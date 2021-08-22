@@ -1,11 +1,11 @@
 import stylesUrl from './styles/global.css'
 import tailwindcssStyles from './styles/tailwind.css'
 
-import { Meta, Links, Scripts, useLoaderData } from '@remix-run/react'
+import { Meta, Links, Scripts } from '@remix-run/react'
 import { Outlet } from 'react-router-dom'
-import { MetaFunction, LinksFunction, LoaderFunction, LiveReload } from 'remix'
+import { MetaFunction, LinksFunction, LiveReload } from 'remix'
 
-import { NonFlashOfWrongThemeEls, Themed, ThemeProvider, useTheme } from './utils/theme-provider'
+import { NonFlashOfWrongThemeEls, ThemeProvider, useTheme } from './utils/theme-provider'
 
 export const links: LinksFunction = () => {
   return [
@@ -45,19 +45,14 @@ export const links: LinksFunction = () => {
 export const meta: MetaFunction = () => {
   return {
     title: 'Muthukumar',
-    description: 'Muthukumar is a frontend developer who loves to code.',
+    description: 'Muthukumar is a frontend developer, who loves to code.',
     viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
     charSet: 'utf-8',
   }
 }
 
-export const loader: LoaderFunction = async () => {
-  return { date: new Date() }
-}
-
 function App() {
-  const data = useLoaderData()
-  const { theme, toggleTheme } = useTheme()
+  const { theme } = useTheme()
 
   return (
     <html lang="en" className={theme ?? ''}>
@@ -70,14 +65,6 @@ function App() {
       </head>
       <body className="bg-primary">
         <Outlet />
-
-        <button onClick={toggleTheme} className="text-primary">
-          <Themed light="light" dark="dark" />
-        </button>
-
-        <footer className="bg-white dark:bg-black">
-          <p>This page was rendered at {data.date.toLocaleString()}</p>
-        </footer>
 
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}

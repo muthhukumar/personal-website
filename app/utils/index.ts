@@ -1,1 +1,1 @@
-export const isServerEnvironment = () => typeof window === 'undefined'
+export const isServerEnvironment: () => boolean = () => typeof window === 'undefined'
