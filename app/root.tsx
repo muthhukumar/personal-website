@@ -3,7 +3,8 @@ import tailwindcssStyles from './styles/tailwind.css'
 
 import { Meta, Links, Scripts, useLoaderData } from '@remix-run/react'
 import { Outlet } from 'react-router-dom'
-import { LinksFunction, LoaderFunction, LiveReload } from 'remix'
+import { MetaFunction, LinksFunction, LoaderFunction, LiveReload } from 'remix'
+
 import { NonFlashOfWrongThemeEls, Themed, ThemeProvider, useTheme } from './utils/theme-provider'
 
 export const links: LinksFunction = () => {
@@ -41,6 +42,15 @@ export const links: LinksFunction = () => {
   ]
 }
 
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Muthukumar',
+    description: 'Muthukumar is a frontend developer who loves to code.',
+    viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
+    charSet: 'utf-8',
+  }
+}
+
 export const loader: LoaderFunction = async () => {
   return { date: new Date() }
 }
@@ -58,10 +68,10 @@ function App() {
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="bg-white dark:bg-black">
+      <body className="bg-primary">
         <Outlet />
 
-        <button onClick={toggleTheme} className="text-black dark:text-white">
+        <button onClick={toggleTheme} className="text-primary">
           <Themed light="light" dark="dark" />
         </button>
 

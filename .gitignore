@@ -1,11 +1,14 @@
-node_modules
+.vscode/
+.DS_Store
+node_modules/
 
-.DS_STORE
-
-/.cache
-/server/build
+.cache
+server/build
 /public/build
 
-.vercel
+/app/styles/**/*.css
 
-./app/styles/*.css
+.env
+.env.production
+.envrc
+
