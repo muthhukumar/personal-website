@@ -1,11 +1,15 @@
+import stylesUrl from './styles/global.css'
+import tailwindcssStyles from './styles/tailwind.css'
+
 import { Meta, Links, Scripts, useLoaderData } from '@remix-run/react'
 import { Outlet } from 'react-router-dom'
 import { LinksFunction, LoaderFunction, LiveReload } from 'remix'
 
-import stylesUrl from './styles/global.css'
-
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }]
+  return [
+    { rel: 'stylesheet', href: stylesUrl },
+    { rel: 'stylesheet', href: tailwindcssStyles },
+  ]
 }
 
 export const loader: LoaderFunction = async () => {
@@ -16,7 +20,7 @@ export default function App() {
   const data = useLoaderData()
 
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.png" type="image/png" />
@@ -26,7 +30,7 @@ export default function App() {
       <body>
         <Outlet />
 
-        <footer>
+        <footer className="bg-gray-50 dark:bg-black">
           <p>This page was rendered at {data.date.toLocaleString()}</p>
         </footer>
 

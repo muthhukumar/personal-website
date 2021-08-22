@@ -12,7 +12,8 @@
     "prepare": "husky install",
     "test": "echo 'add test'",
     "lint": "eslint . --ext ts --ext tsx --ext js",
-    "validate": "npm run lint"
+    "validate": "npm run lint",
+    "build:css": "postcss styles/**/*.css --base styles --dir ./app/styles"
   },
   "dependencies": {
     "@remix-run/express": "^0.17.5",
@@ -28,17 +29,22 @@
   },
   "devDependencies": {
     "@remix-run/dev": "0.18.0-pre.0",
-    "@types/react": "^17.0.1",
     "@types/node": "^16.6.2",
+    "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "autoprefixer": "^10.3.2",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
+    "postcss": "^8.3.6",
+    "postcss-import": "^14.0.2",
     "prettier": "^2.3.2",
+    "tailwindcss": "^2.2.7",
+    "postcss-cli": "^8.3.1",
     "typescript": "^4.1.2"
   },
   "engines": {

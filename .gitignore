@@ -5,3 +5,5 @@ node_modules
 /public/build
 
 .vercel
+
+./app/styles/*.css
