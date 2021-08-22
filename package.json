@@ -50,7 +50,7 @@
   "engines": {
     "node": "14"
   },
-  "sideEffects": false,
+  "sideEffects": true,
   "lint-staged": {
     "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)": [
       "prettier --write"

@@ -11,3 +11,13 @@ footer {
   color: #ccc;
   padding-top: 80px;
 }
+
+dark-mode,
+light-mode {
+  display: none;
+}
+
+.dark *,
+.light * {
+  transition: background 350ms ease;
+}

@@ -1,3 +1,5 @@
+import './utils/bootstrap.client'
+
 import ReactDOM from 'react-dom'
 import { RemixBrowser as Remix } from '@remix-run/react'
 
