@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "name": "remix-app-template",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "build": "remix build",
+    "dev": "pm2-dev ./pm2.config.js",
+    "start": "node ./index.js",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
+    "setup": "npm install && npm run build && npm run validate",
+    "prepare": "husky install",
+    "test": "echo 'add test'",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "validate": "npm run lint"
+  },
+  "dependencies": {
+    "@remix-run/express": "^0.17.5",
+    "@remix-run/node": "0.18.0-pre.0",
+    "@remix-run/react": "0.18.0-pre.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^6.0.0-beta.0",
+    "remix": "0.18.0-pre.0"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "0.18.0-pre.0",
+    "@types/react": "^17.0.1",
+    "@types/node": "^16.6.2",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "sideEffects": false,
+  "lint-staged": {
+    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)": [
+      "prettier --write"
+    ]
+  }
+}

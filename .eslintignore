@@ -1,0 +1,7 @@
+**/node_modules/*
+**/out/*
+**/.next/*
+.cache
+.vercel
+/public/build
+/server/build
