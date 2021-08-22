@@ -1,11 +1,11 @@
 import stylesUrl from './styles/global.css'
 import tailwindcssStyles from './styles/tailwind.css'
 
-import { Meta, Links, Scripts } from '@remix-run/react'
-import { Outlet } from 'react-router-dom'
-import { MetaFunction, LinksFunction, LiveReload } from 'remix'
+import {Meta, Links, Scripts} from '@remix-run/react'
+import {Outlet} from 'react-router-dom'
+import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
-import { NonFlashOfWrongThemeEls, ThemeProvider, useTheme } from './utils/theme-provider'
+import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from './utils/theme-provider'
 
 export const links: LinksFunction = () => {
   return [
@@ -37,8 +37,8 @@ export const links: LinksFunction = () => {
       type: 'font/woff',
       crossOrigin: 'anonymous',
     },
-    { rel: 'stylesheet', href: stylesUrl },
-    { rel: 'stylesheet', href: tailwindcssStyles },
+    {rel: 'stylesheet', href: stylesUrl},
+    {rel: 'stylesheet', href: tailwindcssStyles},
   ]
 }
 
@@ -52,7 +52,7 @@ export const meta: MetaFunction = () => {
 }
 
 function App() {
-  const { theme } = useTheme()
+  const {theme} = useTheme()
 
   return (
     <html lang="en" className={theme ?? ''}>
@@ -81,7 +81,7 @@ export default function AppWithProvider() {
   )
 }
 
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary({error}: {error: Error}) {
   return (
     <html lang="en">
       <head>

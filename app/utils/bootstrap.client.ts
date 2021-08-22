@@ -1,2 +1,2 @@
-import { handleDarkAndLightModeEls } from './theme-provider'
+import {handleDarkAndLightModeEls} from './theme-provider'
 handleDarkAndLightModeEls()

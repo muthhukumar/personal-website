@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const compression = require('compression')
 const morgan = require('morgan')
-const { createRequestHandler } = require('@remix-run/express')
+const {createRequestHandler} = require('@remix-run/express')
 
 const MODE = process.env.NODE_ENV
 const BUILD_DIR = path.join(process.cwd(), 'server', 'build')
@@ -14,19 +14,19 @@ app.use(morgan('tiny'))
 app.use(compression())
 
 // You may want to be more aggressive with this caching
-app.use(express.static('public', { maxAge: '1h' }))
+app.use(express.static('public', {maxAge: '1h'}))
 
 // Remix fingerprints its assets so we can cache forever
-app.use(express.static('public/build', { immutable: true, maxAge: '1y' }))
+app.use(express.static('public/build', {immutable: true, maxAge: '1y'}))
 
 app.all('*', (...args) => {
   if (MODE === 'production') {
-    return createRequestHandler({ build: require('./server/build') })(...args)
+    return createRequestHandler({build: require('./server/build')})(...args)
   }
 
   purgeRequireCache()
   const build = require('./server/build')
-  return createRequestHandler({ build, mode: MODE })(...args)
+  return createRequestHandler({build, mode: MODE})(...args)
 })
 
 const port = process.env.PORT ?? 3000

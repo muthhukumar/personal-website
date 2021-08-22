@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { isServerEnvironment } from './index'
+import {isServerEnvironment} from './index'
 
 const THEME_KEY = 'theme'
 
@@ -37,7 +37,7 @@ const getPreferredTheme = () => {
 
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined)
 
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+function ThemeProvider({children}: {children: React.ReactNode}) {
   const [theme, setTheme] = React.useState<null | Theme.light | Theme.dark>(() => {
     if (isServerEnvironment()) {
       return null
@@ -53,7 +53,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
     return setTheme(Theme.light)
   }, [theme])
 
-  const value = React.useMemo(() => ({ theme, toggleTheme }), [theme])
+  const value = React.useMemo(() => ({theme, toggleTheme}), [theme])
 
   React.useEffect(() => {
     if (theme) {
@@ -134,12 +134,12 @@ const clientThemeCode = `
 `
 
 const NonFlashOfWrongThemeEls = () => {
-  const { theme } = useTheme()
+  const {theme} = useTheme()
 
   return (
     <>
       <meta name="color-scheme" content={theme === Theme.light ? 'light dark' : 'dark light'} />
-      <script dangerouslySetInnerHTML={{ __html: clientThemeCode }}></script>
+      <script dangerouslySetInnerHTML={{__html: clientThemeCode}}></script>
     </>
   )
 }
@@ -175,7 +175,7 @@ const Themed = ({
   dark: React.ReactNode | string
   light: React.ReactNode | string
 }) => {
-  const { theme } = useTheme()
+  const {theme} = useTheme()
 
   if (isServerEnvironment()) {
     return (
@@ -189,11 +189,4 @@ const Themed = ({
   return <>{theme === Theme.light ? light : dark}</>
 }
 
-export {
-  ThemeProvider,
-  useTheme,
-  NonFlashOfWrongThemeEls,
-  handleDarkAndLightModeEls,
-  Themed,
-  Theme,
-}
+export {ThemeProvider, useTheme, NonFlashOfWrongThemeEls, handleDarkAndLightModeEls, Themed, Theme}
