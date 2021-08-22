@@ -5,4 +5,5 @@ module.exports = {
   semi: false,
   printWidth: 100,
   quoteProps: 'preserve',
+  bracketSpacing: false,
 }
