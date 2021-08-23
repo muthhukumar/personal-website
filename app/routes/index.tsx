@@ -2,20 +2,21 @@ import {LoaderFunction} from 'remix'
 import {useLoaderData} from '@remix-run/react'
 import {Link} from 'react-router-dom'
 
-import {BlogPostListType, getBlogPostsList} from '../utils/mdx.server'
-// import {useMdxComponent} from '../utils/hooks'
+import {BlogPostListType, getBlogPostListFromDisk, getMDXPageData} from '../utils/mdx.server'
+import {useMdxComponent} from '../utils/hooks'
 
 export const loader: LoaderFunction = async () => {
   // const {code} = await getContent({slug: 'avoid-magic-numbers.mdx'})
-  // console.log(getBlogPostsList())
-  return getBlogPostsList()
+  // console.log(getBlogPostsListFromDisk())
+  // console.log(await getMDXPageData({contentDir: 'blog', slug: 'closure'}))
+  const {code} = await getMDXPageData({contentDir: 'blog', slug: 'closure'})
+  return [getBlogPostListFromDisk(), code]
 }
 
 export default function Index() {
-  const blogPostList = useLoaderData<Array<BlogPostListType>>()
+  const [blogPostList, code] = useLoaderData<[Array<BlogPostListType>, string]>()
 
-  // const Component = useMdxComponent(data)
-  console.log(blogPostList)
+  const Component = useMdxComponent(code)
 
   return (
     <div className="text-primary">
@@ -26,6 +27,7 @@ export default function Index() {
           </div>
         )
       })}
+      <Component />
     </div>
   )
 }
