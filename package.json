@@ -4,7 +4,7 @@
   "description": "",
   "license": "",
   "scripts": {
-    "build": "remix build",
+    "build:remix": "remix build",
     "dev": "pm2-dev ./pm2.config.js",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
@@ -13,7 +13,10 @@
     "test": "echo 'add test'",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "validate": "npm run lint",
-    "build:css": "postcss styles/**/*.css --base styles --dir ./app/styles"
+    "build:css": "postcss styles/**/*.css --base styles --dir ./app/styles",
+    "build": "npm run build:css && npm run build:remix",
+    "prebuild": "npm run clean && echo All clean",
+    "clean": "rimraf public/build ./node_modules/.cache ./app/styles/**.css ./server/* .cache"
   },
   "dependencies": {
     "@remix-run/express": "^0.17.5",
@@ -21,7 +24,7 @@
     "@remix-run/react": "0.18.0-pre.0",
     "@tailwindcss/typography": "^0.4.1",
     "compression": "^1.7.4",
-    "esbuild": "^0.11.16",
+    "esbuild": "^0.12.22",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^6.0.1",
@@ -49,11 +52,13 @@
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.2",
     "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
     "tailwindcss": "^2.2.7",
     "typescript": "^4.1.2"
   },
   "engines": {
-    "node": "14"
+    "node": "16",
+    "npm": "7"
   },
   "sideEffects": true,
   "lint-staged": {
