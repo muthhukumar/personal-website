@@ -2,32 +2,24 @@ import {LoaderFunction} from 'remix'
 import {useLoaderData} from '@remix-run/react'
 import {Link} from 'react-router-dom'
 
-import {BlogPostListType, getBlogPostListFromDisk, getMDXPageData} from '../utils/mdx.server'
-import {useMdxComponent} from '../utils/hooks'
+import {BlogPostListType, getBlogPostListFromDisk} from '../utils/mdx.server'
 
 export const loader: LoaderFunction = async () => {
-  // const {code} = await getContent({slug: 'avoid-magic-numbers.mdx'})
-  // console.log(getBlogPostsListFromDisk())
-  // console.log(await getMDXPageData({contentDir: 'blog', slug: 'closure'}))
-  const {code} = await getMDXPageData({contentDir: 'blog', slug: 'closure'})
-  return [getBlogPostListFromDisk(), code]
+  return getBlogPostListFromDisk()
 }
 
 export default function Index() {
-  const [blogPostList, code] = useLoaderData<[Array<BlogPostListType>, string]>()
-
-  const Component = useMdxComponent(code)
+  const blogPostList = useLoaderData<Array<BlogPostListType>>()
 
   return (
-    <div className="text-primary">
+    <div className="w-full">
       {blogPostList.map((blog) => {
         return (
-          <div key={blog.slug}>
+          <div key={blog.slug} className="text-primary">
             <Link to={`/blog/${blog.slug}`}>{blog.title}</Link>
           </div>
         )
       })}
-      <Component />
     </div>
   )
 }

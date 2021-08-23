@@ -24,7 +24,7 @@ interface MDXSourceAndFilesType {
   }
 }
 
-interface MDXPageType {
+export interface MDXPageType {
   code: string
   frontmatter: {
     [key: string]: any
@@ -33,12 +33,12 @@ interface MDXPageType {
   matter: GrayMatter.GrayMatterFile<any> | null
 }
 
-interface MDXPageErrorType {
-  code: null
-  frontmatter: null
-  errors: Array<string>
-  matter: null
-}
+// interface MDXPageErrorType {
+//   code: null
+//   frontmatter: null
+//   errors: Array<string>
+//   matter: null
+// }
 
 const BLOG_FOLDER_PATH = path.join(process.cwd(), 'content', 'blog')
 
@@ -85,7 +85,7 @@ function getBlogPostListFromDisk(): Array<BlogPostListType> {
       return {...getBlogMatterData(nestedBlogPath), slug: blogPostName}
     }
 
-    return {...getBlogMatterData(blogPath), slug: blogPostName.replace(/.mdx/g, '')}
+    return {...getBlogMatterData(blogPath), slug: blogPostName.replace(/.(mdx|md)/g, '')}
   })
 }
 
@@ -95,8 +95,8 @@ async function getMDXPageData({
 }: {
   slug: string
   contentDir: string
-}): Promise<MDXPageType | MDXPageErrorType> {
-  const mdxDataGetters = {
+}): Promise<MDXPageType | null> {
+  const mdxSourceConfig = {
     async github(): Promise<MDXSourceAndFilesType> {
       throw new Error('The app and other stuff is not configured to use Github as the cms')
     },
@@ -160,16 +160,16 @@ async function getMDXPageData({
   try {
     const getterToUse = shouldUseBlogDataFromDisk ? 'disk' : 'github'
 
-    const {mdxSource, files} = await mdxDataGetters[getterToUse]()
-
+    const {mdxSource, files} = await mdxSourceConfig[getterToUse]()
     return await bundleMDX(mdxSource, {files})
   } catch (error) {
-    return {
-      errors: ['Failed to parse MDX', String(error)],
-      code: null,
-      frontmatter: null,
-      matter: null,
-    }
+    // return {
+    //   errors: ['Failed to parse MDX', String(error)],
+    //   code: null,
+    //   frontmatter: null,
+    //   matter: null,
+    // }
+    return null
   }
 }
 
