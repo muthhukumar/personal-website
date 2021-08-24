@@ -1,9 +1,9 @@
 ---
 title: Cool things I found in week of 28 March 2021
 date: '2021-03-28'
-tags: ['cool-things']
+categories: ['cool-things']
 draft: false
-summary: In this post, I listed out the Cool things I found in the week of 28 March 2021
+description: In this post, I listed out the Cool things I found in the week of 28 March 2021
 ---
 
 Last week I didn't find anything new and wanted to spend Sunday by watching some anime, so I didn't bother to write a post and didn't have much of a motivation to write either. But for this week, I came up with a flow so that it can be easy when I work on the post on Sunday. This week, I have found quite a few new things.

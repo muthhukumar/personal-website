@@ -1,10 +1,10 @@
 ---
 title: 'Misconceptions and things you need to know before buying a domain name'
 date: '2021-04-11'
-lastmod: '2021-04-11'
-tags: ['domain name']
+updatedAt: '2021-04-11'
+categories: ['domain name']
 draft: false
-summary: 'In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.'
+description: 'In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.'
 ---
 
 In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.

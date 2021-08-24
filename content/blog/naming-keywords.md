@@ -1,10 +1,10 @@
 ---
 title: 'Keywords for naming variables, functions and classes'
 date: '2021-02-26'
-lastmod: '2021-02-26'
-tags: ['programming', 'clean code']
+updatedAt: '2021-02-26'
+categories: ['programming', 'clean code']
 draft: false
-summary: 'In this post, I have added most of the keywords that can be used to name variable, functions or classes.'
+description: 'In this post, I have added most of the keywords that can be used to name variable, functions or classes.'
 ---
 
 - count

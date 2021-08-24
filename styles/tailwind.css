@@ -26,6 +26,10 @@
   }
 
   .text-primary {
-    @apply dark:text-white text-black;
+    @apply text-black dark:text-white;
+  }
+
+  .text-primary-inverse {
+    @apply text-white dark:text-black;
   }
 }

@@ -1,10 +1,10 @@
 ---
 title: 'What is object key pattern in javascript?'
 date: '2021-08-11'
-lastmod: '2021-08-11'
-tags: ['javascript', 'refactoring']
+updatedAt: '2021-08-11'
+categories: ['javascript', 'refactoring']
 draft: false
-summary: "In this blog post, you'll learn how to avoid multiple if check using object key pattern in javascript and what problem it solves."
+description: "In this blog post, you'll learn how to avoid multiple if check using object key pattern in javascript and what problem it solves."
 ---
 
 # Object key pattern

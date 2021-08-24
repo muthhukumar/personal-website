@@ -1,10 +1,10 @@
 ---
 title: 'Mock and Unit testing'
 date: '2020-08-24'
-lastmod: '2020-08-24'
-tags: ['unit testing', 'programming']
+updatedAt: '2020-08-24'
+categories: ['unit testing', 'programming']
 draft: false
-summary: 'Short description about mock and unit testing with code examples.'
+description: 'Short description about mock and unit testing with code examples.'
 ---
 
 ### What is Mock testing?

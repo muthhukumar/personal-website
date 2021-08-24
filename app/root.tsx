@@ -6,6 +6,7 @@ import {Outlet} from 'react-router-dom'
 import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
 import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from './utils/theme-provider'
+import Navbar from './components/Navbar'
 
 export const links: LinksFunction = () => {
   return [
@@ -64,6 +65,7 @@ function App() {
         <NonFlashOfWrongThemeEls />
       </head>
       <body className="bg-primary">
+        <Navbar />
         <Outlet />
 
         <Scripts />

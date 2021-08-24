@@ -23,6 +23,7 @@
     "@remix-run/node": "0.18.0-pre.0",
     "@remix-run/react": "0.18.0-pre.0",
     "@tailwindcss/typography": "^0.4.1",
+    "clsx": "^1.1.1",
     "compression": "^1.7.4",
     "esbuild": "^0.12.22",
     "express": "^4.17.1",

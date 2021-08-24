@@ -1,9 +1,9 @@
 ---
 title: cron-jobs
 date: '2021-03-06'
-tags: ['heroku', 'cron-jobs']
+categories: ['heroku', 'cron-jobs']
 draft: false
-summary: How to prevent the Heroku app from idling after 30 minutes?. And keep the app active.
+description: How to prevent the Heroku app from idling after 30 minutes?. And keep the app active.
 ---
 
 As you may know, Heroku provides free instance to host various services. If we create a Heroku app in the hobby tier, then there are few limitations.
@@ -32,7 +32,7 @@ The server needs to have an API route so that we can use it in the cron-job.
 It may look like this,
 
 <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2">
-  <Image alt="cron-job dashboard" src="/static/images/api-route.png" width={1222} height={448} />
+  <img alt="cron-job dashboard" src="/images/api-route.png" width={1222} height={448} />
 </div>
 
 Here I'm using the Nodejs server as an example. Let us assume where we already have a Nodejs server hosted in Heroku, and we want to
@@ -47,14 +47,14 @@ Create an account on the website mentioned above. Once completed and logged in, 
 You can see something like this,
 
 <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2">
-  <Image alt="cron-job dashboard" src="/static/images/cron-job.png" width={1938} height={674} />
+  <img alt="cron-job dashboard" src="/images/cron-job.png" width={1938} height={674} />
 </div>
 
 Now in the `Title, Address` input, enter the server's title and in the second input box, enter your Heroku app URL `https://todo-server.herokuapp.com/ping`.
 It may look like this,
 
 <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2">
-  <Image alt="cron-job dashboard" src="/static/images/cron-title.png" width={1402} height={290} />
+  <img alt="cron-job dashboard" src="/images/cron-title.png" width={1402} height={290} />
 </div>
 
 If your API route uses the username and password authentication, enter those value in the `Requires HTTP authentication` input box.
@@ -64,12 +64,7 @@ For our case, I'll choose all the days of month, week, hours. In minutes input, 
 and select the required minute. Or just follow the steps in the gif.
 
 <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2">
-  <Image
-    alt="cron-job dashboard"
-    src="/static/images/cron-execution-time.gif"
-    width={1222}
-    height={448}
-  />
+  <img alt="cron-job dashboard" src="/images/cron-execution-time.gif" width={1222} height={448} />
 </div>
 
 Now, go below and press the Create job button and it will create you cron job.

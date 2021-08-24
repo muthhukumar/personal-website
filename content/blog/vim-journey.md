@@ -1,10 +1,10 @@
 ---
 title: 'My Journey with Vim'
 date: '2020-12-06'
-lastmod: '2020-12-06'
-tags: ['journal', 'vim']
+updatedAt: '2020-12-06'
+categories: ['journal', 'vim']
 draft: false
-summary: 'In this article, I explain why and how I started using Vim and my journey with Vim.'
+description: 'In this article, I explain why and how I started using Vim and my journey with Vim.'
 ---
 
 For the past six months, I have been using Vim as my primary text editor. In this article, I explain why and how I started using Vim and my journey with Vim.
