@@ -32,4 +32,8 @@
   .text-primary-inverse {
     @apply text-white dark:text-black;
   }
+
+  .ring-primary {
+    @apply transition-all duration-200 hover:ring-1 hover:ring-black ring-offset-4 ring-offset-white dark:hover:ring-white dark:hover:ring-offset-black;
+  }
 }

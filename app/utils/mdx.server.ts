@@ -7,7 +7,7 @@ import {bundleMDX} from 'mdx-bundler'
 export interface BlogPostType {
   title: string
   date: string
-  category: Array<string>
+  categories: Array<string>
   updatedAt: string
   draft: boolean
   description: string
@@ -61,13 +61,13 @@ function getBlogMatterData(blogPath: string): BlogPostType {
   const {
     title = '',
     date = '',
-    category = [],
+    categories = [],
     updatedAt = '',
     draft = true,
     description = '',
   } = GrayMatter(blogData).data
 
-  return {title, date, category, updatedAt, draft, description}
+  return {title, date, categories, updatedAt, draft, description}
 }
 
 function getBlogPostListFromDisk(): Array<BlogPostListType> {
@@ -77,7 +77,7 @@ function getBlogPostListFromDisk(): Array<BlogPostListType> {
 
   const blogPosts = fs.readdirSync(BLOG_FOLDER_PATH)
 
-  return blogPosts.map((blogPostName) => {
+  const mappedBlogPosts = blogPosts.map((blogPostName) => {
     const blogPath = path.join(BLOG_FOLDER_PATH, blogPostName)
 
     if (isDirectory(blogPath)) {
@@ -87,6 +87,8 @@ function getBlogPostListFromDisk(): Array<BlogPostListType> {
 
     return {...getBlogMatterData(blogPath), slug: blogPostName.replace(/.(mdx|md)/g, '')}
   })
+
+  return mappedBlogPosts.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
 }
 
 async function getMDXPageData({

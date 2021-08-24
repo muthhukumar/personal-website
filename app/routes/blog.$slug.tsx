@@ -1,8 +1,8 @@
 import {json, LoaderFunction} from 'remix'
 import {useLoaderData} from '@remix-run/react'
 
-import {getMDXPageData, MDXPageType} from '../../utils/mdx.server'
-import {useMdxComponent} from '../../utils/hooks'
+import {getMDXPageData, MDXPageType} from '../utils/mdx.server'
+import {useMdxComponent} from '../utils/hooks'
 
 export const loader: LoaderFunction = async ({params}) => {
   const page = await getMDXPageData({contentDir: 'blog', slug: params.slug})

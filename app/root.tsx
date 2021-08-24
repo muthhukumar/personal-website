@@ -64,7 +64,7 @@ function App() {
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="bg-primary">
+      <body className="min-h-screen bg-primary">
         <Navbar />
         <Outlet />
 

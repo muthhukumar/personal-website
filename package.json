@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^6.0.1",
+    "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
