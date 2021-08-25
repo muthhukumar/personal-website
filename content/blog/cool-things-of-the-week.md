@@ -4,6 +4,8 @@ date: '2021-03-14'
 categories: ['cool-things']
 draft: false
 description: In this post, I listed out the Cool things I found in the week of 2021/03/14
+banner: /images/cool-stuff.jpeg
+bannerCredit: Photo by Jonathan Clark from Pexels
 ---
 
 As I was thinking content for another blog, this idea of sharing what I found this week's post came, and I thought of giving it a shot and do this every week. Let's see in the upcoming weeks whether I will follow it or not.

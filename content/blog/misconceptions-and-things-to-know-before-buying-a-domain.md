@@ -5,6 +5,8 @@ updatedAt: '2021-04-11'
 categories: ['domain name']
 draft: false
 description: 'In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.'
+banner: /images/domain-misconception.jpeg
+bannerCredit: Photo by Soulful Pizza from Pexels
 ---
 
 In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.

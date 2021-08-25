@@ -11,6 +11,8 @@ export interface BlogPostType {
   updatedAt: string
   draft: boolean
   description: string
+  banner: string
+  bannerCredit: string
 }
 
 export interface BlogPostListType extends BlogPostType {
@@ -65,9 +67,22 @@ function getBlogMatterData(blogPath: string): BlogPostType {
     updatedAt = '',
     draft = true,
     description = '',
+    bannerCredit = '',
+    banner = '',
   } = GrayMatter(blogData).data
 
-  return {title, date, categories, updatedAt, draft, description}
+  return {title, date, categories, updatedAt, draft, description, banner, bannerCredit}
+}
+
+function getBlogPostData(slug: string): BlogPostListType {
+  const blogPath = path.join(BLOG_FOLDER_PATH, slug)
+
+  if (isDirectory(blogPath)) {
+    const nestedBlogPath = path.join(blogPath, 'index.mdx')
+    return {...getBlogMatterData(nestedBlogPath), slug}
+  }
+
+  return {...getBlogMatterData(blogPath), slug: slug.replace(/.(mdx|md)/g, '')}
 }
 
 function getBlogPostListFromDisk(): Array<BlogPostListType> {
@@ -77,16 +92,7 @@ function getBlogPostListFromDisk(): Array<BlogPostListType> {
 
   const blogPosts = fs.readdirSync(BLOG_FOLDER_PATH)
 
-  const mappedBlogPosts = blogPosts.map((blogPostName) => {
-    const blogPath = path.join(BLOG_FOLDER_PATH, blogPostName)
-
-    if (isDirectory(blogPath)) {
-      const nestedBlogPath = path.join(blogPath, 'index.mdx')
-      return {...getBlogMatterData(nestedBlogPath), slug: blogPostName}
-    }
-
-    return {...getBlogMatterData(blogPath), slug: blogPostName.replace(/.(mdx|md)/g, '')}
-  })
+  const mappedBlogPosts = blogPosts.map((slug) => getBlogPostData(slug))
 
   return mappedBlogPosts.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
 }
@@ -175,4 +181,4 @@ async function getMDXPageData({
   }
 }
 
-export {getBlogPostListFromDisk, getMDXPageData}
+export {getBlogPostListFromDisk, getMDXPageData, getBlogPostData}

@@ -5,6 +5,8 @@ updatedAt: '2021-08-11'
 categories: ['javascript', 'refactoring']
 draft: false
 description: "In this blog post, you'll learn how to avoid multiple if check using object key pattern in javascript and what problem it solves."
+banner: /images/object-key-pattern.jpeg
+bannerCredit: Photo by Pixabay from Pexels
 ---
 
 # Object key pattern

@@ -1,10 +1,12 @@
 ---
-title: 'What is a closure?'
-date: '2020-07-11'
-updatedAt: '2020-07-11'
+title: What is a closure?
+date: 2020-07-11
+updatedAt: 2020-07-11
 categories: ['javascript']
 draft: false
-description: 'Brief explaination about closure in Javascript. '
+description: Brief explaination about closure in Javascript.
+banner: /images/closure.jpeg
+bannerCredit: Photo by Kevin Bidwell from Pexels
 ---
 
 In simple words, when a function inside another function access variable that is outside of that function then, that can be called as **Closure**.

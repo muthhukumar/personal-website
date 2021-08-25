@@ -5,6 +5,8 @@ updatedAt: '2020-08-24'
 categories: ['unit testing', 'programming']
 draft: false
 description: 'Short description about mock and unit testing with code examples.'
+banner: /images/unit-testing.jpeg
+bannerCredit: Photo by Mohammad Danish from Pexels
 ---
 
 ### What is Mock testing?

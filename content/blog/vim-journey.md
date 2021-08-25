@@ -5,6 +5,8 @@ updatedAt: '2020-12-06'
 categories: ['journal', 'vim']
 draft: false
 description: 'In this article, I explain why and how I started using Vim and my journey with Vim.'
+banner: /images/vim-journey.jpeg
+bannerCredit: Photo by Craig Adderley from Pexels
 ---
 
 For the past six months, I have been using Vim as my primary text editor. In this article, I explain why and how I started using Vim and my journey with Vim.
