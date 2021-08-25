@@ -4,7 +4,8 @@
   "description": "",
   "license": "",
   "scripts": {
-    "build:remix": "remix build",
+    "build:remix": "cross-env NODE_ENV=production remix build",
+    "build:css:prod": "npm run build:css -- --env production",
     "dev": "pm2-dev ./pm2.config.js",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
@@ -14,7 +15,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "validate": "npm run lint",
     "build:css": "postcss styles/**/*.css --base styles --dir ./app/styles",
-    "build": "npm run build:css && npm run build:remix",
+    "build": "npm run build:css:prod && npm run build:remix",
     "prebuild": "npm run clean && echo All clean",
     "clean": "rimraf public/build ./node_modules/.cache ./app/styles/**.css ./server/* .cache"
   },
@@ -25,6 +26,7 @@
     "@tailwindcss/typography": "^0.4.1",
     "clsx": "^1.1.1",
     "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.12.22",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
