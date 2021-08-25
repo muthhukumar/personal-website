@@ -21,13 +21,21 @@ type LoaderType = {
 export const loader: LoaderFunction = async ({params}) => {
   const page = await getMDXPageData({contentDir: 'blog', slug: params.slug})
   const blogData = getBlogPostListFromDisk().filter((blogPost) => blogPost.slug === params.slug)[0]
-  return json({page, blogData}, {status: page ? 200 : 404})
+  return json(
+    {page, blogData},
+    {
+      status: page ? 200 : 404,
+      headers: {
+        'cache-control': 'max-age=3600',
+      },
+    },
+  )
 }
 
 export default function Index() {
   const {page, blogData} = useLoaderData<LoaderType>()
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
