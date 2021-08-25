@@ -1,12 +1,14 @@
 import stylesUrl from './styles/global.css'
 import tailwindcssStyles from './styles/tailwind.css'
 
-import {Meta, Links, Scripts} from '@remix-run/react'
 import {Outlet} from 'react-router-dom'
+import {Meta, Links, Scripts} from '@remix-run/react'
 import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
 import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from './utils/theme-provider'
+
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export const links: LinksFunction = () => {
   return [
@@ -40,6 +42,28 @@ export const links: LinksFunction = () => {
     },
     {rel: 'stylesheet', href: stylesUrl},
     {rel: 'stylesheet', href: tailwindcssStyles},
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/favicon/apple-touch-icon.png',
+    },
+
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon/favicon-32x32.png',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: '/favicon/favicon-16x16.png',
+    },
+    {
+      rel: 'manifest',
+      href: '/site.webmanifest',
+    },
   ]
 }
 
@@ -58,15 +82,14 @@ function App() {
   return (
     <html lang="en" className={theme ?? ''}>
       <head>
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
         <Meta />
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="min-h-screen bg-primary">
+      <body className="bg-primary">
         <Navbar />
         <Outlet />
+        <Footer />
 
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
