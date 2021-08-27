@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
-import {json, LoaderFunction, useRouteData} from 'remix'
+import {json, LoaderFunction, MetaFunction, useRouteData} from 'remix'
 import {MdKeyboardBackspace} from 'react-icons/md'
 import moment from 'moment'
 
@@ -15,6 +15,15 @@ import {useMdxComponent} from '~/utils/hooks'
 type LoaderType = {
   blogData: BlogPostListType
   page: MDXPageType | null
+}
+
+export const meta: MetaFunction = ({data}) => {
+  const blogData = data.blogData as BlogPostListType
+  return {
+    'og:title': blogData.title,
+    'og:description': blogData.description,
+    'og:image': blogData.banner,
+  }
 }
 
 export const loader: LoaderFunction = async ({params}) => {
@@ -49,7 +58,7 @@ function MDXComponent({page, blogData}: {page: MDXPageType; blogData: BlogPostLi
   const Component = useMdxComponent(page.code)
 
   return (
-    <div className="p-16 pt-0 mt-32">
+    <div className="p-6 pt-0 mt-32 md:p-8 lg:p-16">
       <div className="container flex flex-col items-start max-w-4xl mx-auto mb-12 text-primary">
         <Link to="/blog">
           <div className="flex items-center justify-start">

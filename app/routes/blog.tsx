@@ -46,12 +46,12 @@ export const loader: LoaderFunction = async ({request}) => {
 export default function Blog() {
   const {blogPostList, categories, query} = useRouteData<LoaderData>()
 
-  const latestBlog = blogPostList[0]
+  const [latestBlog, ...blogPosts] = blogPostList
 
   const submit = useSubmit()
 
   return (
-    <div className="p-16 pt-0 mt-32">
+    <div className="p-8 pt-0 mt-32 md:p-16">
       <div className="container max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-primary">Find latest of my writing here.</h2>
         <Form onChange={(event) => submit(event.currentTarget, {method: 'get'})}>
@@ -89,11 +89,14 @@ export default function Blog() {
             to={`/blog/${latestBlog.slug}`}
             className="block overflow-hidden rounded-lg ring-primary group"
           >
-            <div className="flex flex-col p-20 bg-gray-100 dark:bg-gray-900">
+            <div className="flex flex-col p-8 bg-gray-100 md:p-20 dark:bg-gray-900">
               <h3 className="mb-12 text-xl font-semibold text-primary">Latest article</h3>
-              <div className="flex justify-between">
-                <img src="/images/computer.jpeg" className="w-5/12 bg-cover rounded-lg h-80" />
-                <div className="flex flex-col justify-between w-1/2 min-h-full">
+              <div className="flex flex-col justify-between lg:flex-row">
+                <img
+                  src={latestBlog.banner}
+                  className="object-cover w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                />
+                <div className="flex flex-col justify-between w-full min-h-full lg:w-1/2">
                   <div>
                     <div className="text-3xl font-medium leading-relaxed text-primary">
                       {latestBlog.title}
@@ -102,7 +105,7 @@ export default function Blog() {
                       {moment(latestBlog.date).format('ll')} - 5 min read
                     </div>
                   </div>
-                  <div className="flex items-center mt-auto ml-auto">
+                  <div className="flex items-center mt-4 ml-auto md:mb-auto">
                     <div className="mr-4 text-xl text-primary">Read full article </div>
                     <span className="p-4 transition duration-200 origin-center transform border rounded-full text-primary group-hover:border-black dark:group-hover:border-white">
                       <HiOutlineArrowRight
@@ -116,9 +119,9 @@ export default function Blog() {
             </div>
           </Link>
         ) : null}
-        <div className="grid grid-cols-3 gap-8 mt-8">
-          {blogPostList.length > 0
-            ? blogPostList.map((blogPost) => {
+        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3">
+          {blogPosts.length > 0
+            ? blogPosts.map((blogPost) => {
                 return (
                   <Link
                     to={`/blog/${blogPost.slug}`}
@@ -129,7 +132,7 @@ export default function Blog() {
                       <div className="w-full h-80">
                         <img
                           src={blogPost.banner}
-                          className="w-full h-full bg-cover rounded-lg group-hover:ring-primary"
+                          className="object-cover w-full h-full bg-cover rounded-lg group-hover:ring-primary"
                           alt={blogPost.bannerCredit ?? `${blogPost.title} banner`}
                           loading="lazy"
                         />
@@ -145,7 +148,7 @@ export default function Blog() {
               })
             : null}
         </div>
-        {blogPostList.length === 0 && (
+        {blogPosts.length === 0 && (
           <div className="text-xl font-normal text-center text-primary">
             Looks like the article you looking for is not available. Please try some other topic
           </div>

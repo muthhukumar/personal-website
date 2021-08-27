@@ -1,7 +1,7 @@
 import {Link, useLocation} from 'react-router-dom'
 import clsx from 'clsx'
 
-import ThemeToggle from './ThemeToggle'
+// import ThemeToggle from './ThemeToggle'
 
 const navLinks = [
   {
@@ -12,10 +12,10 @@ const navLinks = [
     to: '/blog',
     pathname: 'Blog',
   },
-  {
-    to: '/bookmarks',
-    pathname: 'Bookmarks',
-  },
+  // {
+  //   to: '/bookmarks',
+  //   pathname: 'Bookmarks',
+  // },
 ]
 
 function NavLink({to, pathname}: {to: string; pathname: string}) {
@@ -55,9 +55,9 @@ function Navbar() {
           })}
         </ul>
       </nav>
-      <span className="ml-auto">
+      {/* <span className="ml-auto">
         <ThemeToggle />
-      </span>
+      </span> */}
     </header>
   )
 }
