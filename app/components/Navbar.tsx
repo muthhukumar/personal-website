@@ -1,5 +1,6 @@
-import clsx from 'clsx'
 import {Link, useLocation} from 'react-router-dom'
+import clsx from 'clsx'
+
 import ThemeToggle from './ThemeToggle'
 
 const navLinks = [

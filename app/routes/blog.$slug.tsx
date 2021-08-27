@@ -1,17 +1,16 @@
 import * as React from 'react'
-import {json, LoaderFunction} from 'remix'
-import {useLoaderData} from '@remix-run/react'
+import {Link} from 'react-router-dom'
+import {json, LoaderFunction, useRouteData} from 'remix'
 import {MdKeyboardBackspace} from 'react-icons/md'
+import moment from 'moment'
 
 import {
   BlogPostListType,
   getBlogPostListFromDisk,
   getMDXPageData,
   MDXPageType,
-} from '../utils/mdx.server'
-import {useMdxComponent} from '../utils/hooks'
-import moment from 'moment'
-import {Link} from 'react-router-dom'
+} from '~/utils/mdx.server'
+import {useMdxComponent} from '~/utils/hooks'
 
 type LoaderType = {
   blogData: BlogPostListType
@@ -33,7 +32,7 @@ export const loader: LoaderFunction = async ({params}) => {
 }
 
 export default function Index() {
-  const {page, blogData} = useLoaderData<LoaderType>()
+  const {page, blogData} = useRouteData<LoaderType>()
 
   React.useEffect(() => {
     window.scrollTo(0, 0)

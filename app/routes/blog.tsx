@@ -1,15 +1,15 @@
 import {json, LoaderFunction, MetaFunction, useRouteData, Form, useSubmit} from 'remix'
+import {Link} from 'react-router-dom'
 import {RiSearchLine} from 'react-icons/ri'
 import {HiOutlineArrowRight} from 'react-icons/hi'
 import moment from 'moment'
 
-import {BlogPostListType, getBlogPostListFromDisk} from '../utils/mdx.server'
-import {Link} from 'react-router-dom'
+import {BlogPostListType, getBlogPostListFromDisk} from '~/utils/mdx.server'
 
 type LoaderData = {
   blogPostList: Array<BlogPostListType>
   categories: Array<string>
-  title: string | ''
+  query: string | ''
 }
 
 export const meta: MetaFunction = () => {
@@ -23,10 +23,10 @@ export const loader: LoaderFunction = async ({request}) => {
 
   const url = new URL(request.url)
 
-  const title = url.searchParams.get('title') ?? ''
+  const query = url.searchParams.get('query') ?? ''
 
-  const filteredBlogPost = title
-    ? blogPostList.filter((blogPost) => blogPost.title.toLowerCase().includes(title.toLowerCase()))
+  const filteredBlogPost = query
+    ? blogPostList.filter((blogPost) => blogPost.title.toLowerCase().includes(query.toLowerCase()))
     : blogPostList
 
   const uniqueCategories = new Set(blogPostList.map((blog) => blog.categories).flat())
@@ -34,7 +34,7 @@ export const loader: LoaderFunction = async ({request}) => {
   const categories = Array.from(uniqueCategories)
 
   return json(
-    {blogPostList: filteredBlogPost, categories, title},
+    {blogPostList: filteredBlogPost, categories, query},
     {
       headers: {
         'cache-control': 'max-age=3600',
@@ -44,7 +44,7 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export default function Blog() {
-  const {blogPostList, categories, title} = useRouteData<LoaderData>()
+  const {blogPostList, categories, query} = useRouteData<LoaderData>()
 
   const latestBlog = blogPostList[0]
 
@@ -54,39 +54,37 @@ export default function Blog() {
     <div className="p-16 pt-0 mt-32">
       <div className="container max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-primary">Find latest of my writing here.</h2>
-        <Form
-          className="container flex items-center justify-center px-4 mt-8 overflow-hidden border border-gray-100 dark:border-gray-600 rounded-xl focus-within:border-gray-600 dark:focus-within:border-gray-100"
-          onChange={(event) => submit(event.currentTarget, {method: 'get'})}
-        >
-          <RiSearchLine className="mr-2" size={18} />
-          <input
-            name="title"
-            type="text"
-            defaultValue={title}
-            placeholder="Search blog"
-            className="w-full py-4 bg-primary focus:outline-none text-primary"
-          />
-          <div className="text-gray-400">{blogPostList.length}</div>
-        </Form>
-
-        <div className="mt-12">
-          <h2 className="mb-4 text-lg font-semibold text-primary">Search from categories</h2>
-          <div className="flex flex-wrap items-center justify-start">
-            {categories.map((category) => {
-              return (
-                <div
-                  key={category}
-                  className="px-8 py-3 mb-3 mr-3 text-center bg-gray-100 rounded-full dark:bg-gray-900 text-primary ring-primary"
-                >
-                  {category}
-                </div>
-              )
-            })}
+        <Form onChange={(event) => submit(event.currentTarget, {method: 'get'})}>
+          <div className="container flex items-center justify-center px-4 mt-8 overflow-hidden border border-gray-100 dark:border-gray-600 rounded-xl focus-within:border-gray-600 dark:focus-within:border-gray-100">
+            <RiSearchLine className="mr-2" size={18} />
+            <input
+              name="query"
+              type="text"
+              defaultValue={query}
+              placeholder="Search blog"
+              className="w-full py-4 bg-primary focus:outline-none text-primary"
+            />
+            <div className="text-gray-400">{blogPostList.length}</div>
           </div>
-        </div>
+          <div className="mt-12">
+            <h2 className="mb-4 text-lg font-semibold text-primary">Search from categories</h2>
+            <div className="flex flex-wrap items-center justify-start">
+              {categories.map((category) => {
+                return (
+                  <div
+                    key={category}
+                    className="px-8 py-3 mb-3 mr-3 text-center bg-gray-100 rounded-full dark:bg-gray-900 text-primary ring-primary"
+                  >
+                    {category}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </Form>
       </div>
       <div className="container flex flex-col mx-auto mt-20 max-w-7xl">
-        {!title ? (
+        {!query ? (
           <Link
             to={`/blog/${latestBlog.slug}`}
             className="block overflow-hidden rounded-lg ring-primary group"

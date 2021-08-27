@@ -5,10 +5,10 @@ import {Outlet} from 'react-router-dom'
 import {Meta, Links, Scripts} from '@remix-run/react'
 import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
-import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from './utils/theme-provider'
+import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from '~/utils/theme-provider'
 
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import Navbar from '~/components/Navbar'
+import Footer from '~/components/Footer'
 
 export const links: LinksFunction = () => {
   return [
