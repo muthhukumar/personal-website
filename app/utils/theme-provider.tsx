@@ -43,7 +43,8 @@ function ThemeProvider({children}: {children: React.ReactNode}) {
       return null
     }
 
-    return getPreferredTheme()
+    // return getPreferredTheme()
+    return Theme.light
   })
 
   const toggleTheme = React.useCallback(() => {

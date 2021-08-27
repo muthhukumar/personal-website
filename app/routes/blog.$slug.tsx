@@ -75,7 +75,7 @@ function MDXComponent({page, blogData}: {page: MDXPageType; blogData: BlogPostLi
         </div>
       </div>
       <img src={blogData.banner} className="container max-w-6xl mx-auto rounded-lg" />
-      <article className="container max-w-4xl mx-auto mt-16 prose prose-md prose-purple text-primary">
+      <article className="container max-w-4xl mx-auto mt-16 prose prose-md prose-pink text-primary">
         <Component />
       </article>
     </div>

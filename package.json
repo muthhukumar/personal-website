@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "build:remix": "cross-env NODE_ENV=production remix build",
-    "build:css:prod": "npm run build:css -- --env production",
+    "build:css:prod": "cross-env NODE_ENV=production npm run build:css",
     "dev": "pm2-dev ./pm2.config.js",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
@@ -18,7 +18,8 @@
     "build": "npm run build:css:prod && npm run build:remix",
     "prebuild": "npm run clean && echo All clean",
     "clean": "rimraf public/build ./node_modules/.cache ./app/styles/**.css ./server/* .cache",
-    "postinstall": "remix setup"
+    "postinstall": "remix setup",
+    "serve:prod": "cross-env NODE_ENV=production node ./index.js"
   },
   "dependencies": {
     "@remix-run/express": "v0.18.0-pre.1",
