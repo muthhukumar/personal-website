@@ -20,6 +20,8 @@ type LoaderType = {
 export const meta: MetaFunction = ({data}) => {
   const blogData = data.blogData as BlogPostListType
   return {
+    title: blogData.title,
+    description: blogData.description,
     'og:title': blogData.title,
     'og:description': blogData.description,
     'og:image': blogData.banner,
