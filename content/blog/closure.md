@@ -6,7 +6,7 @@ categories: ['javascript']
 draft: false
 description: Brief explaination about closure in Javascript.
 banner: /images/closure.jpeg
-bannerCredit: Photo by Aman Upadhyay on Unsplash
+bannerCredit: Photo by Pixabay from Pexels
 ---
 
 In simple words, when a function inside another function access variable that is outside of that function then, that can be called as **Closure**.

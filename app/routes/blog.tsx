@@ -96,7 +96,8 @@ export default function Blog() {
               <div className="flex flex-col justify-between lg:flex-row">
                 <img
                   src={latestBlog.banner}
-                  className="object-cover w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                  className="w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                  alt={latestBlog.bannerCredit}
                   loading="eager"
                 />
                 <div className="flex flex-col justify-between w-full min-h-full lg:w-1/2">
@@ -135,7 +136,7 @@ export default function Blog() {
                       <div className="w-full h-80">
                         <img
                           src={blogPost.banner}
-                          className="object-cover w-full h-full bg-cover rounded-lg group-hover:ring-primary"
+                          className="w-full h-full rounded-lg group-hover:ring-primary"
                           alt={blogPost.bannerCredit ?? `${blogPost.title} banner`}
                           loading="eager"
                         />
