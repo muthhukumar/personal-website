@@ -153,7 +153,7 @@ export default function Blog() {
         </div>
         {blogPosts.length === 0 && (
           <div className="text-xl font-normal text-center text-primary">
-            Looks like the article you looking for is not available. Please try some other topic
+            Looks like the article you looking for is not available. Please try some other topic.
           </div>
         )}
       </div>

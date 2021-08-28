@@ -6,7 +6,7 @@ categories: ['domain name']
 draft: false
 description: 'In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.'
 banner: /images/domain-misconception.jpeg
-bannerCredit: Photo by Soulful Pizza from Pexels
+bannerCredit: Photo by Sigmund on Unsplash
 ---
 
 In this post, I address several misconceptions when buying a domain and things you need to know before purchasing a domain name.
