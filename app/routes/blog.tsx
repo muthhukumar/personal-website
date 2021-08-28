@@ -95,6 +95,7 @@ export default function Blog() {
                 <img
                   src={latestBlog.banner}
                   className="object-cover w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                  loading="eager"
                 />
                 <div className="flex flex-col justify-between w-full min-h-full lg:w-1/2">
                   <div>
@@ -134,7 +135,7 @@ export default function Blog() {
                           src={blogPost.banner}
                           className="object-cover w-full h-full bg-cover rounded-lg group-hover:ring-primary"
                           alt={blogPost.bannerCredit ?? `${blogPost.title} banner`}
-                          loading="lazy"
+                          loading="eager"
                         />
                       </div>
 

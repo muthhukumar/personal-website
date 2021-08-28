@@ -17,7 +17,6 @@ light-mode {
   display: none;
 }
 
-.dark *,
-.light * {
-  transition: background 350ms ease;
+html {
+  scroll-behavior: smooth;
 }
