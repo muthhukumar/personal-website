@@ -5,8 +5,8 @@ compress_images(
   'public/images/',
   {compress_force: true, statistic: true, autoupdate: true},
   false,
-  {jpg: {engine: 'mozjpeg', command: ['-quality', '10']}},
-  {png: {engine: 'pngquant', command: ['-quality=8-10', '-o']}},
+  {jpg: {engine: 'mozjpeg', command: ['-quality', '15']}},
+  {png: {engine: 'pngquant', command: ['-quality=12-15', '-o']}},
   {svg: {engine: false, command: false}},
   {
     gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']},
