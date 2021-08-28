@@ -15,11 +15,12 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "validate": "npm run lint",
     "build:css": "postcss styles/**/*.css --base styles --dir ./app/styles",
-    "build": "npm run build:css:prod && npm run build:remix",
+    "build": "npm run optimize-image && npm run build:css:prod && npm run build:remix",
     "prebuild": "npm run clean && echo All clean",
-    "clean": "rimraf public/build ./node_modules/.cache ./app/styles/**.css ./server/* .cache",
+    "clean": "rimraf public/build ./node_modules/.cache ./app/styles/**.css ./server/* .cache public/images",
     "postinstall": "remix setup",
-    "serve:prod": "cross-env NODE_ENV=production node ./index.js"
+    "serve": "cross-env NODE_ENV=production PORT=4000 node ./index.js",
+    "optimize-image": "node ./scripts/optimizeImage.js"
   },
   "dependencies": {
     "@remix-run/express": "v0.18.0-pre.1",
