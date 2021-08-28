@@ -46,7 +46,9 @@ export const loader: LoaderFunction = async ({request}) => {
 export default function Blog() {
   const {blogPostList, categories, query} = useRouteData<LoaderData>()
 
-  const [latestBlog, ...blogPosts] = blogPostList
+  const latestBlog = query ? null : blogPostList[0]
+
+  const blogPosts = query ? blogPostList : blogPostList.slice(1, blogPostList.length)
 
   const submit = useSubmit()
 
@@ -84,7 +86,7 @@ export default function Blog() {
         </Form>
       </div>
       <div className="container flex flex-col mx-auto mt-20 max-w-7xl">
-        {!query ? (
+        {!query && latestBlog ? (
           <Link
             to={`/blog/${latestBlog.slug}`}
             className="block overflow-hidden rounded-lg ring-primary group"
