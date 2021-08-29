@@ -4,7 +4,7 @@ import * as esbuild from 'esbuild'
 import GrayMatter from 'gray-matter'
 import {bundleMDX} from 'mdx-bundler'
 
-export interface BlogPostType {
+export interface ArticlesType {
   title: string
   date: string
   categories: Array<string>
@@ -15,7 +15,7 @@ export interface BlogPostType {
   bannerCredit: string
 }
 
-export interface BlogPostListType extends BlogPostType {
+export interface ArticlesListType extends ArticlesType {
   slug: string
 }
 
@@ -44,21 +44,21 @@ export interface MDXPageType {
 
 const BLOG_FOLDER_PATH = path.join(process.cwd(), 'content', 'blog')
 
-const shouldUseBlogDataFromDisk = true
+const shouldUseArticlesFromDisk = true
 
 const isDirectory = (path: string): boolean =>
   fs.existsSync(path) && fs.lstatSync(path).isDirectory()
 
-function getBlogMatterData(blogPath: string): BlogPostType {
-  if (typeof blogPath !== 'string') {
-    throw new Error('Blog path should be a string.')
+function getArticleFrontMatterData(articlePath: string): ArticlesType {
+  if (typeof articlePath !== 'string') {
+    throw new Error('article path should be a string.')
   }
 
-  if (!fs.existsSync(blogPath)) {
-    throw new Error(`File not found on the directory ${blogPath}`)
+  if (!fs.existsSync(articlePath)) {
+    throw new Error(`File not found on the directory ${articlePath}`)
   }
 
-  const blogData = fs.readFileSync(blogPath)
+  const article = fs.readFileSync(articlePath)
 
   const {
     title = '',
@@ -69,34 +69,34 @@ function getBlogMatterData(blogPath: string): BlogPostType {
     description = '',
     bannerCredit = '',
     banner = '',
-  } = GrayMatter(blogData).data
+  } = GrayMatter(article).data
 
   return {title, date, categories, updatedAt, draft, description, banner, bannerCredit}
 }
 
-function getBlogPostData(slug: string): BlogPostListType {
-  const blogPath = path.join(BLOG_FOLDER_PATH, slug)
+function getArticleData(slug: string): ArticlesListType {
+  const article = path.join(BLOG_FOLDER_PATH, slug)
 
-  if (isDirectory(blogPath)) {
-    const nestedBlogPath = path.join(blogPath, 'index.mdx')
-    return {...getBlogMatterData(nestedBlogPath), slug}
+  if (isDirectory(article)) {
+    const nestedArticlePath = path.join(article, 'index.mdx')
+    return {...getArticleFrontMatterData(nestedArticlePath), slug}
   }
 
-  return {...getBlogMatterData(blogPath), slug: slug.replace(/.(mdx|md)/g, '')}
+  return {...getArticleFrontMatterData(article), slug: slug.replace(/.(mdx|md)/g, '')}
 }
 
-function getBlogPostListFromDisk(): Array<BlogPostListType> {
+function getArticlesFromDisk(): Array<ArticlesListType> {
   if (!isDirectory(BLOG_FOLDER_PATH)) {
-    throw new Error('Passed blog folder path is not a directory.')
+    throw new Error('Passed article folder path is not a directory.')
   }
 
-  const blogPosts = fs.readdirSync(BLOG_FOLDER_PATH)
+  const articles = fs.readdirSync(BLOG_FOLDER_PATH)
 
-  const mappedBlogPosts = blogPosts
-    .map((slug) => getBlogPostData(slug))
-    .filter((blogPosts) => !blogPosts.draft)
+  const mappedArticles = articles
+    .map((slug) => getArticleData(slug))
+    .filter((article) => !article.draft)
 
-  return mappedBlogPosts.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
+  return mappedArticles.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
 }
 
 async function getMDXPageData({
@@ -168,19 +168,13 @@ async function getMDXPageData({
   }
 
   try {
-    const getterToUse = shouldUseBlogDataFromDisk ? 'disk' : 'github'
+    const getterToUse = shouldUseArticlesFromDisk ? 'disk' : 'github'
 
     const {mdxSource, files} = await mdxSourceConfig[getterToUse]()
     return await bundleMDX(mdxSource, {files})
   } catch (error) {
-    // return {
-    //   errors: ['Failed to parse MDX', String(error)],
-    //   code: null,
-    //   frontmatter: null,
-    //   matter: null,
-    // }
     return null
   }
 }
 
-export {getBlogPostListFromDisk, getMDXPageData, getBlogPostData}
+export {getArticlesFromDisk, getMDXPageData, getArticleData}
