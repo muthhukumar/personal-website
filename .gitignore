@@ -5,6 +5,7 @@ node_modules/
 .cache
 server/build
 /public/build
+/public/images
 
 /app/styles/**/*.css
 other/postcss
@@ -13,3 +14,4 @@ other/postcss
 .env.production
 .envrc
 
+log
