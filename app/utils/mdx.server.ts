@@ -92,7 +92,9 @@ function getBlogPostListFromDisk(): Array<BlogPostListType> {
 
   const blogPosts = fs.readdirSync(BLOG_FOLDER_PATH)
 
-  const mappedBlogPosts = blogPosts.map((slug) => getBlogPostData(slug))
+  const mappedBlogPosts = blogPosts
+    .map((slug) => getBlogPostData(slug))
+    .filter((blogPosts) => !blogPosts.draft)
 
   return mappedBlogPosts.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
 }
