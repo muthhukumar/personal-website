@@ -13,4 +13,10 @@ const useMdxComponent = (code: string) => {
   return React.useMemo(() => getMDXComponent(code), [code])
 }
 
-export {useMdxComponent}
+const useScrollToTop = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+}
+
+export {useMdxComponent, useScrollToTop}

@@ -42,7 +42,7 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
 
 function Navbar() {
   return (
-    <header className="flex items-center justify-start p-8 text-primary">
+    <header className="flex items-center justify-start p-8 mb-16 text-primary">
       <Link
         to="/"
         className="flex items-center justify-center w-10 h-10 font-sans text-2xl font-medium bg-pink-600 rounded-full text-primary-inverse"

@@ -40,7 +40,8 @@ const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined
 function ThemeProvider({children}: {children: React.ReactNode}) {
   const [theme, setTheme] = React.useState<null | Theme.light | Theme.dark>(() => {
     if (isServerEnvironment()) {
-      return null
+      // return null
+      return Theme.light
     }
 
     // return getPreferredTheme()
