@@ -46,7 +46,9 @@ export const loader: LoaderFunction = async ({request}) => {
 export default function Blog() {
   const {blogPostList, categories, query} = useRouteData<LoaderData>()
 
-  const [latestBlog, ...blogPosts] = blogPostList
+  const latestBlog = query ? null : blogPostList[0]
+
+  const blogPosts = query ? blogPostList : blogPostList.slice(1, blogPostList.length)
 
   const submit = useSubmit()
 
@@ -84,7 +86,7 @@ export default function Blog() {
         </Form>
       </div>
       <div className="container flex flex-col mx-auto mt-20 max-w-7xl">
-        {!query ? (
+        {!query && latestBlog ? (
           <Link
             to={`/blog/${latestBlog.slug}`}
             className="block overflow-hidden rounded-lg ring-primary group"
@@ -94,7 +96,9 @@ export default function Blog() {
               <div className="flex flex-col justify-between lg:flex-row">
                 <img
                   src={latestBlog.banner}
-                  className="object-cover w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                  className="w-full mb-4 bg-cover rounded-lg lg:w-5/12 h-80"
+                  alt={latestBlog.bannerCredit}
+                  loading="eager"
                 />
                 <div className="flex flex-col justify-between w-full min-h-full lg:w-1/2">
                   <div>
@@ -132,14 +136,14 @@ export default function Blog() {
                       <div className="w-full h-80">
                         <img
                           src={blogPost.banner}
-                          className="object-cover w-full h-full bg-cover rounded-lg group-hover:ring-primary"
+                          className="w-full h-full rounded-lg group-hover:ring-primary"
                           alt={blogPost.bannerCredit ?? `${blogPost.title} banner`}
-                          loading="lazy"
+                          loading="eager"
                         />
                       </div>
 
                       <h2 className="mt-4 text-xl font-medium text-primary">{blogPost.title}</h2>
-                      <div className="mt-2 text-xl text-gray-400">
+                      <div className="mt-2 text-xl font-medium text-gray-400">
                         {moment(blogPost.date).format('ll')} - 5 min read
                       </div>
                     </div>
@@ -150,7 +154,7 @@ export default function Blog() {
         </div>
         {blogPosts.length === 0 && (
           <div className="text-xl font-normal text-center text-primary">
-            Looks like the article you looking for is not available. Please try some other topic
+            Looks like the article you looking for is not available. Please try some other topic.
           </div>
         )}
       </div>
