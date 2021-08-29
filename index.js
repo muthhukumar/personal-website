@@ -16,12 +16,10 @@ app.use(compression())
 // You may want to be more aggressive with this caching
 app.use(express.static('public', {maxAge: '1h'}))
 
-app.use(express.static('public/fonts', {maxAge: '1y'}))
-
-app.use(express.static('public/images', {maxAge: '1y'}))
-
-// Remix fingerprints its assets so we can cache forever
-app.use(express.static('public/build', {immutable: true, maxAge: '1y'}))
+app.use((_, res, next) => {
+  res.header('x-powered-by', 'remix')
+  next()
+})
 
 app.all('*', (...args) => {
   if (MODE === 'production') {

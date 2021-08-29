@@ -143,7 +143,7 @@ export default function Blog() {
                       </div>
 
                       <h2 className="mt-4 text-xl font-medium text-primary">{blogPost.title}</h2>
-                      <div className="mt-2 text-xl text-gray-400">
+                      <div className="mt-2 text-xl font-medium text-gray-400">
                         {moment(blogPost.date).format('ll')} - 5 min read
                       </div>
                     </div>

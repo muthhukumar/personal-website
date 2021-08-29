@@ -25,8 +25,9 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
   const hasBlogKey = location.pathname.includes('blog') && to.includes('blog')
 
   return (
-    <Link to={to}>
-      <li
+    <li>
+      <Link
+        to={to}
         className={clsx({
           'mr-16 font-medium text-md py-2 text-primary border-b-2 border-transparent hover:cursor-pointer':
             true,
@@ -34,8 +35,8 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
         })}
       >
         {pathname}
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }
 
