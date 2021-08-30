@@ -111,7 +111,7 @@ export default function Blog() {
                       {moment(latestArticle.date).format('ll')}
                     </div>
                   </div>
-                  <div className="flex items-center mt-4 ml-auto md:mb-auto">
+                  <div className="flex items-center mt-4 ml-auto md:mt-auto">
                     <div className="mr-4 text-xl text-primary">Read full article </div>
                     <span className="p-4 transition duration-200 origin-center transform border rounded-full text-primary group-hover:border-black dark:group-hover:border-white">
                       <HiOutlineArrowRight
