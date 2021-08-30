@@ -1,13 +1,18 @@
 import {Link} from 'react-router-dom'
 import moment from 'moment'
+import clsx from 'clsx'
 
 import {ArticlesListType} from '~/utils/mdx.server'
 
 function ArticleBanner(props: ArticlesListType) {
-  const {slug, banner, title, date, bannerCredit} = props
+  const {slug, banner, title, date, bannerCredit, draft} = props
 
   return (
-    <Link to={`/blog/${slug}`} className="rounded-lg group" key={slug}>
+    <Link
+      to={`/blog/${slug}`}
+      className={clsx('rounded-lg group', {'bg-red-400': draft})}
+      key={slug}
+    >
       <div className="flex flex-col mb-4" key={slug}>
         <div className="w-full h-80">
           <img
