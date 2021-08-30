@@ -96,7 +96,11 @@ function getArticlesFromDisk(): Array<ArticlesListType> {
     .map((slug) => getArticleData(slug))
     .filter((article) => (process.env.NODE === 'production' ? !article.draft : true))
 
-  return mappedArticles.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
+  return mappedArticles.sort((a, b) => {
+    const dateA = new Date(a.date).getTime()
+    const dateB = new Date(b.date).getTime()
+    return dateA + dateB
+  })
 }
 
 async function getMDXPageData({
