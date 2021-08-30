@@ -29,7 +29,7 @@ function LoginForm({shouldFocus}) {
 
 function App() {
   const [mount, setMount] = React.useState(true)
-  const [shouldFocus, setShouldFocus] = React.useState(true)
+  const [shouldFocus, setShouldFocus] = React.useState(false)
   return (
     <div style={{border: '1px solid black', padding: '16px'}}>
       <div style={{minHeight: '14rem'}}>
