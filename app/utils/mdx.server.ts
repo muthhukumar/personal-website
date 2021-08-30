@@ -94,7 +94,7 @@ function getArticlesFromDisk(): Array<ArticlesListType> {
 
   const mappedArticles = articles
     .map((slug) => getArticleData(slug))
-    .filter((article) => !article.draft)
+    .filter((article) => (process.env.NODE === 'production' ? !article.draft : true))
 
   return mappedArticles.sort((a, b) => new Date(a.date).getTime() + new Date(b.date).getTime())
 }

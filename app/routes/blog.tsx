@@ -46,7 +46,7 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export default function Blog() {
-  const {articles, categories, query} = useRouteData<LoaderData>()
+  const {articles, query} = useRouteData<LoaderData>()
 
   const latestArticle = query ? null : articles[0]
 
@@ -70,7 +70,7 @@ export default function Blog() {
             />
             <div className="text-gray-400">{articles.length}</div>
           </div>
-          <div className="mt-12">
+          {/* <div className="mt-12">
             <h2 className="mb-4 text-lg font-semibold text-primary">Search from categories</h2>
             <div className="flex flex-wrap items-center justify-start">
               {categories.map((category) => {
@@ -84,7 +84,7 @@ export default function Blog() {
                 )
               })}
             </div>
-          </div>
+          </div> */}
         </Form>
       </div>
       <div className="container flex flex-col mx-auto mt-20 max-w-7xl">
