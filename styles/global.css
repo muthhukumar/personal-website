@@ -20,3 +20,22 @@ light-mode {
 html {
   scroll-behavior: smooth;
 }
+
+pre {
+  --base00: #f3f3f3; /* editor background */
+  --base01: #e0e0e0; /* unused (currently) */
+  --base02: #d6d6d6; /* unused (currently) */
+  --base03: #989fb1; /* code comments */
+  --base04: #969896; /* unused (currently) */
+  --base05: #1f2233; /* fallback font color */
+  --base06: #141b29; /* unused (currently) */
+  --base07: #555a5f; /* unused (currently) */
+  --base08: #383757; /* variable references */
+  --base09: #aa0982; /* numbers */
+  --base0A: #c3c14c; /* keywords */
+  --base0B: #8865c9; /* strings */
+  --base0C: #db40b4; /* escape characters in strings */
+  --base0D: #489dd6; /* function calls */
+  --base0E: #8222d1; /* operators */
+  --base0F: #3e6dd3; /* "Embedded" */
+}

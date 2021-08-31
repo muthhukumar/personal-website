@@ -3,6 +3,7 @@ import path from 'path'
 import * as esbuild from 'esbuild'
 import GrayMatter from 'gray-matter'
 import {bundleMDX} from 'mdx-bundler'
+import {remarkCodeBlocksShiki} from '@kentcdodds/md-temp'
 
 export interface ArticlesType {
   title: string
@@ -99,9 +100,11 @@ function getArticlesFromDisk(): Array<ArticlesListType> {
   return mappedArticles.sort((a, b) => {
     const dateA = new Date(a.date).getTime()
     const dateB = new Date(b.date).getTime()
-    return dateA + dateB
+    return dateB - dateA
   })
 }
+
+const remarkPlugins = [remarkCodeBlocksShiki]
 
 async function getMDXPageData({
   slug,
@@ -175,7 +178,13 @@ async function getMDXPageData({
     const getterToUse = shouldUseArticlesFromDisk ? 'disk' : 'github'
 
     const {mdxSource, files} = await mdxSourceConfig[getterToUse]()
-    return await bundleMDX(mdxSource, {files})
+    return await bundleMDX(mdxSource, {
+      files,
+      xdmOptions(options) {
+        options.remarkPlugins = [...(options.remarkPlugins ?? []), ...remarkPlugins]
+        return options
+      },
+    })
   } catch (error) {
     return null
   }
