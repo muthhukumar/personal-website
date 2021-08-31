@@ -11,8 +11,6 @@ export default function handleRequest(
 ) {
   const markup = ReactDOMServer.renderToString(<Remix context={remixContext} url={request.url} />)
 
-  console.log(Object.fromEntries(responseHeaders))
-
   return new Response('<!DOCTYPE html>' + markup, {
     status: responseStatusCode,
     headers: {
