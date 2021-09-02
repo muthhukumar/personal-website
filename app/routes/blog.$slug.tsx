@@ -83,7 +83,7 @@ function MDXComponent({page, article}: {page: MDXPageType; article: ArticlesList
         </div>
       </div>
       <img src={article.banner} className="container max-w-6xl mx-auto rounded-lg" />
-      <article className="container max-w-4xl mx-auto mt-16 prose prose-lg prose-pink text-primary">
+      <article className="container max-w-4xl mx-auto mt-16 prose prose-lg prose-pink text-primary text-[19px] leading-8">
         <Component />
       </article>
     </div>
