@@ -29,14 +29,14 @@ export const links: LinksFunction = () => {
     {
       rel: 'preload',
       as: 'font',
-      href: '/fonts/nunito-v16-latin-regular.woff2',
+      href: '/fonts/nunito-v16-latin-700.woff2',
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
     {
       rel: 'preload',
       as: 'font',
-      href: '/fonts/nunito-v16-latin-regular.woff',
+      href: '/fonts/nunito-v16-latin-700.woff',
       type: 'font/woff',
       crossOrigin: 'anonymous',
     },

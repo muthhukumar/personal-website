@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "build:remix": "cross-env NODE_ENV=production remix build",
-    "build:css:prod": "cross-env NODE_ENV=production npm run build:css",
+    "build:css:prod": "npm run build:css -- --env production",
     "dev": "pm2-dev ./pm2.config.js",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
