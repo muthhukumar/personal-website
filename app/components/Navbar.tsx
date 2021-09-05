@@ -13,8 +13,8 @@ const navLinks = [
     pathname: 'Blog',
   },
   // {
-  //   to: '/bookmarks',
-  //   pathname: 'Bookmarks',
+  //   to: '/sketches',
+  //   pathname: 'Sketches',
   // },
 ]
 
@@ -29,9 +29,8 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
       <Link
         to={to}
         className={clsx({
-          'mr-16 font-medium text-md py-2 text-primary border-b-2 border-transparent hover:cursor-pointer':
-            true,
-          'text-pink-600 border-b-2 border-pink-600': isActivePath || hasBlogKey,
+          'mr-16 font-medium text-md border-b-2 border-transparent hover:cursor-pointer': true,
+          'border-b-2 border-pink-600': isActivePath || hasBlogKey,
         })}
       >
         {pathname}
@@ -41,26 +40,31 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
 }
 
 function Navbar() {
+  const location = useLocation()
+
+  const isBlogPath = new RegExp(/\/blog\/./).test(location.pathname)
+
+  console.log(location.pathname)
+
+  console.log(isBlogPath)
+
   return (
-    <header className="flex items-center justify-start p-8 mb-16 text-primary">
-      <Link
-        to="/"
-        className="flex items-center justify-center w-10 h-10 font-sans text-2xl font-medium bg-pink-600 rounded-full text-primary-inverse"
-      >
-        M
-      </Link>
-      <nav className="ml-auto">
-        <ul className="flex items-center">
+    <header className={clsx('p-16 pb-4 text-primary', {'bg-blue-100': isBlogPath})}>
+      <nav className="container flex items-center justify-start max-w-6xl mx-auto">
+        <ul className="flex items-center justify-center">
           {navLinks.map((link) => {
             return <NavLink key={link.to} {...link} />
           })}
         </ul>
       </nav>
-      {/* <span className="ml-auto">
-        <ThemeToggle />
-      </span> */}
     </header>
   )
 }
 
 export default Navbar
+
+// <div className="flex flex-col mt-auto mb-8">
+//   <div className="text-lg text-gray-600">Hi, my name is</div>
+//   <div className="mt-2 font-black text-8xl">Muthukumar</div>
+//   <div className="text-lg text-gray-600">I love to code & try out new things.</div>
+// </div>
