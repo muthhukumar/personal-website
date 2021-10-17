@@ -1,5 +1,4 @@
-import {json, LoaderFunction, MetaFunction, useRouteData} from 'remix'
-import {RiArrowRightSLine} from 'react-icons/ri'
+import {json, LoaderFunction, MetaFunction, useLoaderData} from 'remix'
 
 import {
   ArticlesListType,
@@ -51,7 +50,7 @@ export const loader: LoaderFunction = async ({params}) => {
 }
 
 export default function Index() {
-  const {page, article} = useRouteData<LoaderType>()
+  const {page, article} = useLoaderData<LoaderType>()
 
   if (!page) {
     return <div className="text-primary">Article post not found</div>
@@ -65,17 +64,13 @@ function MDXComponent({page, article}: {page: MDXPageType; article: ArticlesList
 
   return (
     <div className="text-primary">
-      <div className="h-[25vh] bg-blue-100 flex items-end">
-        <div className="container max-w-6xl mx-auto mb-16">
-          <div className="flex items-center mt-4">
-            Home <RiArrowRightSLine className="mx-4" /> Blog <RiArrowRightSLine className="mx-4" />{' '}
-            {article.categories[0]}
-          </div>
+      <div className="flex items-end bg-blue-100">
+        <div className="container max-w-4xl mx-auto mb-16">
           <div className="mt-8 text-3xl font-bold">{article.title}</div>
         </div>
       </div>
       <div className="p-6 pt-0 md:p-8 lg:p-16">
-        <article className="container max-w-6xl mx-auto prose prose-lg prose-pink text-primary text-[19px] leading-8">
+        <article className="container max-w-4xl mx-auto leading-8 prose prose-md prose-pink text-primary">
           <Component />
         </article>
       </div>

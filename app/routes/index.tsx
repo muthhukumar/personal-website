@@ -1,4 +1,4 @@
-import {json, LoaderFunction, useRouteData} from 'remix'
+import {json, LoaderFunction, useLoaderData} from 'remix'
 import ArticleBanner from '~/components/ArticleBanner'
 
 import {ArticlesListType, getArticlesFromDisk} from '~/utils/mdx.server'
@@ -12,11 +12,11 @@ export const loader: LoaderFunction = async () => {
 }
 
 export default function Index() {
-  const latest10Articles = useRouteData<Array<ArticlesListType>>()
+  const latest10Articles = useLoaderData<Array<ArticlesListType>>()
   return (
-    <div>
+    <div className="mx-4">
       <div className="py-8 mb-8">
-        <div className="container flex items-center justify-between max-w-6xl mx-auto text-primary">
+        <div className="container flex items-center justify-between max-w-4xl mx-auto text-primary">
           <div>
             <div className="text-xl font-normal">Hi, I&apos;m </div>
             <h1 className="text-5xl font-bold md:text-7xl">Muthukumar</h1>
@@ -25,10 +25,13 @@ export default function Index() {
               coding.
             </p>
           </div>
-          <img src="/profile.jpeg" className="object-cover w-64 h-64 ml-32 rounded-full" />
+          <img
+            src="/profile.jpeg"
+            className="object-cover w-64 h-64 ml-32 rounded-full sm:hidden lg:inline"
+          />
         </div>
       </div>
-      <div className="container max-w-6xl mx-auto text-primary">
+      <div className="container max-w-4xl mx-auto text-primary">
         <h2 className="mt-6 text-xl font-bold text-pink-500">RECENTLY PUBLISHED</h2>
         <div className="flex flex-col items-start mt-8">
           {latest10Articles.length > 0 &&

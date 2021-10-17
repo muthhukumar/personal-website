@@ -50,7 +50,7 @@ function Navbar() {
 
   return (
     <header className={clsx('p-16 pb-4 text-primary', {'bg-blue-100': isBlogPath})}>
-      <nav className="container flex items-center justify-start max-w-6xl mx-auto">
+      <nav className="container flex items-center justify-start max-w-4xl mx-auto">
         <ul className="flex items-center justify-center">
           {navLinks.map((link) => {
             return <NavLink key={link.to} {...link} />

@@ -1,4 +1,4 @@
-import {json, LoaderFunction, MetaFunction, useRouteData, Form, useSubmit} from 'remix'
+import {json, LoaderFunction, MetaFunction, useLoaderData, Form, useSubmit} from 'remix'
 import {RiSearchLine} from 'react-icons/ri'
 
 import {ArticlesListType, getArticlesFromDisk} from '~/utils/mdx.server'
@@ -43,13 +43,13 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export default function Blog() {
-  const {articles, query} = useRouteData<LoaderData>()
+  const {articles, query} = useLoaderData<LoaderData>()
 
   const submit = useSubmit()
 
   return (
     <div className="p-8 pt-0 md:p-16">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-primary">Find latest of my writing here.</h2>
         <Form onChange={(event) => submit(event.currentTarget, {method: 'get'})}>
           <div className="container flex items-center justify-center px-4 mt-8 overflow-hidden border border-gray-100 dark:border-gray-600 rounded-xl focus-within:border-gray-600 dark:focus-within:border-gray-100">
@@ -65,7 +65,7 @@ export default function Blog() {
           </div>
         </Form>
       </div>
-      <div className="container flex flex-col max-w-6xl mx-auto mt-8">
+      <div className="container flex flex-col max-w-4xl mx-auto mt-8">
         <div className="flex flex-col items-start mt-8 text-primary">
           {articles.length > 0
             ? articles.map((article) => {
