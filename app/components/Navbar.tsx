@@ -44,10 +44,6 @@ function Navbar() {
 
   const isBlogPath = new RegExp(/\/blog\/./).test(location.pathname)
 
-  console.log(location.pathname)
-
-  console.log(isBlogPath)
-
   return (
     <header className={clsx('p-16 pb-4 text-primary', {'bg-blue-100': isBlogPath})}>
       <nav className="container flex items-center justify-start max-w-4xl mx-auto">
