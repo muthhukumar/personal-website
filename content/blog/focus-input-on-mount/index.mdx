@@ -15,28 +15,28 @@ Instead of making the user click the input box we are going to tell react to foc
 
 Let's create an sample login form to see how to focus input on mount.
 
-```js
-import * as React from 'react'
+<Highlight code={
+`
+import * as React from "react";
 
 function LoginForm() {
-  return (
-    <form onSubmit={(e) => e.preventDefault()} style={{border: '1px solid black', padding: '16px'}}>
-      <h2 style={{margin: '10px'}}>Login form</h2>
-      <label>
-        email: <input placeholder="email" name="email" type="email" />
-      </label>
-      <br />
-      <label>
-        password: <input placeholder="password" name="password" type="password" />
-      </label>
-      <br />
-      <button type="submit" style={{border: '1px solid black', padding: '8px 14px'}}>
-        login
-      </button>
-    </form>
-  )
-}
-```
+return (
+
+<form onSubmit={(e) => e.preventDefault()} style={{border: '1px solid black', padding: '16px'}}>
+  <h2 style={{margin: '10px'}}>Login form</h2>
+  <label>
+    email: <input placeholder="email" name="email" type="email" />
+  </label>
+  <br />
+  <label>
+    password: <input placeholder="password" name="password" type="password" />
+  </label>
+  <br />
+  <button type="submit" style={{border: '1px solid black', padding: '8px 14px'}}>
+    login
+  </button>
+</form>
+); } ` } language="jsx"/>
 
 import App, {LoginForm} from './Component'
 

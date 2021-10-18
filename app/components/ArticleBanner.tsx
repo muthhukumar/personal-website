@@ -1,30 +1,22 @@
 import {Link} from 'react-router-dom'
-import moment from 'moment'
+import {HiOutlineArrowRight} from 'react-icons/hi'
 import clsx from 'clsx'
 
 import {ArticlesListType} from '~/utils/mdx.server'
 
 function ArticleBanner(props: ArticlesListType) {
-  const {slug, banner, title, date, bannerCredit, draft} = props
+  const {slug, title, draft, description} = props
 
   return (
     <Link
       to={`/blog/${slug}`}
-      className={clsx('rounded-lg group', {'bg-red-400': draft})}
+      className={clsx('rounded-lg group mb-12 w-full md:w-4/6', {'bg-red-400': draft})}
       key={slug}
     >
-      <div className="flex flex-col mb-4" key={slug}>
-        <div className="w-full h-80">
-          <img
-            src={banner}
-            className="w-full h-full rounded-lg group-hover:ring-primary"
-            alt={bannerCredit ?? `${title} banner`}
-            loading="eager"
-          />
-        </div>
-
-        <h2 className="mt-4 text-xl font-medium text-primary">{title}</h2>
-        <div className="mt-2 text-xl font-medium text-gray-400">{moment(date).format('ll')}</div>
+      <h2 className="text-xl font-bold text-primary">{title}</h2>
+      <p className="mt-4 text-md text-normal">{description}</p>
+      <div className="flex items-center mt-4 font-bold">
+        Read more <HiOutlineArrowRight className="ml-2" size={15} />
       </div>
     </Link>
   )

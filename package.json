@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "build:remix": "cross-env NODE_ENV=production remix build",
-    "build:css:prod": "cross-env NODE_ENV=production npm run build:css",
+    "build:css:prod": "npm run build:css -- --env production",
     "dev": "pm2-dev ./pm2.config.js",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@kentcdodds/md-temp": "^1.1.0",
-    "@remix-run/express": "v0.18.0-pre.1",
-    "@remix-run/node": "v0.18.0-pre.1",
-    "@remix-run/react": "v0.18.0-pre.1",
+    "@remix-run/express": "0.19",
+    "@remix-run/node": "0.19",
+    "@remix-run/react": "0.19",
     "@tailwindcss/typography": "^0.4.1",
     "clsx": "^1.1.1",
     "compression": "^1.7.4",
@@ -37,15 +37,15 @@
     "mdx-bundler": "^6.0.1",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
-    "node-fetch": "^2.6.1",
+    "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
-    "react-router-dom": "^6.0.0-beta.0",
-    "remix": "v0.18.0-pre.1"
+    "react-router-dom": "6.0.0-beta.6",
+    "remix": "0.19"
   },
   "devDependencies": {
-    "@remix-run/dev": "v0.18.0-pre.1",
+    "@remix-run/dev": "0.19",
     "@types/node": "^16.6.2",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
@@ -71,8 +71,7 @@
     "typescript": "^4.4.2"
   },
   "engines": {
-    "node": "16",
-    "npm": "7"
+    "node": "14.x"
   },
   "sideEffects": true,
   "lint-staged": {
