@@ -88,7 +88,7 @@ function getArticleData(slug: string): ArticlesListType {
 
 function getArticlesFromDisk(): Array<ArticlesListType> {
   if (!isDirectory(BLOG_FOLDER_PATH)) {
-    throw new Error('Passed article folder path is not a directory.')
+    throw new Error(`Passed article folder path is not a directory. Path name ${BLOG_FOLDER_PATH}`)
   }
 
   const articles = fs.readdirSync(BLOG_FOLDER_PATH)

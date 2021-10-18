@@ -39,3 +39,9 @@ pre {
   --base0E: #8222d1; /* operators */
   --base0F: #3e6dd3; /* "Embedded" */
 }
+
+*,
+::before,
+::after {
+  -webkit-font-smoothing: antialiased;
+}
