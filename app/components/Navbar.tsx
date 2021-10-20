@@ -1,36 +1,32 @@
 import {Link, useLocation} from 'react-router-dom'
 import clsx from 'clsx'
+import {FaCircle} from 'react-icons/fa'
 
-// import ThemeToggle from './ThemeToggle'
+import {composeToArticleDate} from '~/utils'
 
 const navLinks = [
   {
     to: '/',
-    pathname: 'Home',
+    pathname: 'About',
   },
   {
-    to: '/blog',
-    pathname: 'Blog',
+    to: '/posts',
+    pathname: 'Posts',
   },
-  // {
-  //   to: '/sketches',
-  //   pathname: 'Sketches',
-  // },
 ]
 
 function NavLink({to, pathname}: {to: string; pathname: string}) {
   const location = useLocation()
 
   const isActivePath = location.pathname === to
-  const hasBlogKey = location.pathname.includes('blog') && to.includes('blog')
 
   return (
     <li>
       <Link
         to={to}
         className={clsx({
-          'mr-16 font-medium text-md border-b-2 border-transparent hover:cursor-pointer': true,
-          'border-b-2 border-pink-600': isActivePath || hasBlogKey,
+          'ml-8 font-medium text-md border-b-2 border-transparent hover:cursor-pointer': true,
+          'border-b-2 border-pink-600': isActivePath,
         })}
       >
         {pathname}
@@ -39,28 +35,52 @@ function NavLink({to, pathname}: {to: string; pathname: string}) {
   )
 }
 
-function Navbar() {
+function Tag({tag}: {tag: string}) {
+  return (
+    <Link
+      className="px-[8px] py-[2px] mr-1 text-sm text-gray-600 bg-gray-300 rounded-md"
+      to={`/posts?tag=${tag}`}
+    >
+      {tag}
+    </Link>
+  )
+}
+
+function PostNavbar({date, tags = []}: {date?: string | Date | number; tags: Array<string>}) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center justify-start text-gray-500">
+        You, {date && composeToArticleDate(date)}
+        <FaCircle color="gray" size={5} className="mx-2" />
+        {tags && tags.map((tag) => <Tag key={tag} tag={tag} />)}
+      </div>
+      <Link to="/posts" className="text-gray-500 underline">
+        Back
+      </Link>
+    </div>
+  )
+}
+
+function Navbar({tags, date}: {tags?: Array<string>; date?: string | Date | number}) {
   const location = useLocation()
 
-  const isBlogPath = new RegExp(/\/blog\/./).test(location.pathname)
+  const isArticlePath = new RegExp(/\/blog\/./).test(location.pathname)
 
   return (
-    <header className={clsx('p-16 pb-4 text-primary', {'bg-blue-100': isBlogPath})}>
-      <nav className="container flex items-center justify-start max-w-4xl mx-auto">
-        <ul className="flex items-center justify-center">
-          {navLinks.map((link) => {
-            return <NavLink key={link.to} {...link} />
-          })}
-        </ul>
-      </nav>
+    <header className="mb-8">
+      {isArticlePath ? (
+        <PostNavbar tags={tags ?? []} date={date} />
+      ) : (
+        <nav>
+          <ul className="flex items-center justify-end w-full">
+            {navLinks.map((link) => {
+              return <NavLink key={link.to} {...link} />
+            })}
+          </ul>
+        </nav>
+      )}
     </header>
   )
 }
 
 export default Navbar
-
-// <div className="flex flex-col mt-auto mb-8">
-//   <div className="text-lg text-gray-600">Hi, my name is</div>
-//   <div className="mt-2 font-black text-8xl">Muthukumar</div>
-//   <div className="text-lg text-gray-600">I love to code & try out new things.</div>
-// </div>
