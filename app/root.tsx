@@ -7,8 +7,7 @@ import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
 import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from '~/utils/theme-provider'
 
-import Navbar from '~/components/Navbar'
-import Footer from '~/components/Footer'
+import {Footer} from '~/components'
 
 export const links: LinksFunction = () => {
   return [
@@ -37,6 +36,20 @@ export const links: LinksFunction = () => {
       rel: 'preload',
       as: 'font',
       href: '/fonts/inter-v3-latin-600.woff',
+      type: 'font/woff',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v3-latin-900.woff2',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v3-latin-900.woff',
       type: 'font/woff',
       crossOrigin: 'anonymous',
     },
@@ -86,8 +99,7 @@ function App() {
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="bg-primary">
-        <Navbar />
+      <body className="container max-w-3xl px-8 py-20 mx-auto bg-primary text-primary">
         <Outlet />
         <Footer />
 
