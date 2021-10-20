@@ -1,9 +1,10 @@
-# fly.toml file generated for remix-blog on 2021-08-23T20:57:58+05:30
+# fly.toml file generated for small-leaf-8242 on 2021-10-18T20:42:40+05:30
 
-app = "remix-blog"
+app = "small-leaf-8242"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
+processes = []
 
 [env]
   NODE_ENV = "production"
@@ -15,6 +16,7 @@ kill_timeout = 5
 [[services]]
   http_checks = []
   internal_port = 3000
+  processes = ["app"]
   protocol = "tcp"
   script_checks = []
 
@@ -34,5 +36,5 @@ kill_timeout = 5
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
-    restart_limit = 6
+    restart_limit = 0
     timeout = "2s"
