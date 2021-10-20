@@ -7,6 +7,7 @@ import {
   MDXPageType,
 } from '~/utils/mdx.server'
 import {useMdxComponent} from '~/utils/hooks'
+import {Header, Navbar} from '~/components'
 
 type LoaderType = {
   article: ArticlesListType
@@ -36,7 +37,7 @@ export const meta: MetaFunction = ({data}) => {
 }
 
 export const loader: LoaderFunction = async ({params}) => {
-  const page = await getMDXPageData({contentDir: 'blog', slug: params.slug})
+  const page = await getMDXPageData({contentDir: 'blog', slug: params.slug ?? ''})
   const article = getArticlesFromDisk().filter((article) => article.slug === params.slug)[0]
   return json(
     {page, article},
@@ -63,17 +64,12 @@ function MDXComponent({page, article}: {page: MDXPageType; article: ArticlesList
   const Component = useMdxComponent(page.code)
 
   return (
-    <div className="text-primary">
-      <div className="flex items-end bg-blue-100">
-        <div className="container max-w-4xl mx-auto mb-16">
-          <div className="mt-8 text-3xl font-bold">{article.title}</div>
-        </div>
-      </div>
-      <div className="p-6 pt-0 md:p-8 lg:p-16">
-        <article className="container max-w-4xl mx-auto leading-8 prose prose-md prose-pink text-primary">
-          <Component />
-        </article>
-      </div>
-    </div>
+    <>
+      <Header title={article.title} />
+      <Navbar tags={article.categories} date={article.date} />
+      <article className="w-full max-w-full prose pt-7 prose-pink text-primary">
+        <Component />
+      </article>
+    </>
   )
 }
