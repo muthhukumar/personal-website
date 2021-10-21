@@ -4,6 +4,7 @@ import * as esbuild from 'esbuild'
 import GrayMatter from 'gray-matter'
 import {bundleMDX} from 'mdx-bundler'
 import {remarkCodeBlocksShiki} from '@kentcdodds/md-temp'
+import readingTime from 'reading-time'
 
 export interface ArticlesType {
   title: string
@@ -190,4 +191,8 @@ async function getMDXPageData({
   }
 }
 
-export {getArticlesFromDisk, getMDXPageData, getArticleData}
+function getReadingTime(text: string) {
+  return readingTime(text)
+}
+
+export {getArticlesFromDisk, getMDXPageData, getArticleData, getReadingTime}

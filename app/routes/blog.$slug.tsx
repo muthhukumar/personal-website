@@ -1,17 +1,23 @@
-import {json, LoaderFunction, MetaFunction, useLoaderData} from 'remix'
+import {json, Link, LoaderFunction, MetaFunction, redirect, useLoaderData} from 'remix'
 
 import {
   ArticlesListType,
   getArticlesFromDisk,
   getMDXPageData,
+  getReadingTime,
   MDXPageType,
 } from '~/utils/mdx.server'
 import {useMdxComponent} from '~/utils/hooks'
-import {Header, Navbar} from '~/components'
+import {Header} from '~/components'
+import {prisma} from '~/utils/prisma.server'
+import {composeToArticleDate} from '~/utils'
+import {FaCircle} from 'react-icons/fa'
 
 type LoaderType = {
   article: ArticlesListType
   page: MDXPageType | null
+  views: number
+  readingTime: ReturnType<typeof getReadingTime>
 }
 
 export const meta: MetaFunction = ({data}) => {
@@ -23,7 +29,6 @@ export const meta: MetaFunction = ({data}) => {
       description: '',
       'og:title': '',
       'og:description': '',
-      'og:image': '',
     }
   }
 
@@ -32,15 +37,41 @@ export const meta: MetaFunction = ({data}) => {
     description: article.description,
     'og:title': article.title,
     'og:description': article.description,
-    'og:image': article.banner,
   }
 }
 
 export const loader: LoaderFunction = async ({params}) => {
-  const page = await getMDXPageData({contentDir: 'blog', slug: params.slug ?? ''})
-  const article = getArticlesFromDisk().filter((article) => article.slug === params.slug)[0]
+  const slug = params.slug ?? ''
+
+  const page = await getMDXPageData({contentDir: 'blog', slug})
+
+  if (!slug || !page) {
+    return redirect('/posts')
+  }
+
+  let views = 0
+  const readingTime = getReadingTime(page.code)
+
+  try {
+    let post = await prisma.post.findUnique({where: {slug}})
+
+    if (!post) {
+      post = await prisma.post.create({data: {slug}})
+    }
+
+    const {views: postViews} = await prisma.post.update({
+      where: {id: post.id},
+      data: {views: post.views + 1},
+    })
+
+    views = postViews
+  } catch (error) {
+    console.log('something winet wrong', error)
+  }
+
+  const article = getArticlesFromDisk().filter((article) => article.slug === slug)[0]
   return json(
-    {page, article},
+    {page, article, views, readingTime},
     {
       status: page ? 200 : 404,
       headers: {
@@ -50,23 +81,75 @@ export const loader: LoaderFunction = async ({params}) => {
   )
 }
 
+function Tag({tag}: {tag: string}) {
+  return (
+    <Link
+      className="px-[8px] py-[2px] mr-1 text-sm text-gray-600 bg-gray-300 rounded-md"
+      to={`/posts?tag=${tag}`}
+    >
+      {tag}
+    </Link>
+  )
+}
+
+function PostMoreDetails({
+  date,
+  tags = [],
+  views,
+  readingTime,
+}: {
+  views: number
+  date?: string | Date | number
+  tags: Array<string>
+  readingTime: ReturnType<typeof getReadingTime>
+}) {
+  return (
+    <div className="flex items-center justify-between mb-8 text-gray-500 text-md">
+      <p>Muthukumar, {date && composeToArticleDate(date)}</p>
+      {/* <FaCircle color="gray" size={5} className="mx-2" /> */}
+      {/* {tags && tags.map((tag) => <Tag key={tag} tag={tag} />)} */}
+      {}
+      <div className="flex items-center">
+        <p>{readingTime.text}</p>
+        <FaCircle color="gray" size={5} className="mx-2" />
+        <p>{views.toLocaleString()} views</p>
+      </div>
+    </div>
+  )
+}
+
 export default function Index() {
-  const {page, article} = useLoaderData<LoaderType>()
+  const {page, ...data} = useLoaderData<LoaderType>()
 
   if (!page) {
     return <div className="text-primary">Article post not found</div>
   }
 
-  return <MDXComponent page={page} article={article} />
+  return <MDXComponent page={page} {...data} />
 }
 
-function MDXComponent({page, article}: {page: MDXPageType; article: ArticlesListType}) {
+function MDXComponent({
+  page,
+  article,
+  views,
+  readingTime,
+}: {
+  views: number
+  page: MDXPageType
+  article: ArticlesListType
+  readingTime: ReturnType<typeof getReadingTime>
+}) {
   const Component = useMdxComponent(page.code)
 
   return (
     <>
       <Header title={article.title} />
-      <Navbar tags={article.categories} date={article.date} />
+      <PostMoreDetails
+        date={article.date}
+        tags={article.categories}
+        views={views}
+        readingTime={readingTime}
+      />
       <article className="w-full max-w-full prose pt-7 prose-pink text-primary">
         <Component />
       </article>
