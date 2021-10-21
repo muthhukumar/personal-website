@@ -7,7 +7,7 @@ import {MetaFunction, LinksFunction, LiveReload} from 'remix'
 
 import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from '~/utils/theme-provider'
 
-import {Footer} from '~/components'
+import {Footer, Navbar} from '~/components'
 
 export const links: LinksFunction = () => {
   return [
@@ -99,7 +99,8 @@ function App() {
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="container max-w-3xl px-8 py-20 mx-auto bg-primary text-primary">
+      <body className="container max-w-3xl px-8 py-8 mx-auto bg-primary text-primary">
+        <Navbar />
         <Outlet />
         <Footer />
 

@@ -6,6 +6,12 @@ body {
   font-family: sans-serif;
 }
 
+pre,
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+}
+
 footer {
   text-align: center;
   color: #ccc;

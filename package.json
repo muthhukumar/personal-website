@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@kentcdodds/md-temp": "^1.1.0",
+    "@prisma/client": "^3.3.0",
     "@remix-run/express": "0.19",
     "@remix-run/node": "0.19",
     "@remix-run/react": "0.19",
@@ -42,6 +43,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-router-dom": "6.0.0-beta.6",
+    "reading-time": "^1.5.0",
     "remix": "0.19"
   },
   "devDependencies": {

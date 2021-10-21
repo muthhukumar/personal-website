@@ -1,5 +1,3 @@
-import {Header, Navbar} from '~/components'
-
 import {siteConfig} from '~/site-config'
 
 function Social({
@@ -23,9 +21,7 @@ function Social({
 
 export default function Index() {
   return (
-    <>
-      <Header title={siteConfig.name} />
-      <Navbar />
+    <div>
       <div className="mb-12">
         <p>{siteConfig.description}</p>
       </div>
@@ -35,6 +31,6 @@ export default function Index() {
           return <Social key={social.socialName} {...social} />
         })}
       </div>
-    </>
+    </div>
   )
 }
