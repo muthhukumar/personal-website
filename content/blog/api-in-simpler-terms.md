@@ -2,7 +2,7 @@
 title: What is an API in simpler terms?
 date: 2021-08-30
 updatedAt: 2021-08-30
-categories: [computer science]
+categories: ['computer science']
 draft: false
 description: In this article, I explain what is an API in simpler terms.
 banner: /images/api.jpeg
