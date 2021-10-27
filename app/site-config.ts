@@ -1,6 +1,6 @@
 const siteConfig = {
   name: 'Muthukumar',
-  description: `Hey, I'm Muthukumar. I'm a software developer at Actyv. I like to code and
+  description: `I like to code and
 	listen music. And I like to try out new technologies and build stuff with it. Currently
 	trying out Remix.run`,
   socials: [

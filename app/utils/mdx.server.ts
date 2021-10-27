@@ -6,6 +6,8 @@ import {bundleMDX} from 'mdx-bundler'
 import {remarkCodeBlocksShiki} from '@kentcdodds/md-temp'
 import readingTime from 'reading-time'
 
+import {prisma} from '~/utils/prisma.server'
+
 export interface ArticlesType {
   title: string
   date: string
@@ -195,4 +197,18 @@ function getReadingTime(text: string) {
   return readingTime(text)
 }
 
-export {getArticlesFromDisk, getMDXPageData, getArticleData, getReadingTime}
+async function getFeaturedPosts({limit = 10}) {
+  try {
+    return prisma.post.findMany({
+      orderBy: {
+        views: 'desc',
+      },
+      take: limit,
+    })
+  } catch (error) {
+    console.log('error', error)
+    return []
+  }
+}
+
+export {getFeaturedPosts, getArticlesFromDisk, getMDXPageData, getArticleData, getReadingTime}
