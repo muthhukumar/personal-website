@@ -1,4 +1,13 @@
-import {json, Link, LoaderFunction, MetaFunction, redirect, useLoaderData} from 'remix'
+import * as React from 'react'
+import {
+  ActionFunction,
+  json,
+  LoaderFunction,
+  MetaFunction,
+  redirect,
+  useFetcher,
+  useLoaderData,
+} from 'remix'
 
 import {
   ArticlesListType,
@@ -12,6 +21,7 @@ import {Header} from '~/components'
 import {prisma} from '~/utils/prisma.server'
 import {composeToArticleDate} from '~/utils'
 import {FaCircle} from 'react-icons/fa'
+import {useParams} from 'react-router-dom'
 
 type LoaderType = {
   article: ArticlesListType
@@ -40,6 +50,39 @@ export const meta: MetaFunction = ({data}) => {
   }
 }
 
+export const action: ActionFunction = async ({request}) => {
+  const formData = new URLSearchParams(await request.text())
+
+  const slug = formData.get('slug')
+
+  const url = new URL(request.url)
+
+  const article = getArticlesFromDisk().filter((article) => article.slug === slug)[0]
+
+  if (!slug || !article) {
+    return redirect(url.pathname)
+  }
+
+  try {
+    let post = await prisma.post.findUnique({where: {slug}})
+
+    if (!post) {
+      post = await prisma.post.create({
+        data: {slug, title: article.title, date: article.date, description: article.description},
+      })
+    }
+
+    await prisma.post.update({
+      where: {id: post.id},
+      data: {views: post.views + 1},
+    })
+  } catch (error) {
+    console.log('error', error)
+  }
+
+  return redirect(url.pathname)
+}
+
 export const loader: LoaderFunction = async ({params}) => {
   const slug = params.slug ?? ''
 
@@ -51,25 +94,21 @@ export const loader: LoaderFunction = async ({params}) => {
 
   let views = 0
   const readingTime = getReadingTime(page.code)
+  const article = getArticlesFromDisk().filter((article) => article.slug === slug)[0]
 
   try {
     let post = await prisma.post.findUnique({where: {slug}})
 
     if (!post) {
-      post = await prisma.post.create({data: {slug}})
+      post = await prisma.post.create({
+        data: {slug, title: article.title, date: article.date, description: article.description},
+      })
     }
-
-    const {views: postViews} = await prisma.post.update({
-      where: {id: post.id},
-      data: {views: post.views + 1},
-    })
-
-    views = postViews
+    views = post.views
   } catch (error) {
     console.log('something winet wrong', error)
   }
 
-  const article = getArticlesFromDisk().filter((article) => article.slug === slug)[0]
   return json(
     {page, article, views, readingTime},
     {
@@ -81,20 +120,8 @@ export const loader: LoaderFunction = async ({params}) => {
   )
 }
 
-function Tag({tag}: {tag: string}) {
-  return (
-    <Link
-      className="px-[8px] py-[2px] mr-1 text-sm text-gray-600 bg-gray-300 rounded-md"
-      to={`/posts?tag=${tag}`}
-    >
-      {tag}
-    </Link>
-  )
-}
-
 function PostMoreDetails({
   date,
-  tags = [],
   views,
   readingTime,
 }: {
@@ -104,11 +131,11 @@ function PostMoreDetails({
   readingTime: ReturnType<typeof getReadingTime>
 }) {
   return (
-    <div className="flex items-center justify-between mb-8 text-gray-500 text-md">
-      <p>Muthukumar, {date && composeToArticleDate(date)}</p>
-      {/* <FaCircle color="gray" size={5} className="mx-2" /> */}
-      {/* {tags && tags.map((tag) => <Tag key={tag} tag={tag} />)} */}
-      {}
+    <div className="flex items-center justify-between mb-8 text-sm text-gray-800">
+      <div className="flex items-center">
+        <img src="/profile.jpeg" alt="Muthukumar picture" className="w-6 h-6 mr-2 rounded-full" />
+        <p>Muthukumar / {date && composeToArticleDate(date)}</p>
+      </div>
       <div className="flex items-center">
         <p>{readingTime.text}</p>
         <FaCircle color="gray" size={5} className="mx-2" />
@@ -120,6 +147,15 @@ function PostMoreDetails({
 
 export default function Index() {
   const {page, ...data} = useLoaderData<LoaderType>()
+  const fetcher = useFetcher()
+
+  const {slug} = useParams()
+
+  React.useEffect(() => {
+    if (slug) {
+      fetcher.submit({slug}, {method: 'post'})
+    }
+  }, [])
 
   if (!page) {
     return <div className="text-primary">Article post not found</div>

@@ -1,8 +1,13 @@
 # base node image
-FROM node:16-slim as base
+FROM node:16-bullseye-slim as base
 
 ARG REMIX_TOKEN
-ENV REMIX_TOKEN=${REMIX_TOKEN}
+ARG DATABASE_URL
+ENV REMIX_TOKEN=$REMIX_TOKEN
+ENV DATABASE_URL=${DATABASE_URL}
+
+# install open ssl for prisma and ffmpeg for the call kent functionality
+RUN apt-get update && apt-get install -y openssl 
 
 # install all node_modules, including dev
 FROM base as deps
@@ -17,7 +22,9 @@ RUN npm install --production=false
 FROM base as production-deps
 
 ARG REMIX_TOKEN
-ENV REMIX_TOKEN=${REMIX_TOKEN}
+ARG DATABASE_URL
+ENV REMIX_TOKEN=$REMIX_TOKEN
+ENV DATABASE_URL=${DATABASE_URL}
 
 RUN mkdir /app/
 WORKDIR /app/
@@ -30,12 +37,18 @@ RUN npm prune --production
 FROM base as build
 
 ARG REMIX_TOKEN
-ENV REMIX_TOKEN=${REMIX_TOKEN}
+ARG DATABASE_URL
+ENV REMIX_TOKEN=$REMIX_TOKEN
+ENV DATABASE_URL=${DATABASE_URL}
 
 RUN mkdir /app/
 WORKDIR /app/
 
 COPY --from=deps /app/node_modules /app/node_modules
+
+# schema doesn't change much so these will stay cached
+ADD prisma .
+RUN npx prisma generate
 
 # app code changes all the time
 ADD . .
@@ -45,11 +58,16 @@ RUN npm run build
 FROM base
 
 ENV NODE_ENV=production
+ENV DATABASE_URL=${DATABASE_URL}
 
 RUN mkdir /app/
 WORKDIR /app/
 
+EXPOSE 3000
+EXPOSE $PORT
+
 COPY --from=production-deps /app/node_modules /app/node_modules
+COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
 COPY --from=build /app/server/build /app/server/build
 COPY --from=build /app/public /app/public
 ADD . .

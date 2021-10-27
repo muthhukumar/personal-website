@@ -8,7 +8,10 @@ generator client {
 }
 
 model Post {
-  id   String @unique @default(uuid())
-  slug String @unique
-  views Int    @default(0)
+  id          String @unique @default(uuid())
+  slug        String @unique
+  views       Int    @default(0)
+  title       String
+  date        String
+  description String
 }

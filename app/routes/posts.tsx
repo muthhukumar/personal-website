@@ -69,7 +69,7 @@ export default function Posts() {
 
   const query = urlSearchParams.get('query')
 
-  const tag = urlSearchParams.get('tag')
+  // const tag = urlSearchParams.get('tag')
 
   const submit = useSubmit()
 

@@ -99,7 +99,7 @@ function App() {
         <Links />
         <NonFlashOfWrongThemeEls />
       </head>
-      <body className="container max-w-3xl px-8 py-8 mx-auto bg-primary text-primary">
+      <body className="container max-w-3xl p-10 mx-auto bg-primary text-primary">
         <Navbar />
         <Outlet />
         <Footer />
