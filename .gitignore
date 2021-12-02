@@ -1,18 +1,12 @@
-.vscode/
-.DS_Store
-node_modules/
+node_modules
 
 .cache
-server/build
-/public/build
-/public/images
-
-/app/styles/**/*.css
-other/postcss
-
-.env
-.env.production
-.envrc
-
-log
 .vercel
+.output
+
+public/build
+api/build
+
+app/styles/*
+
+.DS_STORE

@@ -1,109 +1,84 @@
-import stylesUrl from './styles/global.css'
-import tailwindcssStyles from './styles/tailwind.css'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
+import type { LinksFunction } from 'remix'
 
-import {Outlet} from 'react-router-dom'
-import {Meta, Links, Scripts} from '@remix-run/react'
-import {MetaFunction, LinksFunction, LiveReload} from 'remix'
-
-import {NonFlashOfWrongThemeEls, ThemeProvider, useTheme} from '~/utils/theme-provider'
-
-import {Footer, Navbar} from '~/components'
+import globalStylesUrl from '~/styles/global.css'
+import tailwindStylesUrl from '~/styles/tailwind.css'
 
 export const links: LinksFunction = () => {
   return [
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-regular.woff2',
-      type: 'font/woff2',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-regular.woff',
-      type: 'font/woff',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-600.woff2',
-      type: 'font/woff2',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-600.woff',
-      type: 'font/woff',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-900.woff2',
-      type: 'font/woff2',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v3-latin-900.woff',
-      type: 'font/woff',
-      crossOrigin: 'anonymous',
-    },
-    {rel: 'stylesheet', href: stylesUrl},
-    {rel: 'stylesheet', href: tailwindcssStyles},
-    {
-      rel: 'apple-touch-icon',
-      sizes: '180x180',
-      href: '/favicon/apple-touch-icon.png',
-    },
-
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      href: '/favicon/favicon-32x32.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      href: '/favicon/favicon-16x16.png',
-    },
-    {
-      rel: 'manifest',
-      href: '/site.webmanifest',
-    },
+    { rel: 'stylesheet', href: globalStylesUrl },
+    { rel: 'stylesheet', href: tailwindStylesUrl },
   ]
 }
 
-export const meta: MetaFunction = () => {
-  return {
-    title: 'Muthukumar',
-    description: 'Muthukumar is a frontend developer, who loves to code.',
-    viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
-    charSet: 'utf-8',
-  }
+export default function App() {
+  return (
+    <Document>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Document>
+  )
 }
 
-function App() {
-  const {theme} = useTheme()
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error)
+  return (
+    <Document title="Error!">
+      <Layout>
+        <div>
+          <h1>There was an error</h1>
+          <p>{error.message}</p>
+          <hr />
+          <p>Hey, developer, you should replace this with what you want your users to see.</p>
+        </div>
+      </Layout>
+    </Document>
+  )
+}
+
+// https://remix.run/docs/en/v1/api/conventions#catchboundary
+export function CatchBoundary() {
+  const caught = useCatch()
+
+  let message
+  switch (caught.status) {
+    case 401:
+      message = <p>Oops! Looks like you tried to visit a page that you do not have access to.</p>
+      break
+    case 404:
+      message = <p>Oops! Looks like you tried to visit a page that does not exist.</p>
+      break
+
+    default:
+      throw new Error(caught.data || caught.statusText)
+  }
 
   return (
-    <html lang="en" className={theme ?? ''}>
+    <Document title={`${caught.status} ${caught.statusText}`}>
+      <Layout>
+        <h1>
+          {caught.status}: {caught.statusText}
+        </h1>
+        {message}
+      </Layout>
+    </Document>
+  )
+}
+
+function Document({ children, title }: { children: React.ReactNode; title?: string }) {
+  return (
+    <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
-        <NonFlashOfWrongThemeEls />
       </head>
-      <body className="container max-w-3xl p-10 mx-auto bg-primary text-primary">
-        <Navbar />
-        <Outlet />
-        <Footer />
-
+      <body>
+        {children}
+        <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
@@ -111,33 +86,6 @@ function App() {
   )
 }
 
-export default function AppWithProvider() {
-  return (
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  )
-}
-
-export function ErrorBoundary({error}: {error: Error}) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <title>Oops!</title>
-      </head>
-      <body>
-        <div>
-          <h1>App Error</h1>
-          <pre>{error.message}</pre>
-          <p>
-            Replace this UI with what you want users to see when your app throws uncaught errors.
-          </p>
-        </div>
-
-        <Scripts />
-      </body>
-    </html>
-  )
+function Layout({ children }: { children: React.ReactNode }) {
+  return <div>{children}</div>
 }
