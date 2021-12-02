@@ -158,7 +158,6 @@ input:where([type='search']) {
   --gap: 1rem;
   --space: 2rem;
   display: grid;
-  grid-auto-rows: -webkit-min-content;
   grid-auto-rows: min-content;
   gap: var(--gap);
   padding-top: var(--space);

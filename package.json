@@ -4,26 +4,53 @@
   "description": "",
   "license": "",
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev",
+    "dev": "pm2-dev ./pm2.config.js",
+    "watch:css": "postcss styles --base styles --dir app/styles -w",
+    "build:css": "postcss styles --base styles --dir app/styles --env production",
+    "build:remix": "remix build",
+    "build:css:prod": "npm run build:css -- --env production",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
+    "setup": "npm install && npm run build && npm run validate",
+    "prepare": "husky install",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "validate": "npm run lint",
+    "build": "npm run build:css:prod && npm run build:remix",
+    "prebuild": "npm run clean && echo All clean",
+    "clean": "npx rimraf public/build ./node_modules/.cache ./app/styles/**.css ./api/build* .cache",
     "postinstall": "remix setup node"
   },
   "dependencies": {
     "@remix-run/react": "^1.0.6",
+    "@remix-run/serve": "^1.0.6",
+    "@remix-run/vercel": "^1.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.0.6",
-    "@remix-run/serve": "^1.0.6",
-    "@remix-run/vercel": "^1.0.6"
+    "remix": "^1.0.6"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.0.6",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.25.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "postcss": "^8.4.4",
+    "postcss-cli": "^9.0.2",
+    "prettier": "^2.5.0",
+    "tailwindcss": "^2.2.19",
     "typescript": "^4.1.2"
   },
   "engines": {
     "node": ">=14"
+  },
+  "lint-staged": {
+    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)": [
+      "prettier --write"
+    ]
   },
   "sideEffects": false
 }
