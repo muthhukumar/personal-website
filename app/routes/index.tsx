@@ -1,53 +1,100 @@
-import {json, LoaderFunction} from '@remix-run/server-runtime'
-import {Link, useLoaderData} from 'remix'
-import {AiOutlineEye} from 'react-icons/ai'
-import {BsArrowRight} from 'react-icons/bs'
+import type { MetaFunction, LoaderFunction } from "remix";
+import { useLoaderData, json, Link } from "remix";
 
-import {siteConfig} from '~/site-config'
-import {getFeaturedPosts} from '~/utils/mdx.server'
+type IndexData = {
+  resources: Array<{ name: string; url: string }>;
+  demos: Array<{ name: string; to: string }>;
+};
 
-export const loader: LoaderFunction = async () => {
-  return json(await getFeaturedPosts({limit: 3}))
-}
+// Loaders provide data to components and are only ever called on the server, so
+// you can connect to a database or run any server side code you want right next
+// to the component that renders it.
+// https://remix.run/api/conventions#loader
+export let loader: LoaderFunction = () => {
+  let data: IndexData = {
+    resources: [
+      {
+        name: "Remix Docs",
+        url: "https://remix.run/docs"
+      },
+      {
+        name: "React Router Docs",
+        url: "https://reactrouter.com/docs"
+      },
+      {
+        name: "Remix Discord",
+        url: "https://discord.gg/VBePs6d"
+      }
+    ],
+    demos: [
+      {
+        to: "demos/actions",
+        name: "Actions"
+      },
+      {
+        to: "demos/about",
+        name: "Nested Routes, CSS loading/unloading"
+      },
+      {
+        to: "demos/params",
+        name: "URL Params and Error Boundaries"
+      }
+    ]
+  };
 
+  // https://remix.run/api/remix#json
+  return json(data);
+};
+
+// https://remix.run/api/conventions#meta
+export let meta: MetaFunction = () => {
+  return {
+    title: "Remix Starter",
+    description: "Welcome to remix!"
+  };
+};
+
+// https://remix.run/guides/routing#index-routes
 export default function Index() {
-  const featuredPosts = useLoaderData<Awaited<ReturnType<typeof getFeaturedPosts>>>()
-  return (
-    <div>
-      <div className="flex items-center justify-between w-full">
-        <div className="w-[70%]">
-          <p className="text-5xl font-bold">{siteConfig.name}</p>
-          <p className="text-gray-600 text-md">Full stack developer at Actyv</p>
-          <p className="mt-4 text-gray-600 text-md">{siteConfig.description}</p>
-        </div>
-        <div className="rounded-full w-[20%] h-auto overflow-hidden">
-          <img src="/profile.jpeg" alt="Muthukumar picture" className="w-full h-auto" />
-        </div>
-      </div>
-      <div className="mt-16">
-        <h2 className="text-3xl font-bold">Featured Posts</h2>
-        <div className="flex items-center justify-between h-48 gap-8 mt-6">
-          {featuredPosts.map((post) => {
-            return (
-              <Link
-                to={`/blog/${post.slug}`}
-                key={post.id}
-                className="flex flex-col items-start justify-between w-1/3 h-full p-4 rounded-lg ring-4"
-              >
-                <p className="text-lg font-semibold text-left">{post.title}</p>
-                <div className="flex items-center">
-                  <AiOutlineEye className="mr-2 font-bold" size={20} />
-                  <p>{post.views} views</p>
-                </div>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
+  let data = useLoaderData<IndexData>();
 
-      <Link to="/posts" className="flex items-center mt-6 text-lg">
-        Read all posts <BsArrowRight className="ml-2" size={25} />
-      </Link>
+  return (
+    <div className="remix__page">
+      <main>
+        <h2>Welcome to Remix!</h2>
+        <p>We're stoked that you're here. 🥳</p>
+        <p>
+          Feel free to take a look around the code to see how Remix does things,
+          it might be a bit different than what you’re used to. When you're
+          ready to dive deeper, we've got plenty of resources to get you
+          up-and-running quickly.
+        </p>
+        <p>
+          Check out all the demos in this starter, and then just delete the{" "}
+          <code>app/routes/demos</code> and <code>app/styles/demos</code>{" "}
+          folders when you're ready to turn this into your next project.
+        </p>
+      </main>
+      <aside>
+        <h2>Demos In This App</h2>
+        <ul>
+          {data.demos.map(demo => (
+            <li key={demo.to} className="remix__page__resource">
+              <Link to={demo.to} prefetch="intent">
+                {demo.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <h2>Resources</h2>
+        <ul>
+          {data.resources.map(resource => (
+            <li key={resource.url} className="remix__page__resource">
+              <a href={resource.url}>{resource.name}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
     </div>
-  )
+  );
 }
