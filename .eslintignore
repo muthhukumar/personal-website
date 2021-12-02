@@ -5,3 +5,4 @@
 .vercel
 /public/build
 /server/build
+api/build
