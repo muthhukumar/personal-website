@@ -3,11 +3,47 @@ import type { LinksFunction } from 'remix'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
+import Navbar from './components/navbar'
 
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: tailwindStylesUrl },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v7-latin-regular.eot',
+      type: 'font/eot',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v7-latin-regular.svg',
+      type: 'font/svg',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v7-latin-regular.ttf',
+      type: 'font/ttf',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v7-latin-regular.woff',
+      type: 'font/woff',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/inter-v7-latin-regular.woff2',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
   ]
 }
 
@@ -76,7 +112,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="antialiased">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -87,5 +123,10 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>
+  return (
+    <div className="container mx-auto max-w-7xl">
+      <Navbar />
+      <main>{children}</main>
+    </div>
+  )
 }
