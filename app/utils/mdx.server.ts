@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 // import remark from 'remark'
 // import html from 'remark-html'
 
-const postsDirectory = join(process.cwd(), 'content')
+const postsDirectory = join(process.cwd(), '_content')
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
