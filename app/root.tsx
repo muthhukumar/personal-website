@@ -124,7 +124,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container mx-auto max-w-7xl">
+    <div>
       <Navbar />
       <main>{children}</main>
     </div>

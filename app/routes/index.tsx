@@ -1,4 +1,4 @@
-import type { MetaFunction } from 'remix'
+import { LoaderFunction, MetaFunction, redirect } from 'remix'
 
 export const meta: MetaFunction = () => {
   return {
@@ -7,6 +7,10 @@ export const meta: MetaFunction = () => {
   }
 }
 
+export const loader: LoaderFunction = () => {
+  throw redirect('/blog')
+}
+
 export default function Index() {
-  return <div>Index page</div>
+  return <div>You are not supposed to see this page!!!.</div>
 }
