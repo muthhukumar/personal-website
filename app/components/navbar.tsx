@@ -13,13 +13,13 @@ const links: Array<{ to: string; pathname: string }> = [
 
 export default function Navbar() {
   return (
-    <header className="py-6 font-semibold">
-      <nav className="flex items-center">
+    <header className="relative py-6 font-semibold border-b">
+      <nav className="container flex items-baseline max-w-5xl mx-auto">
         <Link to="/" className="mr-8">
-          <p>Muthukumar</p>
+          <p className="text-2xl font-bold text-black">Muthukumar</p>
         </Link>
         {links.map((link) => (
-          <Link to={link.to} key={link.to} className="mr-6">
+          <Link to={link.to} key={link.to} className="mr-6 text-gray-500">
             {link.pathname}
           </Link>
         ))}

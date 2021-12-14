@@ -1,45 +1,25 @@
-import * as React from 'react'
 import { json, Link, LoaderFunction, MetaFunction, useLoaderData, useSearchParams } from 'remix'
 import { BiRightArrowAlt } from 'react-icons/bi'
-import { capitalCase } from 'change-case'
+import { IoIosSearch } from 'react-icons/io'
 
-import { getAllPosts } from '~/utils/mdx.server'
-
-type Topic = {
-  title: string
-  topic: string
-}
+import { md } from '~/utils/mdx.server'
+import Container from '~/components/container'
+import Date from '~/components/date'
 
 type BlogPost = {
   title: string
   slug: string
   summary: string
-  tags: Array<string>
+  date: string
 }
 
-function NavLink({ topic, children }: { topic: string; children: React.ReactNode }) {
-  const [searchParams] = useSearchParams()
-
-  const topicFromSearchParams = searchParams.get('topic')
-
-  const isActivePath = topicFromSearchParams === topic
-
+function BlogPost({ title, description, slug, date }: Record<string, string>) {
   return (
-    <Link to={`/blog?topic=${topic}`} className={`${isActivePath ? 'font-semibold' : undefined}`}>
-      <p className="mb-1">{children}</p>
-    </Link>
-  )
-}
-
-function BlogPost({ title, description, slug }: Record<string, string>) {
-  return (
-    <div className="w-full">
-      {/* <div className="flex items-center justify-center w-full p-4 mb-2 text-xl font-semibold text-center text-gray-600 border-2 border-gray-200 rounded-md h-44"> */}
-      <h2 className="pb-1 mb-2 text-xl font-semibold text-gray-900 border-b-2 border-gray-100">
-        {title}
-      </h2>
-      <p className="mb-3 text-sm">{description}</p>
-      <Link to={`/blog/${slug}`} className="flex items-center text-sm text-gray-500">
+    <div className="w-full pb-10 mb-8 border-b">
+      <Date className="my-2 text-sm text-gray-500" date={date} />
+      <h2 className="my-4 text-2xl font-bold">{title}</h2>
+      <p className="mb-4 text-md">{description}</p>
+      <Link to={`/blog/${slug}`} className="flex items-center text-sm text-blue-500">
         Read More <BiRightArrowAlt className="ml-1" />
       </Link>
     </div>
@@ -55,60 +35,63 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url)
 
-  const topic = url.searchParams.get('topic')
+  const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = getAllPosts(['title', 'slug', 'summary', 'tags'])
+  const blogPosts = await md.getAllPosts()
 
-  const isLatest = topic === 'latest' || !topic
-
-  const filteredBlogPosts = isLatest
+  const filteredBlogPosts = !query
     ? blogPosts
-    : blogPosts.filter((post) => post.tags.includes(topic))
+    : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
 
-  const topics = blogPosts.map((post) => post.tags)
-
-  const uniqueTopics = Array.from(new Set(topics.flat())).map((topic) => ({
-    title: capitalCase(topic),
-    topic,
-  }))
-
-  return json({
-    blogPosts: filteredBlogPosts,
-    topics: [{ title: 'Latest', topic: 'latest' }, ...uniqueTopics],
-  })
+  return json({ blogPosts: filteredBlogPosts })
 }
 
 export default function Blog() {
-  const { blogPosts, topics } =
-    useLoaderData<{ blogPosts: Array<BlogPost>; topics: Array<Topic> }>()
-  return (
-    <div className="pt-16 h-[92.5vh] flex">
-      <div className="container h-full pr-8 border-r w-72">
-        <h2 className="text-xl font-black">Articles and tutorials</h2>
-        <p className="mt-4 text-sm">Thoughts and tutorials on technologies I like and use.</p>
+  const { blogPosts } = useLoaderData<{ blogPosts: Array<BlogPost> }>()
+  const [searchParams] = useSearchParams()
 
-        <div className="my-6 w-1/4 h-[1px] bg-gray-300"></div>
-        {topics.map((topic) => {
-          return (
-            <NavLink key={topic.topic} topic={topic.topic}>
-              {topic.title}
-            </NavLink>
-          )
-        })}
+  const q = searchParams.get('q')
+  return (
+    <>
+      <div className="pb-6 border-b">
+        <Container>
+          <form>
+            <h2 className="py-10 text-2xl font-bold">Blog</h2>
+            <div className="flex items-center max-w-sm p-1 border border-gray-400 rounded-md">
+              <IoIosSearch className="ml-2 text-gray-500" size={20} />
+              <input
+                name="q"
+                type="text"
+                className="w-full p-1 ml-2 text-sm"
+                placeholder="Search posts..."
+                defaultValue={q ?? ''}
+              />
+            </div>
+          </form>
+        </Container>
       </div>
-      <div className="w-full h-full px-8 pb-16 overflow-y-scroll">
-        {blogPosts.length === 0 && <p className="text-center">No blog post found.</p>}
-        <div className="grid w-full grid-cols-2 gap-8">
-          {blogPosts.map((blogPost) => (
-            <BlogPost
-              slug={blogPost.slug}
-              key={blogPost.slug}
-              title={blogPost.title}
-              description={blogPost.summary}
-            />
-          ))}
+      <Container>
+        <div className="flex w-full">
+          <div className="py-6">
+            {blogPosts.length === 0 && <p className="text-center">No blog post found.</p>}
+            <div className="w-full">
+              {blogPosts.map((blogPost) => (
+                <BlogPost
+                  date={blogPost.date}
+                  slug={blogPost.slug}
+                  key={blogPost.slug}
+                  title={blogPost.title}
+                  description={blogPost.summary}
+                />
+              ))}
+            </div>
+          </div>
+          {/* TODO: For the future */}
+          {/* <div className="w-full max-w-[20rem] bg-gray-300">
+            <h2>Recommended posts</h2>
+          </div> */}
         </div>
-      </div>
-    </div>
+      </Container>
+    </>
   )
 }
