@@ -1,4 +1,5 @@
 import { Link } from 'remix'
+import Container from './container'
 
 const links: Array<{ to: string; pathname: string }> = [
   {
@@ -14,16 +15,18 @@ const links: Array<{ to: string; pathname: string }> = [
 export default function Navbar() {
   return (
     <header className="relative py-6 font-semibold border-b">
-      <nav className="container flex items-baseline max-w-5xl mx-auto">
-        <Link to="/" className="mr-8">
-          <p className="text-2xl font-bold text-black">Muthukumar</p>
-        </Link>
-        {links.map((link) => (
-          <Link to={link.to} key={link.to} className="mr-6 text-gray-500">
-            {link.pathname}
+      <Container>
+        <nav className="flex items-baseline">
+          <Link to="/" className="mr-8">
+            <p className="text-2xl font-bold text-black">Muthukumar</p>
           </Link>
-        ))}
-      </nav>
+          {links.map((link) => (
+            <Link to={link.to} key={link.to} className="mr-6 text-gray-500">
+              {link.pathname}
+            </Link>
+          ))}
+        </nav>
+      </Container>
     </header>
   )
 }
