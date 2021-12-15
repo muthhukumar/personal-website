@@ -18,18 +18,28 @@ if (!sourceType || (sourceType !== SourcesType.GITHUB && sourceType !== SourcesT
 }
 
 export default async function markdownToHtml(markdown: string) {
-  const remark = await import('remark')
-  const html = await import('remark-html')
-  const result = await remark().use(html).process(markdown)
-  return result.toString()
+  const { unified } = await import('unified')
+  const { default: remarkHtml } = await import('remark-html')
+  const { default: remarkParse } = await import('remark-parse')
+  const html = await unified().use(remarkParse).use(remarkHtml).process(markdown)
+  return html.toString()
 }
 
 const sources = {
   [SourcesType.GITHUB]: {
-    async getPostData(sha: string) {
-      const fileContents = await downloadFileBySha(sha)
+    async getPostData(postSlug: string) {
+      const dirList = await downloadDirList('content')
+      const slugs = dirList.map((file) => ({ name: file.name, sha: file.sha }))
+
+      const fileData = slugs.find((slug) => slug.name === postSlug)
+
+      if (!fileData) {
+        return { data: null, content: null }
+      }
+
+      const fileContents = await downloadFileBySha(fileData.sha)
       const { data, content } = matter(fileContents)
-      return { ...data, content }
+      return { ...data, content, slug: postSlug }
     },
     async getAllPosts() {
       const dirList = await downloadDirList('content')
@@ -51,7 +61,7 @@ const sources = {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
-      return { ...data, content }
+      return { ...data, content, slug: slug }
     },
 
     async getAllPosts() {
