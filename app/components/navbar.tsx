@@ -14,7 +14,7 @@ const links: Array<{ to: string; pathname: string }> = [
 
 export default function Navbar() {
   return (
-    <header className="relative py-6 font-semibold border-b">
+    <header className="relative py-4 font-semibold border-b">
       <Container>
         <nav className="flex items-baseline">
           <Link to="/" className="mr-8">

@@ -10,8 +10,9 @@ const SourcesType = {
   FILE_SYSTEM: 'FILE_SYSTEM',
 }
 
-const sourceType =
-  process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
+// const sourceType =
+//   process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
+const sourceType = SourcesType.FILE_SYSTEM
 
 if (!sourceType || (sourceType !== SourcesType.GITHUB && sourceType !== SourcesType.FILE_SYSTEM)) {
   throw new Error('Source type is not specified')
