@@ -3,7 +3,7 @@ import { downloadDirList, downloadFileBySha } from './github.server'
 import fs from 'fs'
 import { join } from 'path'
 
-const postsDirectory = join(process.cwd(), 'content')
+const postsDirectory = join(__dirname, 'content')
 
 const SourcesType = {
   GITHUB: 'GITHUB',
@@ -13,10 +13,6 @@ const SourcesType = {
 // const sourceType =
 //   process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
 const sourceType = SourcesType.FILE_SYSTEM
-
-if (!sourceType || (sourceType !== SourcesType.GITHUB && sourceType !== SourcesType.FILE_SYSTEM)) {
-  throw new Error('Source type is not specified')
-}
 
 export default async function markdownToHtml(markdown: string) {
   const { unified } = await import('unified')
