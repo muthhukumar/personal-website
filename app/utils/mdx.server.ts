@@ -3,16 +3,15 @@ import { downloadDirList, downloadFileBySha } from './github.server'
 import fs from 'fs'
 import { join } from 'path'
 
-const postsDirectory = join(__dirname, 'content')
+const postsDirectory = join(process.cwd(), 'content')
 
 const SourcesType = {
   GITHUB: 'GITHUB',
   FILE_SYSTEM: 'FILE_SYSTEM',
 }
 
-// const sourceType =
-//   process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
-const sourceType = SourcesType.FILE_SYSTEM
+const sourceType =
+  process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
 
 export default async function markdownToHtml(markdown: string) {
   const { unified } = await import('unified')

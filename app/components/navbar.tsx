@@ -6,10 +6,6 @@ const links: Array<{ to: string; pathname: string }> = [
     to: '/blog',
     pathname: 'Blog',
   },
-  {
-    to: '/goodies',
-    pathname: 'Goodies',
-  },
 ]
 
 export default function Navbar() {
