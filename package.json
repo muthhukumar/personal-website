@@ -25,6 +25,7 @@
     "@remix-run/react": "^1.0.6",
     "@remix-run/serve": "^1.0.6",
     "@remix-run/vercel": "^1.0.6",
+    "@tailwindcss/typography": "^0.5.0",
     "gray-matter": "^4.0.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -32,7 +33,9 @@
     "react-icons": "^4.3.1",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
+    "remark-parse": "^10.0.1",
     "remix": "^1.0.6",
+    "unified": "^10.1.1",
     "uninstall": "^0.0.0",
     "xdm": "^3.3.0"
   },
@@ -50,7 +53,7 @@
     "postcss": "^8.4.4",
     "postcss-cli": "^9.0.2",
     "prettier": "^2.5.0",
-    "tailwindcss": "^2.2.19",
+    "tailwindcss": "^3.0.2",
     "typescript": "^4.1.2"
   },
   "engines": {

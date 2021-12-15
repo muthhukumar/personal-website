@@ -79,7 +79,7 @@ export default function Blog() {
                 <BlogPost
                   date={blogPost.date}
                   slug={blogPost.slug}
-                  key={blogPost.slug}
+                  key={blogPost.title}
                   title={blogPost.title}
                   description={blogPost.summary}
                 />
