@@ -10,8 +10,13 @@ const SourcesType = {
   FILE_SYSTEM: 'FILE_SYSTEM',
 }
 
-const sourceType =
-  process.env.NODE_ENV === 'development' ? SourcesType.FILE_SYSTEM : SourcesType.GITHUB
+const sourceType = process.env.SOURCE_TYPE
+  ? process.env.SOURCE_TYPE === SourcesType.FILE_SYSTEM
+    ? SourcesType.FILE_SYSTEM
+    : SourcesType.GITHUB
+  : process.env.NODE_ENV === 'development'
+  ? SourcesType.FILE_SYSTEM
+  : SourcesType.GITHUB
 
 export default async function markdownToHtml(markdown: string) {
   const { unified } = await import('unified')
@@ -39,11 +44,12 @@ const sources = {
     },
     async getAllPosts() {
       const dirList = await downloadDirList('content')
+
       const slugs = dirList.map((file) => ({ name: file.name, sha: file.sha }))
 
       const posts = await Promise.all(
         slugs.map(async (slug) => {
-          return this.getPostData(slug.sha)
+          return this.getPostData(slug.name)
         }),
       )
 
