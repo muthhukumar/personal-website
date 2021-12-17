@@ -11,7 +11,7 @@ module.exports = {
     // },
     {
       name: 'Vercel',
-      script: 'vercel dev --listen 4000',
+      script: 'vercel dev',
       ignore_watch: ['.'],
       env: {
         FORCE_COLOR: '1',

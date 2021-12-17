@@ -1,14 +1,11 @@
-import { HeadersFunction, json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
+
 import Container from '~/components/container'
 import Date from '~/components/date'
-import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 import markdownToHtml from '~/utils/md.server'
 import { getCachedPost } from '~/utils/lru-cache.server'
-
-// export const headers: HeadersFunction = () => {
-//   return { "Cache-Control": 'max-age=100, must-revalidate' };
-// };
 
 export const meta: MetaFunction = ({ data }) => {
   return {
@@ -28,13 +25,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const slug = params.slug ?? ''
 
-  console.time('Getting post')
   const postData = await getCachedPost(slug)
-  console.timeEnd('Getting post')
 
   const html = await markdownToHtml(postData.body)
 
-  return json({ url, html, title: postData.title, ogImage: postData.ogImage, date: postData.publishedAt },)
+  return json({ url, html, title: postData.title, ogImage: postData.ogImage, date: postData.publishedAt }, {
+    headers: {
+      "Cache-Control": 'max-age=100, must-revalidate'
+    }
+  })
 }
 
 export default function BlogSlug() {
