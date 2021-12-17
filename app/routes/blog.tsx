@@ -7,13 +7,18 @@ import Date from '~/components/date'
 import { Post } from '~/utils/md.server'
 import { getCachedPosts } from '~/utils/lru-cache.server'
 
-function BlogPost({ title, publishedAt, description, id }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
+function BlogPost({
+  title,
+  publishedAt,
+  description,
+  id,
+}: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
     <div className="w-full pb-10 mb-8 border-b">
       <Date className="my-2 text-sm text-gray-500" date={publishedAt} />
       <h2 className="my-4 text-2xl font-bold">{title}</h2>
       <p className="mb-4 text-md">{description}</p>
-      <Link to={`/blog/${id}`} className="flex items-center text-sm text-blue-500">
+      <Link to={`/blog/${id}`} className="flex items-center text-sm text-blue-500" prefetch='render'>
         Read More <BiRightArrowAlt className="ml-1" />
       </Link>
     </div>
@@ -38,9 +43,9 @@ export const loader: LoaderFunction = async ({ request }) => {
     : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
 
   return json({ blogPosts: filteredBlogPosts }, {
-    // headers: {
-    //   'Cache-Control': 'max-age=3600, must-revalidate'
-    // }
+    headers: {
+      "Cache-Control": 'max-age=100, must-revalidate'
+    }
   })
 }
 
