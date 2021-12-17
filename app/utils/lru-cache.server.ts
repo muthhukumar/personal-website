@@ -5,7 +5,7 @@ import LRU from 'lru-cache'
 import { getPost, getPosts, Post } from './md.server'
 
 const cache = new LRU({
-  max: 5000,
+  max: 10000,
   length: function (n: string) {
     return n.length
   },
