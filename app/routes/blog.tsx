@@ -2,24 +2,18 @@ import { json, Link, LoaderFunction, MetaFunction, useLoaderData, useSearchParam
 import { BiRightArrowAlt } from 'react-icons/bi'
 import { IoIosSearch } from 'react-icons/io'
 
-import { md } from '~/utils/mdx.server'
 import Container from '~/components/container'
 import Date from '~/components/date'
+import * as post from '~/utils/ms.server'
+import { Post } from '~/utils/ms.server'
 
-type BlogPost = {
-  title: string
-  slug: string
-  summary: string
-  date: string
-}
-
-function BlogPost({ title, description, slug, date }: Record<string, string>) {
+function BlogPost({ title, publishedAt, description, id }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
     <div className="w-full pb-10 mb-8 border-b">
-      <Date className="my-2 text-sm text-gray-500" date={date} />
+      <Date className="my-2 text-sm text-gray-500" date={publishedAt} />
       <h2 className="my-4 text-2xl font-bold">{title}</h2>
       <p className="mb-4 text-md">{description}</p>
-      <Link to={`/blog/${slug}`} className="flex items-center text-sm text-blue-500">
+      <Link to={`/blog/${id}`} className="flex items-center text-sm text-blue-500">
         Read More <BiRightArrowAlt className="ml-1" />
       </Link>
     </div>
@@ -37,7 +31,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await md.getAllPosts()
+  const blogPosts = await post.getPosts()
 
   const filteredBlogPosts = !query
     ? blogPosts
@@ -47,7 +41,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export default function Blog() {
-  const { blogPosts } = useLoaderData<{ blogPosts: Array<BlogPost> }>()
+  const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
   const [searchParams] = useSearchParams()
 
   const q = searchParams.get('q')
@@ -77,11 +71,11 @@ export default function Blog() {
             <div className="w-full">
               {blogPosts.map((blogPost) => (
                 <BlogPost
-                  date={blogPost.date}
-                  slug={blogPost.slug}
-                  key={blogPost.title}
+                  publishedAt={blogPost.publishedAt}
+                  key={blogPost.id}
+                  id={blogPost.id}
                   title={blogPost.title}
-                  description={blogPost.summary}
+                  description={blogPost.description}
                 />
               ))}
             </div>
