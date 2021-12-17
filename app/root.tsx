@@ -1,9 +1,37 @@
-import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, useCatch } from 'remix'
+import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, useCatch, MetaFunction } from 'remix'
 import type { LinksFunction } from 'remix'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import Navbar from './components/navbar'
+
+
+export const meta: MetaFunction = () => {
+  return {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-transparent",
+    "apple-mobile-web-app-title": "Muthukumar",
+    "format-detection": "telephone=no",
+    "mobile-web-app-capable": "yes",
+    "msapplication-TileColor": "#000",
+    "og:locale": "en",
+    "og:site_name": "Muthukumar",
+    "og:type": "website",
+    "theme-color": "#000",
+    "twitter:card": "summary_large_image",
+    "twitter:creator": "@am_muthukumar",
+    "twitter:site": "@am_muthukumar",
+    "X-UA-Compatible": "IE=edge,chrome=1",
+    author: "Muthukumar",
+    HandheldFriendly: "True",
+    language: "en",
+    MobileOptimized: "320",
+    pagename: "Muthukumar",
+    robots: "index, follow",
+    title: "Muthukumar",
+    viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
+  };
+};
 
 export const links: LinksFunction = () => {
   return [
@@ -44,6 +72,20 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
+
+    {
+      rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png"
+    },
+    {
+      rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png",
+
+    },
+    {
+      rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png",
+    },
+    {
+      rel: "manifest", href: "/site.webmanifest"
+    }
   ]
 }
 

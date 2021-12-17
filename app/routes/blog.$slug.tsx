@@ -1,9 +1,20 @@
-import { json, Link, LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import Container from '~/components/container'
 import Date from '~/components/date'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 import markdownToHtml, * as  post from '~/utils/md.server'
+
+export const headers: HeadersFunction = () => {
+  return { "Cache-Control": 'max-age=100, must-revalidate' };
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  return {
+    title: `${data.title} - Muthukumar`,
+    description: data.description
+  }
+}
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params.slug ?? ''
@@ -12,11 +23,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const html = await markdownToHtml(postData.body)
 
-  return json({ html, title: postData.title, date: postData.publishedAt }, {
-    headers: {
-      'Cache-Control': 'max-age=100, must-revalidate'
-    }
-  })
+  return json({ html, title: postData.title, date: postData.publishedAt },)
 }
 
 export default function BlogSlug() {
