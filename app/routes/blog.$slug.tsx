@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const html = await markdownToHtml(postData.body)
 
-  return json({ url, html, title: postData.title, ogImage: postData.ogImage, date: postData.publishedAt }, {
+  return json({ url, html, title: postData.title, ogImage: postData.ogImage, date: postData.publishedAt, description: postData.description }, {
     headers: {
       "Cache-Control": 'max-age=100, must-revalidate'
     }
