@@ -12,18 +12,27 @@ export const headers: HeadersFunction = () => {
 export const meta: MetaFunction = ({ data }) => {
   return {
     title: `${data.title} - Muthukumar`,
-    description: data.description
+    description: data.description,
+    "og:url": data.url,
+    "og:type": 'article',
+    "og:title": data.title,
+    "og:description": data.description,
+    "og:image": data.ogImage
   }
 }
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
+
+  const url = new URL(request.url)
+
+
   const slug = params.slug ?? ''
 
   const postData = await post.getPost(slug)
 
   const html = await markdownToHtml(postData.body)
 
-  return json({ html, title: postData.title, date: postData.publishedAt },)
+  return json({ url, html, title: postData.title, ogImage: postData.ogImage, date: postData.publishedAt },)
 }
 
 export default function BlogSlug() {
