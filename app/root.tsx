@@ -1,4 +1,4 @@
-import { Links, LiveReload, Meta, Outlet, ScrollRestoration, useCatch } from 'remix'
+import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, useCatch } from 'remix'
 import type { LinksFunction } from 'remix'
 
 import globalStylesUrl from '~/styles/global.css'
@@ -115,7 +115,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
       <body className="antialiased">
         {children}
         <ScrollRestoration />
-        {/* <Scripts /> */}
+        <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>

@@ -48,3 +48,11 @@ export const getPost = async (postId: Post['id']) => {
 
 	return json.data as Post
 }
+
+export default async function markdownToHtml(markdown: string) {
+	const { unified } = await import('unified')
+	const { default: remarkHtml } = await import('remark-html')
+	const { default: remarkParse } = await import('remark-parse')
+	const html = await unified().use(remarkParse).use(remarkHtml).process(markdown)
+	return html.toString()
+}

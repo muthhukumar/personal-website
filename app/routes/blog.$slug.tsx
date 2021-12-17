@@ -1,10 +1,9 @@
 import { Link, LoaderFunction, useLoaderData } from 'remix'
 import Container from '~/components/container'
 import Date from '~/components/date'
-import markdownToHtml from '~/utils/mdx.server'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 
-import * as  post from '~/utils/ms.server'
+import markdownToHtml, * as  post from '~/utils/md.server'
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params.slug ?? ''

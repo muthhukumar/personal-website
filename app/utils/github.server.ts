@@ -1,4 +1,3 @@
-import nodePath from 'path'
 import { Octokit as createOctokit } from '@octokit/rest'
 import { throttling } from '@octokit/plugin-throttling'
 
