@@ -1,5 +1,5 @@
 import {
-  Scripts,
+  // Scripts,
   Links,
   LiveReload,
   Meta,
@@ -173,7 +173,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
       <body className="antialiased">
         {children}
         <ScrollRestoration />
-        <Scripts />
+        {/* <Scripts /> */}
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
