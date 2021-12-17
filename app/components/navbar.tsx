@@ -17,7 +17,7 @@ export default function Navbar() {
             <p className="text-2xl font-bold text-black">Muthukumar</p>
           </Link>
           {links.map((link) => (
-            <Link to={link.to} key={link.to} className="mr-6 text-gray-500">
+            <Link to={link.to} key={link.to} className="mr-6 text-gray-600">
               {link.pathname}
             </Link>
           ))}

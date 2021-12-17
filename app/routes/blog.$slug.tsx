@@ -58,7 +58,7 @@ export default function BlogSlug() {
             </div>
             <div className="p-1 text-xs text-left">
               <h2>Muthukumar</h2>
-              <a href="https://rd.nullish.in/twitter" className="text-blue-500">
+              <a href="https://rd.nullish.in/twitter" className="text-blue-600">
                 @am_muthukumar
               </a>
             </div>
@@ -66,7 +66,7 @@ export default function BlogSlug() {
         </Container>
       </div>
       <Container className="max-w-3xl">
-        <article className="py-2 md:py-6 prose md:prose-lg max-w-none">
+        <article className="py-2 md:py-6 prose md:prose-lg max-w-none prose-blue">
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </article>
       </Container>
