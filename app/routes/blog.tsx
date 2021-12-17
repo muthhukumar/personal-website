@@ -4,8 +4,8 @@ import { IoIosSearch } from 'react-icons/io'
 
 import Container from '~/components/container'
 import Date from '~/components/date'
-import * as post from '~/utils/md.server'
 import { Post } from '~/utils/md.server'
+import { getCachedPosts } from '~/utils/lru-cache.server'
 
 function BlogPost({ title, publishedAt, description, id }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
@@ -31,16 +31,16 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await post.getPosts()
+  const blogPosts = await getCachedPosts()
 
   const filteredBlogPosts = !query
     ? blogPosts
     : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
 
   return json({ blogPosts: filteredBlogPosts }, {
-    headers: {
-      'Cache-Control': 'max-age=3600, must-revalidate'
-    }
+    // headers: {
+    //   'Cache-Control': 'max-age=3600, must-revalidate'
+    // }
   })
 }
 

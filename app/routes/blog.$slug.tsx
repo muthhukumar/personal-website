@@ -3,11 +3,12 @@ import Container from '~/components/container'
 import Date from '~/components/date'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 
-import markdownToHtml, * as  post from '~/utils/md.server'
+import markdownToHtml from '~/utils/md.server'
+import { getCachedPost } from '~/utils/lru-cache.server'
 
-export const headers: HeadersFunction = () => {
-  return { "Cache-Control": 'max-age=100, must-revalidate' };
-};
+// export const headers: HeadersFunction = () => {
+//   return { "Cache-Control": 'max-age=100, must-revalidate' };
+// };
 
 export const meta: MetaFunction = ({ data }) => {
   return {
@@ -25,10 +26,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const url = new URL(request.url)
 
-
   const slug = params.slug ?? ''
 
-  const postData = await post.getPost(slug)
+  console.time('Getting post')
+  const postData = await getCachedPost(slug)
+  console.timeEnd('Getting post')
 
   const html = await markdownToHtml(postData.body)
 
