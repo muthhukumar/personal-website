@@ -15,9 +15,9 @@ function BlogPost({
 }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
     <div className="w-full pb-6 md:pb-10 mb-4 md:mb-8 border-b">
-      <Date className="my-2 text-sm md:text-md text-gray-500" date={publishedAt} />
+      <Date className="my-2 text-sm md:text-base text-gray-500" date={publishedAt} />
       <h2 className="my-4 text-xl md:text-2xl font-bold">{title}</h2>
-      <p className="mb-4">{description}</p>
+      <p className="mb-4 text-sm md:text-base">{description}</p>
       <Link to={`/blog/${id}`} className="flex items-center text-sm text-blue-500" prefetch='render'>
         Read More <BiRightArrowAlt className="ml-1" />
       </Link>
