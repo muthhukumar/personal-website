@@ -4,8 +4,8 @@ import { IoIosSearch } from 'react-icons/io'
 
 import Container from '~/components/container'
 import Date from '~/components/date'
-import * as post from '~/utils/ms.server'
-import { Post } from '~/utils/ms.server'
+import * as post from '~/utils/md.server'
+import { Post } from '~/utils/md.server'
 
 function BlogPost({ title, publishedAt, description, id }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
