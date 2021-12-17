@@ -1,4 +1,4 @@
-import { Link, LoaderFunction, useLoaderData } from 'remix'
+import { json, Link, LoaderFunction, useLoaderData } from 'remix'
 import Container from '~/components/container'
 import Date from '~/components/date'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
@@ -12,7 +12,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const html = await markdownToHtml(postData.body)
 
-  return { html, title: postData.title, date: postData.publishedAt }
+  return json({ html, title: postData.title, date: postData.publishedAt }, {
+    headers: {
+      'Cache-Control': 'max-age=100, must-revalidate'
+    }
+  })
 }
 
 export default function BlogSlug() {
