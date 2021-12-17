@@ -37,7 +37,11 @@ export const loader: LoaderFunction = async ({ request }) => {
     ? blogPosts
     : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
 
-  return json({ blogPosts: filteredBlogPosts })
+  return json({ blogPosts: filteredBlogPosts }, {
+    headers: {
+      'Cache-Control': 'max-age=3600, must-revalidate'
+    }
+  })
 }
 
 export default function Blog() {
