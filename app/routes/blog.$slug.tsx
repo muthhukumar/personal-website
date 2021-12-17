@@ -66,7 +66,7 @@ export default function BlogSlug() {
         </Container>
       </div>
       <Container className="max-w-3xl">
-        <article className="py-2 md:py-6 prose prose-sm md:prose-md max-w-none">
+        <article className="py-2 md:py-6 prose prose-md max-w-none">
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </article>
       </Container>
