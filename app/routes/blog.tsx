@@ -14,10 +14,10 @@ function BlogPost({
   id,
 }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
-    <div className="w-full pb-10 mb-8 border-b">
+    <div className="w-full pb-6 md:pb-10 mb-4 md:mb-8 border-b">
       <Date className="my-2 text-sm text-gray-500" date={publishedAt} />
-      <h2 className="my-4 text-2xl font-bold">{title}</h2>
-      <p className="mb-4 text-md">{description}</p>
+      <h2 className="my-4 text-xl md:text-2xl font-bold">{title}</h2>
+      <p className="mb-4 text-sm md:text-md">{description}</p>
       <Link to={`/blog/${id}`} className="flex items-center text-sm text-blue-500" prefetch='render'>
         Read More <BiRightArrowAlt className="ml-1" />
       </Link>
@@ -59,7 +59,7 @@ export default function Blog() {
       <div className="pb-6 border-b">
         <Container>
           <form>
-            <h2 className="py-10 text-2xl font-bold">Blog</h2>
+            <h2 className="py-4 md:py-10 text-xl md:text-2xl font-bold">Blog</h2>
             <div className="flex items-center max-w-sm p-1 border border-gray-400 rounded-md">
               <IoIosSearch className="ml-2 text-gray-500" size={20} />
               <input
@@ -75,7 +75,7 @@ export default function Blog() {
       </div>
       <Container>
         <div className="flex w-full">
-          <div className="py-6">
+          <div className="py-2 md:py-6">
             {blogPosts.length === 0 && <p className="text-center">No blog post found.</p>}
             <div className="w-full">
               {blogPosts.map((blogPost) => (
