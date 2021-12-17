@@ -1,17 +1,19 @@
 import { Link, LoaderFunction, useLoaderData } from 'remix'
 import Container from '~/components/container'
 import Date from '~/components/date'
-import markdownToHtml, { md } from '~/utils/mdx.server'
+import markdownToHtml from '~/utils/mdx.server'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
+
+import * as  post from '~/utils/ms.server'
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params.slug ?? ''
 
-  const postData = await md.getPostData(slug)
+  const postData = await post.getPost(slug)
 
-  const html = await markdownToHtml(postData.content)
+  const html = await markdownToHtml(postData.body)
 
-  return { html, ...postData }
+  return { html, title: postData.title, date: postData.publishedAt }
 }
 
 export default function BlogSlug() {
