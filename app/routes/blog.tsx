@@ -22,7 +22,7 @@ function BlogPost({ title, publishedAt, description, id }: Pick<Post, 'title' | 
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Articles and tutorials',
+    title: 'Blog | Muthukumar',
   }
 }
 
