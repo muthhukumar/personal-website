@@ -21,7 +21,7 @@ module.exports = {
     {
       name: 'Post css',
       script: 'npm run watch:css',
-      watch: ['styles/postcss'],
+      watch: ['styles'],
       autorestart: false,
       env: {
         NODE_ENV: process.env.NODE_ENV ?? 'development',

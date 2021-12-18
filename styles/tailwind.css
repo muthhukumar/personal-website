@@ -1,5 +1,8 @@
+/* purgecss start ignore */
 @tailwind base;
 @tailwind components;
+/* purgecss end ignore */
+
 @tailwind utilities;
 
 /* inter-regular - latin */
@@ -13,4 +16,22 @@
     /* Super Modern Browsers */ url('/fonts/inter-v7-latin-regular.woff') format('woff'),
     /* Modern Browsers */ url('/fonts/inter-v7-latin-regular.ttf') format('truetype'),
     /* Safari, Android, iOS */ url('/fonts/inter-v7-latin-regular.svg#Inter') format('svg'); /* Legacy iOS */
+}
+
+@layer utilities {
+  .bg-color {
+    @apply bg-[color:var(--background-color)];
+  }
+  .font-color {
+    @apply text-[color:var(--font-color)];
+  }
+  .border-color {
+    @apply border-[color:var(--border-color)];
+  }
+  .light-font-color {
+    @apply text-[color:var(--light-font-color)];
+  }
+  .link-font-color {
+    @apply text-[color:var(--link-color)];
+  }
 }

@@ -14,13 +14,13 @@ function BlogPost({
   id,
 }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
-    <div className="w-full pb-6 md:pb-10 mb-4 md:mb-8 border-b">
-      <Date className="my-2 text-sm md:text-base text-gray-600" date={publishedAt} />
-      <h2 className="my-4 text-xl md:text-2xl font-bold">{title}</h2>
+    <div className="w-full pb-6 mb-4 border-b border-color md:pb-10 md:mb-8">
+      <Date className="my-2 text-sm light-font-color md:text-base" date={publishedAt} />
+      <h2 className="my-4 text-xl font-bold md:text-2xl">{title}</h2>
       <p className="mb-4 text-sm md:text-base">{description}</p>
       <Link
         to={`/blog/${id}`}
-        className="flex items-center text-sm text-blue-600"
+        className="flex items-center text-sm link-font-color"
         prefetch="render"
       >
         Read More <BiRightArrowAlt className="ml-1" />
@@ -63,16 +63,16 @@ export default function Blog() {
   const q = searchParams.get('q')
   return (
     <>
-      <div className="pb-6 border-b">
+      <div className="pb-6 border-b border-color">
         <Container>
           <form>
-            <h2 className="py-4 md:py-10 text-xl md:text-2xl font-bold">Blog</h2>
-            <div className="flex items-center max-w-sm p-1 border border-gray-400 rounded-md">
+            <h2 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h2>
+            <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
               <IoIosSearch className="ml-2 text-gray-600" size={20} />
               <input
                 name="q"
                 type="text"
-                className="w-full p-1 ml-2 text-sm"
+                className="w-full p-1 ml-2 text-sm bg-color"
                 placeholder="Search posts..."
                 defaultValue={q ?? ''}
               />
