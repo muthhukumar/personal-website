@@ -40,7 +40,7 @@ const PostQuery = gql`
         html
       }
       coverImage {
-        id
+        url
       }
       excerpt
       publishedAt
