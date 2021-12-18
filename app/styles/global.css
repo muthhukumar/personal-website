@@ -5,3 +5,21 @@
   --link-color: #0070f3;
   --light-font-color: #666;
 }
+
+@media (prefers-color-scheme: light) {
+  .light-favicon {
+    display: none;
+  }
+  .dark-favicon {
+    display: initial;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .light-favicon {
+    display: initial;
+  }
+  .dark-favicon {
+    display: none;
+  }
+}

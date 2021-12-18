@@ -8,15 +8,22 @@ export default function Footer() {
   return (
     <footer className="border-t border-color">
       <Container className="py-16">
-        <div className="flex flex-col">
-          <Link to="/" className="flex items-baseline">
+        <div className="flex flex-col items-center md:items-start">
+          <Link to="/" className="flex items-center">
             <div className="w-8 h-8 mr-2">
-              <img src="/android-chrome-192x192.png" className="w-full h-full" />
+              <img
+                src="/favicon/dark/android-chrome-192x192.png"
+                className="w-full h-full dark-favicon"
+              />
+              <img
+                src="/favicon/light/android-chrome-192x192.png"
+                className="w-full h-full light-favicon"
+              />
             </div>
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
-          <div className="flex items-center justify-between mt-6">
-            <h2 className="text-sm light-font-color">
+          <div className="flex flex-col items-center justify-center w-full mt-6 md:justify-between md:flex-row">
+            <h2 className="mb-4 text-sm md:mb-0 light-font-color">
               Copyright &copy; 2021 Muthukumar. All rights reserved.
             </h2>
             <ul className="flex items-center">

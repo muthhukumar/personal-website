@@ -88,23 +88,53 @@ export const links: LinksFunction = () => {
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      href: '/apple-touch-icon.png',
+      href: '/favicon/dark/apple-touch-icon.png',
+      media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      href: '/favicon-32x32.png',
+      href: '/favicon/dark/favicon-32x32.png',
+      media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      href: '/favicon-16x16.png',
+      href: '/favicon/dark/favicon-16x16.png',
+      media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'manifest',
-      href: '/site.webmanifest',
+      href: '/favicon/dark/site.webmanifest',
+      media: '(prefers-color-scheme: dark)',
+    },
+
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/favicon/light/apple-touch-icon.png',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon/light/favicon-32x32.png',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: '/favicon/light/favicon-16x16.png',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'manifest',
+      href: '/favicon/light/site.webmanifest',
+      media: '(prefers-color-scheme: light)',
     },
   ]
 }
