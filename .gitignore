@@ -10,3 +10,5 @@ api/build
 app/styles/*
 
 .DS_STORE
+
+.env
