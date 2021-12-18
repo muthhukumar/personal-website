@@ -12,7 +12,10 @@ import type { LinksFunction } from 'remix'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
+import darkStylesUrl from '~/styles/dark.css'
+
 import Navbar from './components/navbar'
+import Footer from './components/footer'
 
 export const meta: MetaFunction = () => {
   return {
@@ -45,6 +48,7 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: tailwindStylesUrl },
+    { rel: 'stylesheet', href: darkStylesUrl, media: '(prefers-color-scheme: dark)' },
     {
       rel: 'preload',
       as: 'font',
@@ -166,11 +170,12 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="color-scheme" content="dark light" />
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
-      <body className="antialiased">
+      <body className="antialiased bg-color font-color">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -185,6 +190,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div>
       <Navbar />
       <main>{children}</main>
+      <Footer />
     </div>
   )
 }

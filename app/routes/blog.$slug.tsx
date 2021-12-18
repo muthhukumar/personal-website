@@ -50,17 +50,17 @@ export default function BlogSlug() {
 
   return (
     <div>
-      <div className="pt-4 pb-4 border-b md:pb-10">
+      <div className="pt-4 pb-4 border-b border-color md:pb-10">
         <Container className="flex flex-col items-center justify-center text-center">
           <Link
             to="/blog"
-            className="flex items-center self-start justify-start mb-2 text-sm text-gray-600"
+            className="flex items-center self-start justify-start mb-2 text-sm light-font-color"
           >
             <HiOutlineArrowLeft />
             <p className="self-start ml-2 text-sm md:text-base">Back to Blog</p>
           </Link>
           <h1 className="mt-4 mb-4 text-2xl font-bold md:mt-6 md:text-3xl">{title}</h1>
-          <Date date={date} className="text-sm text-gray-600 md:text-base" />
+          <Date date={date} className="text-sm light-font-color md:text-base" />
           <div className="flex items-center p-1 mt-4 md:mt-8">
             <div className="w-8 h-8 overflow-hidden rounded-full">
               <img src="/images/profile.jpg" className="object-cover w-full h-full rounded-full" />
@@ -75,7 +75,7 @@ export default function BlogSlug() {
         </Container>
       </div>
       <Container className="max-w-3xl">
-        <article className="py-2 prose md:py-6 md:prose-lg max-w-none prose-blue">
+        <article className="py-2 prose md:py-6 md:prose-lg max-w-none prose-blue dark:prose-invert">
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </article>
       </Container>
