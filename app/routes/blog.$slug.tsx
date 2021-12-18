@@ -1,21 +1,20 @@
-import { json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { json, Link, LoaderFunction, MetaFunction, redirect, useLoaderData } from 'remix'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 import Container from '~/components/container'
 import Date from '~/components/date'
 
-import markdownToHtml from '~/utils/md.server'
-import { getCachedPost } from '~/utils/lru-cache.server'
+import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
   return {
     title: `${data.title} - Muthukumar`,
-    description: data.description,
+    description: data.excerpt,
     'og:url': data.url,
     'og:type': 'article',
     'og:title': data.title,
-    'og:description': data.description,
-    'og:image': '/images/og.jpg',
+    'og:description': data.excerpt,
+    'og:image': data.ogImage,
   }
 }
 
@@ -24,18 +23,20 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const slug = params.slug ?? ''
 
-  const postData = await getCachedPost(slug)
+  const postData = await getPost(slug)
 
-  const html = await markdownToHtml(postData.body)
+  if (!postData) {
+    throw redirect('/blog')
+  }
 
   return json(
     {
       url,
-      html,
+      html: postData.content.html,
       title: postData.title,
-      ogImage: postData.ogImage,
+      ogImage: postData.coverImage.url,
       date: postData.publishedAt,
-      description: postData.description,
+      description: postData.excerpt,
     },
     {
       headers: {

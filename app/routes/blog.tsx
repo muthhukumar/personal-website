@@ -4,22 +4,22 @@ import { IoIosSearch } from 'react-icons/io'
 
 import Container from '~/components/container'
 import Date from '~/components/date'
-import { Post } from '~/utils/md.server'
-import { getCachedPosts } from '~/utils/lru-cache.server'
+
+import { getPosts, Post } from '~/utils/cms.server'
 
 function BlogPost({
   title,
   publishedAt,
-  description,
-  id,
-}: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
+  excerpt,
+  slug,
+}: Pick<Post, 'title' | 'publishedAt' | 'excerpt' | 'slug'>) {
   return (
     <div className="w-full pb-6 mb-4 border-b border-color md:pb-10 md:mb-8">
       <Date className="my-2 text-sm light-font-color md:text-base" date={publishedAt} />
       <h2 className="my-4 text-xl font-bold md:text-2xl">{title}</h2>
-      <p className="mb-4 text-sm md:text-base">{description}</p>
+      <p className="mb-4 text-sm md:text-base">{excerpt}</p>
       <Link
-        to={`/blog/${id}`}
+        to={`/blog/${slug}`}
         className="flex items-center text-sm link-font-color"
         prefetch="render"
       >
@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getCachedPosts()
+  const blogPosts = await getPosts()
 
   const filteredBlogPosts = !query
     ? blogPosts
@@ -89,9 +89,9 @@ export default function Blog() {
                 <BlogPost
                   publishedAt={blogPost.publishedAt}
                   key={blogPost.id}
-                  id={blogPost.id}
+                  slug={blogPost.slug}
                   title={blogPost.title}
-                  description={blogPost.description}
+                  excerpt={blogPost.excerpt}
                 />
               ))}
             </div>
