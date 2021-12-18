@@ -6,6 +6,7 @@ import Container from '~/components/container'
 import Date from '~/components/date'
 import { Post } from '~/utils/md.server'
 import { getCachedPosts } from '~/utils/lru-cache.server'
+import { redisClient } from '~/utils/redis.server'
 
 function BlogPost({
   title,
@@ -14,9 +15,9 @@ function BlogPost({
   id,
 }: Pick<Post, 'title' | 'publishedAt' | 'description' | 'id'>) {
   return (
-    <div className="w-full pb-6 md:pb-10 mb-4 md:mb-8 border-b">
-      <Date className="my-2 text-sm md:text-base text-gray-600" date={publishedAt} />
-      <h2 className="my-4 text-xl md:text-2xl font-bold">{title}</h2>
+    <div className="w-full pb-6 mb-4 border-b md:pb-10 md:mb-8">
+      <Date className="my-2 text-sm text-gray-600 md:text-base" date={publishedAt} />
+      <h2 className="my-4 text-xl font-bold md:text-2xl">{title}</h2>
       <p className="mb-4 text-sm md:text-base">{description}</p>
       <Link
         to={`/blog/${id}`}
@@ -40,7 +41,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getCachedPosts()
+  const value = await getCachedPosts()
+
+  const blogPosts = Array.isArray(value) ? value : []
 
   const filteredBlogPosts = !query
     ? blogPosts
@@ -66,7 +69,7 @@ export default function Blog() {
       <div className="pb-6 border-b">
         <Container>
           <form>
-            <h2 className="py-4 md:py-10 text-xl md:text-2xl font-bold">Blog</h2>
+            <h2 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h2>
             <div className="flex items-center max-w-sm p-1 border border-gray-400 rounded-md">
               <IoIosSearch className="ml-2 text-gray-600" size={20} />
               <input
