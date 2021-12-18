@@ -1,4 +1,5 @@
 import redis from 'ioredis'
+import { getRequiredServerEnvVar } from './env.server'
 
 declare global {
   // This prevents us from making multiple connections to the db when the
@@ -23,8 +24,9 @@ function createClient(name: string, options: redis.RedisOptions): redis.Redis {
 // const redisUrl = getRequiredServerEnvVar('REDIS_URL')
 
 const redisClient = createClient('redisCache', {
-  host: 'localhost',
-  port: 6379,
+  host: getRequiredServerEnvVar('REDIS_HOST'),
+  port: Number(getRequiredServerEnvVar('REDIS_PORT')),
+  password: getRequiredServerEnvVar('REDIS_PASSWORD'),
   db: 0,
 })
 
