@@ -1,34 +1,35 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import LRU from 'lru-cache'
 import { getPost, getPosts, Post } from './md.server'
-
-const cache = new LRU({
-  max: 10000,
-  length: function (n: string) {
-    return n.length
-  },
-  maxAge: 1000 * 60 * 60,
-})
+import { redisCache } from './redis.server'
 
 const getCachedPosts = async () => {
-  if (!cache.has('posts')) {
+  const hasPosts = await redisCache.has('posts')
+  if (!hasPosts) {
     const postsFromApi = await getPosts()
-    cache.set('posts', postsFromApi)
+    await redisCache.set('posts', 'id', postsFromApi)
   }
 
-  return cache.get('posts') as Array<Post>
+  const posts = await redisCache.get('posts')
+
+  return posts
 }
 
 const getCachedPost = async (id: Post['id']) => {
   const postId = `${id}:post`
-  if (!cache.has(postId)) {
+  const hasPost = await redisCache.has(postId)
+  if (!hasPost) {
     const postsFromApi = await getPost(id)
-    cache.set(postId, postsFromApi)
+    if (!postsFromApi) {
+      return null
+    }
+    await redisCache.set(`post${postId}`, postId, postsFromApi)
   }
 
-  return cache.get(postId) as Post
+  const post = await redisCache.get(`post${postId}`)
+
+  return post as Post
 }
 
 export { getCachedPosts, getCachedPost }
