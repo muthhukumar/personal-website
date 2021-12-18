@@ -12,3 +12,4 @@ app/styles/*
 .DS_STORE
 
 .env
+.env.*
