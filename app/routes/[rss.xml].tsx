@@ -41,7 +41,7 @@ export const loader: LoaderFunction = async ({ request }) => {
             `
             <item>
               <title><![CDATA[${escapeCdata(blog.title)}]]></title>
-              <description><![CDATA[A funny joke called ${escapeHtml(blog.excerpt)}]]></description>
+              <description><![CDATA[${escapeHtml(blog.excerpt)}]]></description>
               <author><![CDATA[${escapeCdata('Muthukumar')}]]></author>
               <pubDate>${blog.publishedAt}</pubDate>
               <link>${blogUrl}/${blog.slug}</link>
