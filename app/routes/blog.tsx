@@ -81,7 +81,7 @@ export default function Blog() {
         </Container>
       </div>
       <Container>
-        <div className="flex w-full">
+        <div className="w-full">
           <div className="py-2 md:py-6">
             {blogPosts.length === 0 && <p className="text-center">No blog post found.</p>}
             <div className="w-full">
