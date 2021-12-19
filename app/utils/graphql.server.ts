@@ -1,14 +1,34 @@
-import { GraphQLClient } from 'graphql-request'
 import { getRequiredServerEnvVar } from './env.server'
 
-const endpoint = getRequiredServerEnvVar('GRAPHQL_ENDPOINT')
+export type Context = { [key: string]: string }
 
-const authorizationToken = getRequiredServerEnvVar('GRAPHQL_ACCESS_TOKEN')
+function getGqClient(context: Context) {
+  const endpoint = getRequiredServerEnvVar('GRAPHQL_ENDPOINT', context)
 
-const gqClient = new GraphQLClient(endpoint, {
-  headers: {
-    Authorization: `Bearer ${authorizationToken}`,
-  },
-})
+  const authorizationToken = getRequiredServerEnvVar('GRAPHQL_ACCESS_TOKEN', context)
 
-export { gqClient }
+  const gqClient = {
+    async request<DataType>(query: string, variables?: { [key: string]: any }) {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authorizationToken}`,
+        },
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+      })
+
+      if (response.ok) {
+        return ((await response.json()) as { data: DataType }).data
+      }
+
+      return Promise.reject(response.json())
+    },
+  }
+
+  return gqClient
+}
+
+export { getGqClient }

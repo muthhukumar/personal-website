@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request'
-import { gqClient } from './graphql.server'
+import { Context, getGqClient } from './graphql.server'
 
 export type Post = {
   title: string
@@ -48,26 +48,26 @@ const PostQuery = gql`
   }
 `
 
-export const getPosts = async () => {
+export const getPosts = async (context: Context) => {
   try {
-    const posts = await gqClient.request(PostsQuery)
+    const { posts } = await getGqClient(context).request(PostsQuery)
 
     if (!posts) {
       return []
     }
-    return posts.posts as Array<Post>
+    return posts as Array<Post>
   } catch (error) {
     return []
   }
 }
 
-export const getPost = async (slug: Post['slug']) => {
+export const getPost = async (slug: Post['slug'], context: Context) => {
   try {
-    const post = await gqClient.request(PostQuery, { slug })
+    const { post } = await getGqClient(context).request(PostQuery, { slug })
     if (!post) {
       return null
     }
-    return post.post as Post
+    return post as Post
   } catch (error) {
     return null
   }

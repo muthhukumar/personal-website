@@ -35,12 +35,12 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, context }) => {
   const url = new URL(request.url)
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getPosts()
+  const blogPosts = await getPosts(context)
 
   const filteredBlogPosts = !query
     ? blogPosts

@@ -18,12 +18,12 @@ export const meta: MetaFunction = ({ data }) => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader: LoaderFunction = async ({ request, params, context }) => {
   const url = new URL(request.url)
 
   const slug = params.slug ?? ''
 
-  const postData = await getPost(slug)
+  const postData = await getPost(slug, context)
 
   if (!postData) {
     throw redirect('/blog')
