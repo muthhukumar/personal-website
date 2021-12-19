@@ -1,9 +1,17 @@
 :root {
-  --background-color: white;
-  --font-color: black;
+  /* Colors */
+  --black: black;
+  --white: white;
+
+  --background-color: var(--white);
+  --font-color: var(--black);
   --border-color: #eaeaea;
   --link-color: #0070f3;
   --light-font-color: #666;
+
+  /* Inverted stuff */
+  --background-color-inverted: var(--black);
+  --font-color-inverted: var(--white);
 }
 
 @media (prefers-color-scheme: light) {
@@ -23,4 +31,3 @@
     display: none;
   }
 }
-

@@ -1,4 +1,4 @@
-import type { LinksFunction } from 'remix'
+import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
 
 import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
@@ -6,7 +6,9 @@ import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
 
-import { Navbar, Footer, Four00 } from '~/components'
+import { Navbar, Footer, Four00, Banner } from '~/components'
+import { getSession } from './utils/session.server'
+import { BannerType } from './components/banner'
 
 export const meta: MetaFunction = () => {
   return {
@@ -130,6 +132,14 @@ export const links: LinksFunction = () => {
   ]
 }
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get('Cookie'))
+
+  const banner = session.get('banner') ?? { title: '', link: '', show: false }
+
+  return json({ banner })
+}
+
 export default function App() {
   return (
     <Document>
@@ -172,8 +182,10 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const { banner } = useLoaderData<{ banner: BannerType }>()
   return (
     <div>
+      {banner.show && <Banner {...banner} />}
       <Navbar />
       <main>{children}</main>
       <Footer />
