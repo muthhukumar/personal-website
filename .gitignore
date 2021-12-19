@@ -6,7 +6,7 @@ node_modules
 
 public/build
 
-app/styles/*
+# app/styles/*
 
 .DS_STORE
 
