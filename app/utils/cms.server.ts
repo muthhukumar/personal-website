@@ -1,4 +1,3 @@
-import { gql } from 'graphql-request'
 import { Context, getGqClient } from './graphql.server'
 
 export type Post = {
@@ -20,7 +19,7 @@ export type Post = {
   userEmail: string
 }
 
-const PostsQuery = gql`
+const PostsQuery = `
   query MyQuery {
     posts {
       id
@@ -32,7 +31,7 @@ const PostsQuery = gql`
   }
 `
 
-const PostQuery = gql`
+const PostQuery = `
   query GetPostBySlug($slug: String!) {
     post(where: { slug: $slug }) {
       title
