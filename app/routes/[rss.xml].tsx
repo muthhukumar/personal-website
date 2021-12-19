@@ -1,4 +1,5 @@
 import type { LoaderFunction } from 'remix'
+
 import { getPosts } from '~/utils/cms.server'
 
 function escapeCdata(s: string) {
