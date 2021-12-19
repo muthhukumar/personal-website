@@ -50,16 +50,6 @@ export default function Footer() {
               {socials.map((social) => (
                 <SocialIcon {...social} key={social.href} />
               ))}
-              {/* <li className="pr-4 mr-4 border-r border-color">
-                <a href="https://rd.nullish.in/github" target="_blank" rel="noreferrer">
-                  <BsGithub size={20} />
-                </a>
-              </li>
-              <li>
-                <a href="https://rd.nullish.in/twitter" target="_blank" rel="noreferrer">
-                  <SiTwitter size={20} />
-                </a>
-              </li> */}
             </ul>
           </div>
         </div>
