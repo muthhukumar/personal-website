@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getPosts()
+  const blogPosts = await getPosts(query)
 
   const filteredBlogPosts = !query
     ? blogPosts
