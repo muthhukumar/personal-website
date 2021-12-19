@@ -1,20 +1,17 @@
-import { json, Link, LoaderFunction, MetaFunction, redirect, useLoaderData } from 'remix'
-import { HiOutlineArrowLeft } from 'react-icons/hi'
+import { json, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import Container from '~/components/container'
-import Date from '~/components/date'
-
+import { GoBack, Four00, Date, Container } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: `${data.title} - Muthukumar`,
-    description: data.excerpt,
-    'og:url': data.url,
+    title: data && data.title ? `${data?.title} - Muthukumar` : 'Page Not Found | Muthukumar',
+    description: data?.excerpt,
+    'og:url': data?.url,
     'og:type': 'article',
-    'og:title': data.title,
-    'og:description': data.excerpt,
-    'og:image': data.ogImage,
+    'og:title': data?.title,
+    'og:description': data?.excerpt,
+    'og:image': data?.ogImage,
   }
 }
 
@@ -26,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const postData = await getPost(slug)
 
   if (!postData) {
-    throw redirect('/blog')
+    throw json({ message: `Oh no, the page you looking for doesn't exists.` }, { status: 404 })
   }
 
   return json(
@@ -53,13 +50,7 @@ export default function BlogSlug() {
     <div>
       <div className="pt-4 pb-4 border-b border-color md:pb-10">
         <Container className="flex flex-col items-center justify-center text-center">
-          <Link
-            to="/blog"
-            className="flex items-center self-start justify-start mb-2 text-sm light-font-color"
-          >
-            <HiOutlineArrowLeft />
-            <p className="self-start ml-2 text-sm md:text-base">Back to Blog</p>
-          </Link>
+          <GoBack link="/blog" />
           <h1 className="mt-4 mb-4 text-2xl font-bold md:mt-6 md:text-3xl">{title}</h1>
           <Date date={date} className="text-sm light-font-color md:text-base" />
           <div className="flex items-center p-1 mt-4 md:mt-8">
@@ -82,4 +73,20 @@ export default function BlogSlug() {
       </Container>
     </div>
   )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch()
+
+  const message = caught.status === 404 ? caught.data.message : 'Oopsies.. Something went wrong.'
+
+  if (caught.status === 404) {
+    return <Four00 title="404" message={message} link="/blog" />
+  }
+
+  return <Four00 title="500" message={message} link="/blog" />
+}
+
+export function ErrorBoundary() {
+  return <Four00 title="500" message="Oopsies... Something went wrong." link="/blog" />
 }

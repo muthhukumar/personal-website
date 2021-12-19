@@ -48,15 +48,15 @@ const PostQuery = gql`
   }
 `
 
-export const getPosts = async (query: string) => {
+export const getPosts = async (query?: string) => {
   try {
-    const posts = await gqClient.request(PostsQuery, { search: query })
+    const posts = await gqClient.request(PostsQuery, { search: query ?? '' })
 
     if (!posts) {
       return []
     }
     return posts.posts as Array<Post>
-  } catch (error) {
+  } catch {
     return []
   }
 }
@@ -68,7 +68,7 @@ export const getPost = async (slug: Post['slug']) => {
       return null
     }
     return post.post as Post
-  } catch (error) {
+  } catch {
     return null
   }
 }
