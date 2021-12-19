@@ -5,7 +5,6 @@ node_modules
 .output
 
 public/build
-api/build
 
 app/styles/*
 
@@ -13,3 +12,4 @@ app/styles/*
 
 .env
 .env.*
+/build
