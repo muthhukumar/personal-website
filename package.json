@@ -15,7 +15,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "validate": "npm run lint",
     "build": "npm run build:remix",
-    "prebuild": "npm run cclean && echo All clean",
+    "prebuild": "echo All clean",
     "clean": "npx rimraf public/build ./node_modules/.cache ./app/styles/**.css ./api/build* .cache",
     "postinstall": "remix setup node cloudflare-pages",
     "dev:remix": "remix watch",
