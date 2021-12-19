@@ -22,8 +22,14 @@
   .bg-color {
     @apply bg-[color:var(--background-color)];
   }
+  .bg-color-invert {
+    @apply bg-[color:var(--background-color-inverted)];
+  }
   .font-color {
     @apply text-[color:var(--font-color)];
+  }
+  .font-color-invert {
+    @apply text-[color:var(--font-color-inverted)];
   }
   .border-color {
     @apply border-[color:var(--border-color)];

@@ -4,4 +4,8 @@
   --border-color: #333;
   --link-color: #3291ff;
   --light-font-color: #888;
+
+  /* Inverted stuff */
+  --background-color-inverted: var(--white);
+  --font-color-inverted: var(--black);
 }

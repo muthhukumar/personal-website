@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const postData = await getPost(slug)
 
   if (!postData) {
-    throw json({ message: `Oh no, the page you looking for doesn't exists.` }, { status: 404 })
+    throw json({ message: `Oh no, the blog you looking for doesn't exists.` }, { status: 404 })
   }
 
   return json(
