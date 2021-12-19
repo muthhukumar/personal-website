@@ -1,8 +1,28 @@
 import { Link } from 'remix'
 import { BsGithub } from 'react-icons/bs'
 import { SiTwitter } from 'react-icons/si'
+import { IoLogoRss } from 'react-icons/io'
 
 import Container from './container'
+import SocialIcon from './social-icon'
+
+const socials = [
+  {
+    Icon: BsGithub,
+    href: 'https://rd.nullish.in/github',
+    isLast: false,
+  },
+  {
+    Icon: SiTwitter,
+    href: 'https://rd.nullish.in/twitter',
+    isLast: false,
+  },
+  {
+    Icon: IoLogoRss,
+    href: 'https://nullish.in/rss.xml',
+    isLast: true,
+  },
+]
 
 export default function Footer() {
   return (
@@ -27,7 +47,10 @@ export default function Footer() {
               Copyright &copy; 2021 Muthukumar. All rights reserved.
             </h2>
             <ul className="flex items-center">
-              <li className="pr-4 mr-4 border-r border-color">
+              {socials.map((social) => (
+                <SocialIcon {...social} key={social.href} />
+              ))}
+              {/* <li className="pr-4 mr-4 border-r border-color">
                 <a href="https://rd.nullish.in/github" target="_blank" rel="noreferrer">
                   <BsGithub size={20} />
                 </a>
@@ -36,7 +59,7 @@ export default function Footer() {
                 <a href="https://rd.nullish.in/twitter" target="_blank" rel="noreferrer">
                   <SiTwitter size={20} />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

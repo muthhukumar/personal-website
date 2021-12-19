@@ -21,8 +21,8 @@ export type Post = {
 }
 
 const PostsQuery = gql`
-  query MyQuery {
-    posts {
+  query MyQuery($search: String!) {
+    posts(where: { _search: $search }) {
       id
       slug
       title
@@ -48,9 +48,9 @@ const PostQuery = gql`
   }
 `
 
-export const getPosts = async () => {
+export const getPosts = async (query: string) => {
   try {
-    const posts = await gqClient.request(PostsQuery)
+    const posts = await gqClient.request(PostsQuery, { search: query })
 
     if (!posts) {
       return []
