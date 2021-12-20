@@ -34,10 +34,14 @@ export default function Footer() {
               <img
                 src="/favicon/dark/android-chrome-192x192.png"
                 className="w-8 h-8 dark-favicon"
+                width="32px"
+                height="32px"
               />
               <img
                 src="/favicon/light/android-chrome-192x192.png"
                 className="w-8 h-8 light-favicon"
+                width="32px"
+                height="32px"
               />
             </div>
             <p className="text-2xl font-bold font-color">Muthukumar</p>
