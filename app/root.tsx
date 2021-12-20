@@ -33,6 +33,8 @@ export const meta: MetaFunction = () => {
     pagename: 'Muthukumar',
     robots: 'index, follow',
     title: 'Muthukumar',
+    description:
+      'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
     viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
   }
 }
