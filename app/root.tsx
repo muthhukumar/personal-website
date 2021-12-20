@@ -1,6 +1,6 @@
 import { json, LinksFunction, LoaderFunction, useCatch, useLoaderData } from 'remix'
 
-import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
+import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
@@ -165,7 +165,6 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
       <body className="antialiased bg-color font-color">
         {children}
         <ScrollRestoration />
-        <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
