@@ -33,22 +33,6 @@ export default function Footer() {
       <Container className="py-16">
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="flex items-center">
-            <div className="w-8 h-8 mr-2">
-              <img
-                src="/favicon/dark/android-chrome-192x192.png"
-                className="w-8 h-8 dark-favicon"
-                width="32px"
-                height="32px"
-                alt="logo"
-              />
-              <img
-                src="/favicon/light/android-chrome-192x192.png"
-                className="w-8 h-8 light-favicon"
-                width="32px"
-                height="32px"
-                alt="logo"
-              />
-            </div>
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
           <div className="flex flex-col items-center justify-center w-full mt-6 md:justify-between md:flex-row">
