@@ -1,4 +1,4 @@
-import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
+import { json, LinksFunction, LoaderFunction, useCatch, useLoaderData } from 'remix'
 
 import { Scripts, Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
@@ -137,24 +137,17 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const banner = session.get('banner') ?? { title: '', link: '', show: false }
 
+  console.log('banner', banner)
+
   return json({ banner })
 }
 
 export default function App() {
+  const { banner = {} } = useLoaderData<{ banner: BannerType }>()
   return (
     <Document>
-      <Layout>
+      <Layout banner={banner}>
         <Outlet />
-      </Layout>
-    </Document>
-  )
-}
-
-export function ErrorBoundary() {
-  return (
-    <Document title="Error!">
-      <Layout>
-        <Four00 title="500" message="Oopsies... Something went wrong." link="/" />
       </Layout>
     </Document>
   )
@@ -181,8 +174,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
   )
 }
 
-function Layout({ children }: { children: React.ReactNode }) {
-  const { banner } = useLoaderData<{ banner: BannerType }>()
+function Layout({ children, banner }: { banner: BannerType; children: React.ReactNode }) {
   return (
     <div>
       {banner.show && <Banner {...banner} />}
@@ -190,5 +182,27 @@ function Layout({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <Footer />
     </div>
+  )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch()
+
+  const message = caught.status === 404 ? caught.data.message : 'Oopsies.. Something went wrong.'
+
+  if (caught.status === 404) {
+    return <Four00 title="404" message={message} link="/blog" />
+  }
+
+  return <Four00 title="500" message={message} link="/blog" />
+}
+
+export function ErrorBoundary() {
+  return (
+    <Document title="Error!">
+      <Layout>
+        <Four00 title="500" message="Oopsies... Something went wrong." link="/" />
+      </Layout>
+    </Document>
   )
 }
