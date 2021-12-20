@@ -11,16 +11,19 @@ const socials = [
     Icon: BsGithub,
     href: 'https://rd.nullish.in/github',
     isLast: false,
+    alt: `Muthukumar's github profile link` 
   },
   {
     Icon: SiTwitter,
     href: 'https://rd.nullish.in/twitter',
     isLast: false,
+    alt: `Muthukumar's twitter profile link` 
   },
   {
     Icon: IoLogoRss,
     href: 'https://nullish.in/rss.xml',
     isLast: true,
+    alt: `Nullish.in rss feed link` 
   },
 ]
 
@@ -36,12 +39,14 @@ export default function Footer() {
                 className="w-8 h-8 dark-favicon"
                 width="32px"
                 height="32px"
+                alt="logo"
               />
               <img
                 src="/favicon/light/android-chrome-192x192.png"
                 className="w-8 h-8 light-favicon"
                 width="32px"
                 height="32px"
+                alt="logo"
               />
             </div>
             <p className="text-2xl font-bold font-color">Muthukumar</p>
