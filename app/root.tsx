@@ -1,4 +1,4 @@
-import { json, LinksFunction, LoaderFunction, useCatch, useLoaderData } from 'remix'
+import { Scripts, json, LinksFunction, LoaderFunction, useCatch, useLoaderData } from 'remix'
 
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
@@ -166,6 +166,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
       </head>
       <body className="antialiased bg-color font-color">
         {children}
+        <Scripts />
         <ScrollRestoration />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
