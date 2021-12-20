@@ -137,13 +137,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const banner = session.get('banner') ?? { title: '', link: '', show: false }
 
-  console.log('banner', banner)
-
   return json({ banner })
 }
 
 export default function App() {
-  const { banner = {} } = useLoaderData<{ banner: BannerType }>()
+  const { banner } = useLoaderData<{ banner: BannerType }>()
   return (
     <Document>
       <Layout banner={banner}>
