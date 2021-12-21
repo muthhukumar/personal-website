@@ -1,6 +1,6 @@
 import { json, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import { GoBack, Four00, Date, Container } from '~/components'
+import { Markdown, GoBack, Four00, Date, Container } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
@@ -66,11 +66,9 @@ export default function BlogSlug() {
           </div>
         </Container>
       </div>
-      <Container className="max-w-3xl">
-        <article className="py-2 prose md:py-6 md:prose-lg max-w-none prose-blue dark:prose-invert">
-          <div dangerouslySetInnerHTML={{ __html: html }} />
-        </article>
-      </Container>
+      <Markdown className="max-w-5xl">
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </Markdown>
     </div>
   )
 }
