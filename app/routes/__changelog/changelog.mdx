@@ -12,16 +12,25 @@ import { Date } from '~/components'
 
 #### Added
 
-- Added initial version of the index page. Before in index route, the traffic is redirected to the /blog page
-- Added robots.txt for the SEO stuff
-- Created custom Markdown component to render the markdown
-- Created Change log file to keep track of the progress
+- Added initial version of the index page. Before in index route, the traffic is redirected to the /blog page.
+- Added robots.txt for the SEO stuff.
+- Created custom Markdown component to render the markdown.
+- Created Change log file to keep track of the progress.
+- Added `sitemap.xml` file
+- Added `sitemap.xml` to the robots file
 
 #### Changed
 
-- Renamed the title from 'Changelog | Muthukumar' -> 'Changelog | Nullish.in'. It doesn't make sense to have Muthukumar to the changelog
-- In index route, changed the title('Blog | Muthukumar' => 'Muthukumar')
+- Renamed the title from 'Changelog | Muthukumar' -> 'Changelog | Nullish.in'. It doesn't make sense to have Muthukumar to the changelog.
+- In index route, changed the title('Blog | Muthukumar' => 'Muthukumar').
+- Update robots.txt content
+  ```txt
+  User-agent: *
+  Allow: /
+  ```
+- Moved the `robots.txt` file from resource routes to public folder.
 
 #### Removed
 
-- Removed duplicate viewport tag
+- Removed duplicate viewport tag.
+- Removed robots header from the meta. All the robots stuff are moved to the robots.txt file/route.
