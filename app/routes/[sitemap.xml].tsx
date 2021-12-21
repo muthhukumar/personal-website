@@ -8,7 +8,7 @@ const siteMapText = `
     <lastmod>2021-12-21</lastmod>
   </url>
 </urlset>
-`
+`.trim()
 
 export const loader: LoaderFunction = () => {
   return new Response(siteMapText, {

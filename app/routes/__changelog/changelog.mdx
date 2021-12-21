@@ -30,7 +30,18 @@ import { Date } from '~/components'
   ```
 - Moved the `robots.txt` file from resource routes to public folder.
 
+  ```txt
+  User-agent: *
+  Allow: /
+
+  Sitemap: https://nullish.in/sitemap.xml
+  ```
+
 #### Removed
 
 - Removed duplicate viewport tag.
 - Removed robots header from the meta. All the robots stuff are moved to the robots.txt file/route.
+
+```
+
+```
