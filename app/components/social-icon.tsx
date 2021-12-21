@@ -5,10 +5,12 @@ function SocialIcon({
   Icon,
   href,
   isLast,
+  ariaLabel,
 }: {
   Icon: React.JSXElementConstructor<{ size: number }>
   href: string
   isLast: boolean
+  ariaLabel: string
 }) {
   return (
     <li
@@ -17,7 +19,7 @@ function SocialIcon({
         'mr-4 border-r border-color': !isLast,
       })}
     >
-      <a href={href} target="_blank" rel="noreferrer">
+      <a href={href} target="_blank" rel="noreferrer" aria-label={ariaLabel}>
         <Icon size={20} />
       </a>
     </li>
