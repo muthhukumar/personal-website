@@ -11,19 +11,22 @@ const socials = [
     Icon: BsGithub,
     href: 'https://rd.nullish.in/github',
     isLast: false,
-    alt: `Muthukumar's github profile link` 
+    alt: `Muthukumar's github profile link`,
+    ariaLabel: 'Github',
   },
   {
     Icon: SiTwitter,
     href: 'https://rd.nullish.in/twitter',
     isLast: false,
-    alt: `Muthukumar's twitter profile link` 
+    alt: `Muthukumar's twitter profile link`,
+    ariaLabel: 'Twitter',
   },
   {
     Icon: IoLogoRss,
     href: 'https://nullish.in/rss.xml',
     isLast: true,
-    alt: `Nullish.in rss feed link` 
+    alt: `Nullish.in rss feed link`,
+    ariaLabel: 'Rss feed',
   },
 ]
 
