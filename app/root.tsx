@@ -1,6 +1,15 @@
-import { Scripts, json, LinksFunction, LoaderFunction, useCatch, useLoaderData } from 'remix'
-
+import * as React from 'react'
+import {
+  Scripts,
+  json,
+  LinksFunction,
+  LoaderFunction,
+  useCatch,
+  useLoaderData,
+  useLocation,
+} from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
+import ReactGA from 'react-ga'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
@@ -143,6 +152,17 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const { banner } = useLoaderData<{ banner: BannerType }>()
+
+  const location = useLocation()
+
+  React.useEffect(() => {
+    ReactGA.initialize('G-QNMM2GSDYJ')
+  }, [])
+
+  React.useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search)
+  }, [location])
+
   return (
     <Document>
       <Layout banner={banner}>

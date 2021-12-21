@@ -1,5 +1,13 @@
 import * as React from 'react'
-import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, useSearchParams } from 'remix'
+import {
+  Form,
+  useCatch,
+  json,
+  LoaderFunction,
+  MetaFunction,
+  useLoaderData,
+  useSearchParams,
+} from 'remix'
 import { IoIosSearch } from 'react-icons/io'
 
 import { BlogPost, Four00, Container } from '~/components'
@@ -69,7 +77,7 @@ function Layout({ children, query = '' }: { children: React.ReactNode; query?: s
     <>
       <div className="pb-6 border-b border-color">
         <Container>
-          <form>
+          <Form method="get">
             <h2 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h2>
             <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
               <IoIosSearch className="ml-2 text-gray-600" size={20} />
@@ -81,7 +89,7 @@ function Layout({ children, query = '' }: { children: React.ReactNode; query?: s
                 defaultValue={query ?? ''}
               />
             </div>
-          </form>
+          </Form>
         </Container>
       </div>
       {children}
