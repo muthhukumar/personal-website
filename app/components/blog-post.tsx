@@ -20,7 +20,8 @@ export default function BlogPost({
         className="flex items-center text-sm link-font-color"
         prefetch="render"
       >
-        Read More <BiRightArrowAlt className="ml-1" />
+        Continue Reading
+        <BiRightArrowAlt className="ml-1" />
       </Link>
     </div>
   )
