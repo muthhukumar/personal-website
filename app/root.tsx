@@ -31,7 +31,6 @@ export const meta: MetaFunction = () => {
     language: 'en',
     MobileOptimized: '320',
     pagename: 'Muthukumar',
-    robots: 'index, follow',
     title: 'Muthukumar',
     description:
       'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
