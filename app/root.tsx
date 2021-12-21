@@ -173,10 +173,10 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
   )
 }
 
-function Layout({ children, banner }: { banner: BannerType; children: React.ReactNode }) {
+function Layout({ children, banner }: { banner?: BannerType; children: React.ReactNode }) {
   return (
     <div>
-      {banner.show && <Banner {...banner} />}
+      {banner && banner.show && <Banner {...banner} />}
       <Navbar />
       <main>{children}</main>
       <Footer />
