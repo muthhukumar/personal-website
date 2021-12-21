@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, useSearchParams } from 'remix'
-import { IoIosSearch } from 'react-icons/io'
+import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 
 import { BlogPost, Four00, Container } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
@@ -38,24 +37,22 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-  const [searchParams] = useSearchParams()
 
-  const query = searchParams.get('q')
   return (
     <Layout>
       <Container>
         <div className="w-full">
-            <div className="w-full">
-              {blogPosts.map((blogPost) => (
-                <BlogPost
-                  publishedAt={blogPost.publishedAt}
-                  key={blogPost.id}
-                  slug={blogPost.slug}
-                  title={blogPost.title}
-                  excerpt={blogPost.excerpt}
-                />
-              ))}
-            </div>
+          <div className="w-full">
+            {blogPosts.map((blogPost) => (
+              <BlogPost
+                publishedAt={blogPost.publishedAt}
+                key={blogPost.id}
+                slug={blogPost.slug}
+                title={blogPost.title}
+                excerpt={blogPost.excerpt}
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </Layout>
@@ -66,7 +63,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Container>
-        <h2 className="text-xl font-bold text-pink-500 uppercase md:py-4 md:text-xl">Recently published</h2>
+        <h2 className="text-xl font-bold text-pink-500 uppercase md:py-4 md:text-xl">
+          Recently published
+        </h2>
       </Container>
       {children}
     </>
