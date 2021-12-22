@@ -9,7 +9,6 @@ import {
   useLocation,
 } from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
-import ReactGA from 'react-ga'
 
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
@@ -18,6 +17,7 @@ import darkStylesUrl from '~/styles/dark.css'
 import { Navbar, Footer, Four00, Banner } from '~/components'
 import { getSession } from './utils/session.server'
 import { BannerType } from './components/banner'
+import * as gtag from '~/utils/etags'
 
 export const meta: MetaFunction = () => {
   return {
@@ -156,11 +156,7 @@ export default function App() {
   const location = useLocation()
 
   React.useEffect(() => {
-    ReactGA.initialize('G-QNMM2GSDYJ')
-  }, [])
-
-  React.useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    gtag.pageview(location.pathname)
   }, [location])
 
   return (
@@ -183,6 +179,22 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <Links />
       </head>
       <body className="antialiased bg-color font-color">
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
+        <script
+          async
+          id="gtag-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
         {children}
         <Scripts />
         <ScrollRestoration />
