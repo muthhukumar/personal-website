@@ -52,20 +52,16 @@ export default function Blog() {
   return (
     <Layout query={query}>
       <Container>
-        <div className="w-full">
-          <div className="py-2 md:py-6">
-            <div className="w-full">
-              {blogPosts.map((blogPost) => (
-                <BlogPost
-                  publishedAt={blogPost.publishedAt}
-                  key={blogPost.id}
-                  slug={blogPost.slug}
-                  title={blogPost.title}
-                  excerpt={blogPost.excerpt}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="py-2 md:py-6">
+          {blogPosts.map((blogPost) => (
+            <BlogPost
+              publishedAt={blogPost.publishedAt}
+              key={blogPost.id}
+              slug={blogPost.slug}
+              title={blogPost.title}
+              excerpt={blogPost.excerpt}
+            />
+          ))}
         </div>
       </Container>
     </Layout>

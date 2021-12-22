@@ -16,12 +16,15 @@
     /* Super Modern Browsers */ url('/fonts/inter-v7-latin-regular.woff') format('woff'),
     /* Modern Browsers */ url('/fonts/inter-v7-latin-regular.ttf') format('truetype'),
     /* Safari, Android, iOS */ url('/fonts/inter-v7-latin-regular.svg#Inter') format('svg'); /* Legacy iOS */
-    font-display: swap;
+  font-display: swap;
 }
 
 @layer utilities {
   .bg-color {
     @apply bg-[color:var(--background-color)];
+  }
+  .transparent-bg {
+    @apply bg-[color:var(--transparent-background-color)];
   }
   .bg-color-invert {
     @apply bg-[color:var(--background-color-inverted)];
