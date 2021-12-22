@@ -2,14 +2,21 @@
   /* Colors */
   --black: black;
   --white: white;
+  --transparent-white: hsla(0, 0%, 100%, 0.8);
+  --transparent-black: rgba(0, 0, 0, 0.5);
 
   --background-color: var(--white);
   --font-color: var(--black);
   --border-color: #eaeaea;
   --link-color: #0070f3;
   --light-font-color: #666;
+  --transparent-background-color: var(--transparent-white);
 
   /* Inverted stuff */
   --background-color-inverted: var(--black);
   --font-color-inverted: var(--white);
+}
+
+.navbar-backdrop-filter {
+  backdrop-filter: saturate(180%) blur(5px);
 }

@@ -11,7 +11,7 @@ const links: Array<{ to: string; pathname: string }> = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-10 py-4 font-semibold border-b bg-color border-color">
+    <header className="sticky top-0 z-10 py-4 font-semibold border-b navbar-backdrop-filter border-color transparent-bg">
       <Container>
         <nav className="flex items-baseline">
           <Link to="/" className="mr-8">
