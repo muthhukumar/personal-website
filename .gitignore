@@ -13,3 +13,5 @@ app/styles/*
 
 .env
 .env.*
+
+server/build
