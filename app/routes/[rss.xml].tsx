@@ -2,17 +2,24 @@ import type { LoaderFunction } from 'remix'
 
 import { getPosts } from '~/utils/cms.server'
 
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
+}
+function replaceAll(str: string, match: string, replacement: string) {
+  return str.replace(new RegExp(escapeRegExp(match), 'g'), () => replacement)
+}
+
 function escapeCdata(s: string) {
-  return s.replaceAll(']]>', ']]]]><![CDATA[>')
+  return replaceAll(s, ']]>', ']]]]><![CDATA[>')
 }
 
 function escapeHtml(s: string) {
-  return s
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;')
+  const result1 = replaceAll(s, '&', '&amp;')
+  const result2 = replaceAll(result1, '<', '&lt;')
+  const result3 = replaceAll(result2, '>', '&gt;')
+  const result4 = replaceAll(result3, '"', '&quot;')
+  const result5 = replaceAll(result4, "'", '&#039;')
+  return result5
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
