@@ -1,17 +1,17 @@
 module.exports = {
   apps: [
-    // {
-    //   name: 'Remix',
-    //   script: 'remix dev',
-    //   ignore_watch: ['.'],
-    //   env: {
-    //     FORCE_COLOR: '1',
-    //     NODE_ENV: process.env.NODE_ENV ?? 'development',
-    //   },
-    // },
     {
-      name: 'Vercel',
-      script: 'vercel dev',
+      name: 'Server',
+      script: 'npm run start:dev',
+      ignore_watch: ['.'],
+      env: {
+        FORCE_COLOR: '1',
+        NODE_ENV: process.env.NODE_ENV ?? 'development',
+      },
+    },
+    {
+      name: 'Remix watch mode',
+      script: 'remix watch',
       ignore_watch: ['.'],
       env: {
         FORCE_COLOR: '1',
