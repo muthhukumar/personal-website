@@ -10,40 +10,13 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url)
-
-  const query = url.searchParams.get('q') ?? ''
-
-  const blogPosts = await getPosts(query)
-
-  if (blogPosts.length === 0) {
-    throw json({ message: 'No blogs found.' }, { status: 404 })
-  }
-
-  const filteredBlogPosts = !query
-    ? blogPosts
-    : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
-
-  return json(
-    { blogPosts: filteredBlogPosts },
-    {
-      headers: {
-        'Cache-Control': 'max-age=100, must-revalidate',
-      },
-    },
-  )
-}
-
 export default function Blog() {
-  const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-
   return (
     <Layout>
       <Container>
         <div className="w-full">
           <div className="w-full">
-            {blogPosts.map((blogPost) => (
+            {/* {blogPosts.map((blogPost) => (
               <BlogPost
                 publishedAt={blogPost.publishedAt}
                 key={blogPost.id}
@@ -51,7 +24,7 @@ export default function Blog() {
                 title={blogPost.title}
                 excerpt={blogPost.excerpt}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </Container>
