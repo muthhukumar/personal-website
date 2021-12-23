@@ -139,6 +139,10 @@ export const links: LinksFunction = () => {
       href: '/favicon/light/site.webmanifest',
       media: '(prefers-color-scheme: light)',
     },
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in',
+    },
   ]
 }
 
