@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { Link, useCatch, json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 
 import { BlogPost, Four00, Container } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
@@ -39,8 +39,19 @@ export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
 
   return (
-    <Layout>
+    <div className="p-8">
       <Container>
+        <div className="py-8 text-lg">
+          <p>Hey, I&apos;m</p>
+          <h1 className="mt-2 mb-4 text-6xl font-bold">Muthukumar</h1>
+          <p>
+            I write code. I listen to music. And I occasionally write on React, Javascript and other
+            stuff. Loves to read books.
+          </p>
+        </div>
+        <h2 className="text-xl font-bold text-pink-500 uppercase md:py-4 md:text-xl">
+          Recently published
+        </h2>
         <div className="w-full">
           <div className="w-full">
             {blogPosts.map((blogPost) => (
@@ -55,20 +66,7 @@ export default function Blog() {
           </div>
         </div>
       </Container>
-    </Layout>
-  )
-}
-
-function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Container>
-        <h2 className="text-xl font-bold text-pink-500 uppercase md:py-4 md:text-xl">
-          Recently published
-        </h2>
-      </Container>
-      {children}
-    </>
+    </div>
   )
 }
 
