@@ -1,10 +1,12 @@
-import { Link } from 'remix'
+import { Link, useFetcher } from 'remix'
 import { BsGithub } from 'react-icons/bs'
 import { SiTwitter } from 'react-icons/si'
 import { IoLogoRss } from 'react-icons/io'
 
 import Container from './container'
 import SocialIcon from './social-icon'
+import { SpotifyNowPlaying } from '.'
+// import { SpotifyNowPlayingType } from '~/utils/spotify.server'
 
 const socials = [
   {
@@ -31,9 +33,18 @@ const socials = [
 ]
 
 export default function Footer() {
+  const fetcher = useFetcher()
+
   return (
     <footer className="border-t border-color">
       <Container className="py-16">
+        {/* {fetcher.type === 'done' ? (
+          fetcher.data.ok ? (
+            <SpotifyNowPlaying {...fetcher.data} />
+          ) : fetcher.data.error ? (
+            <p data-error>Something went wront</p>
+          ) : null
+        ) : null} */}
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="flex items-center">
             <p className="text-2xl font-bold font-color">Muthukumar</p>

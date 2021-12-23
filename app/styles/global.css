@@ -4,6 +4,7 @@
   --white: white;
   --transparent-white: hsla(0, 0%, 100%, 0.8);
   --transparent-black: rgba(0, 0, 0, 0.5);
+  --spotify-green: #1db954;
 
   --background-color: var(--white);
   --font-color: var(--black);
@@ -20,4 +21,10 @@
 .navbar-backdrop-filter {
   -webkit-backdrop-filter: saturate(180%) blur(5px);
           backdrop-filter: saturate(180%) blur(5px);
+}
+
+.fit-content {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
