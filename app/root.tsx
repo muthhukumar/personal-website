@@ -200,7 +200,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
           }}
         />
         {children}
-        <Scripts />
+        {/* <Scripts /> */}
         <ScrollRestoration />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
