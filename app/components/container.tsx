@@ -10,7 +10,7 @@ export default function Container({
 }) {
   const hasPy = className?.includes('py')
   return (
-    <div className={clsx('px-4 container max-w-5xl mx-auto', { 'py-2': !hasPy }, className)}>
+    <div className={clsx('px-8 container max-w-5xl mx-auto', { 'py-2': !hasPy }, className)}>
       {children}
     </div>
   )
