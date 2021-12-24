@@ -80,7 +80,7 @@ function Layout({ children, query = '' }: { children: React.ReactNode; query?: s
               <input
                 name="q"
                 type="text"
-                className="w-full p-1 ml-2 text-sm bg-color"
+                className="w-full p-1 ml-2 text-sm border-white bg-color dark:border-black"
                 placeholder="Search posts..."
                 defaultValue={query ?? ''}
               />

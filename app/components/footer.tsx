@@ -6,6 +6,13 @@ import { IoLogoRss } from 'react-icons/io'
 import Container from './container'
 import SocialIcon from './social-icon'
 
+type LinkType = {
+  name: string
+  link: string
+  ariaLabel: string
+  openInNewTab?: boolean
+}
+
 const socials = [
   {
     Icon: BsGithub,
@@ -30,7 +37,7 @@ const socials = [
   },
 ]
 
-const links: Array<{ name: string; link: string; ariaLabel: string }> = [
+const links: Array<LinkType> = [
   {
     name: 'Home',
     link: '/',
@@ -55,11 +62,13 @@ const links: Array<{ name: string; link: string; ariaLabel: string }> = [
     name: 'RSS',
     link: '/rss.xml',
     ariaLabel: 'RSS file',
+    openInNewTab: true,
   },
   {
     name: 'Site map',
     link: '/sitemap.xml',
     ariaLabel: 'Sitemap of the website',
+    openInNewTab: true,
   },
   {
     name: 'Changelog',
@@ -73,16 +82,25 @@ export default function Footer() {
     <footer className="border-t border-color">
       <Container className="py-8 lg:py-16">
         <nav className="grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 md:gap-y-2">
-          {links.map((link) => (
-            <Link
-              to={link.link}
-              aria-label={link.ariaLabel}
-              key={link.link}
-              className="light-font-color"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const props: Partial<LinkType & { target: string; rel: string; href: string }> = {}
+            if (link?.openInNewTab) {
+              props.target = '_blank'
+              props.rel = 'noreferrer'
+              props.href = link.link
+            }
+            return (
+              <Link
+                to={link.link}
+                aria-label={link.ariaLabel}
+                key={link.link}
+                className="light-font-color"
+                {...props}
+              >
+                {link.name}
+              </Link>
+            )
+          })}
         </nav>
         <div className="flex flex-col items-center mt-12 md:items-start">
           <Link to="/" className="flex items-center">
