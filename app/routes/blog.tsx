@@ -99,10 +99,10 @@ export function CatchBoundary() {
   const message = caught.status === 404 ? caught.data.message : 'Oopsies.. Something went wrong.'
 
   if (caught.status === 404) {
-    return <Four00 title="404" message={message} link="/blog" />
+    return <Four00 title="404" message={message} link="/" />
   }
 
-  return <Four00 title="500" message={message} link="/blog" />
+  return <Four00 title="500" message={message} link="/" />
 }
 
 export function ErrorBoundary() {
