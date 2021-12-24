@@ -175,13 +175,12 @@ export default function App() {
   )
 }
 
-function Document({ children, title }: { children: React.ReactNode; title?: string }) {
+function Document({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="color-scheme" content="dark light" />
-        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
@@ -236,7 +235,7 @@ export function CatchBoundary() {
 
 export function ErrorBoundary() {
   return (
-    <Document title="Error!">
+    <Document>
       <Layout>
         <Four00 title="500" message="Oopsies... Something went wrong." link="/" />
       </Layout>

@@ -75,6 +75,12 @@ const links: Array<LinkType> = [
     link: '/changelog',
     ariaLabel: 'Changelog of the website',
   },
+  {
+    name: 'Source code',
+    link: 'https://github.com/muthhukumar/personal-website',
+    ariaLabel: 'My Personal website Github repository',
+    openInNewTab: true,
+  },
 ]
 
 export default function Footer() {
@@ -83,11 +89,19 @@ export default function Footer() {
       <Container className="py-8 lg:py-16">
         <nav className="grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 md:gap-y-2">
           {links.map((link) => {
-            const props: Partial<LinkType & { target: string; rel: string; href: string }> = {}
             if (link?.openInNewTab) {
-              props.target = '_blank'
-              props.rel = 'noreferrer'
-              props.href = link.link
+              return (
+                <a
+                  aria-label={link.ariaLabel}
+                  key={link.link}
+                  className="light-font-color"
+                  href={link.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.name}
+                </a>
+              )
             }
             return (
               <Link
@@ -95,7 +109,6 @@ export default function Footer() {
                 aria-label={link.ariaLabel}
                 key={link.link}
                 className="light-font-color"
-                {...props}
               >
                 {link.name}
               </Link>
