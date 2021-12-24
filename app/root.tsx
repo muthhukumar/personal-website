@@ -27,6 +27,8 @@ export const meta: MetaFunction = () => {
     'format-detection': 'telephone=no',
     'mobile-web-app-capable': 'yes',
     'msapplication-TileColor': '#000',
+    image: '/images/og.jpg',
+    'og:image': '/images/og.jpg',
     'og:locale': 'en',
     'og:site_name': 'Muthukumar',
     'og:type': 'website',
