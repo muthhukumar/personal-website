@@ -30,11 +30,61 @@ const socials = [
   },
 ]
 
+const links: Array<{ name: string; link: string; ariaLabel: string }> = [
+  {
+    name: 'Home',
+    link: '/',
+    ariaLabel: 'Home page',
+  },
+  {
+    name: 'Blog',
+    link: '/blog',
+    ariaLabel: 'List of blogs page',
+  },
+  {
+    name: 'About',
+    link: '/about',
+    ariaLabel: 'About page',
+  },
+  {
+    name: 'Quotes',
+    link: '/quotes',
+    ariaLabel: 'List of all the quotes',
+  },
+  {
+    name: 'RSS',
+    link: '/rss.xml',
+    ariaLabel: 'RSS file',
+  },
+  {
+    name: 'Site map',
+    link: '/sitemap.xml',
+    ariaLabel: 'Sitemap of the website',
+  },
+  {
+    name: 'Changelog',
+    link: '/changelog',
+    ariaLabel: 'Changelog of the website',
+  },
+]
+
 export default function Footer() {
   return (
     <footer className="border-t border-color">
       <Container className="py-8 lg:py-16">
-        <div className="flex flex-col items-center md:items-start">
+        <nav className="grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 md:gap-y-2">
+          {links.map((link) => (
+            <Link
+              to={link.link}
+              aria-label={link.ariaLabel}
+              key={link.link}
+              className="light-font-color"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex flex-col items-center mt-12 md:items-start">
           <Link to="/" className="flex items-center">
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
