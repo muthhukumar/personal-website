@@ -19,7 +19,7 @@ function SocialIcon({
         'mr-4 pr-4 border-r border-color': !isLast,
       })}
     >
-      <a href={href} target="_blank" rel="noreferrer" aria-label={ariaLabel}>
+      <a href={href} target="_blank" rel="noreferrer" aria-label={ariaLabel} title={ariaLabel}>
         <Icon size={20} />
       </a>
     </li>
