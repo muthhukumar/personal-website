@@ -19,13 +19,14 @@ export default function Navbar() {
   const [showModal, setShowModal] = React.useState(false)
   const toggle = () => setShowModal((state) => !state)
   return (
-    <header className="sticky top-0 z-10 py-4 font-semibold transition-transform border-b navbar-backdrop-filter border-color transparent-all">
-      <Container>
+    <header className="sticky top-0 z-10 py-2 font-semibold transition-transform border-b lg:py-4 navbar-backdrop-filter border-color transparent-all">
+      <Container className="px-6 lg:px-4">
         <nav className="flex items-center justify-between lg:items-baseline lg:justify-start">
           <Link to="/" className="mr-8">
-            <p className="text-2xl font-bold font-color">Muthukumar</p>
+            <p className="hidden text-2xl font-bold font-color lg:block">Muthukumar</p>
+            <p className="text-2xl font-bold font-color lg:hidden">M</p>
           </Link>
-          <button onClick={toggle}>
+          <button onClick={toggle} aria-label="open menu">
             <HiOutlineMenuAlt4 className="lg:hidden" size={25} />
           </button>
           <div className="hidden lg:flex lg:items-center lg:space-x-6">

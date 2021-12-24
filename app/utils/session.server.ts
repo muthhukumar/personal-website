@@ -4,7 +4,7 @@ export const { commitSession, getSession, destroySession } = createCookieSession
   cookie: {
     name: '_session',
     sameSite: 'lax',
-    domain: '/',
+    path: '/',
     httpOnly: true,
     secrets: ['s3cr3t'],
     secure: process.env.NODE_ENV === 'production',

@@ -4,12 +4,13 @@
   --white: white;
   --transparent-white: hsla(0, 0%, 100%, 0.8);
   --transparent-black: rgba(0, 0, 0, 0.5);
+  --gray: #666;
 
   --background-color: var(--white);
   --font-color: var(--black);
   --border-color: #eaeaea;
   --link-color: #0070f3;
-  --light-font-color: #666;
+  --light-font-color: var(--gray);
   --transparent-background-color: var(--transparent-white);
 
   /* Inverted stuff */
