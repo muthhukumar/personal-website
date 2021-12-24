@@ -14,9 +14,9 @@ function SocialIcon({
 }) {
   return (
     <li
-      className={clsx('pr-4', {
+      className={clsx({
         'mr-0': isLast,
-        'mr-4 border-r border-color': !isLast,
+        'mr-4 pr-4 border-r border-color': !isLast,
       })}
     >
       <a href={href} target="_blank" rel="noreferrer" aria-label={ariaLabel}>

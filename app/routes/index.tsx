@@ -82,10 +82,10 @@ export default function Blog() {
   return (
     <div className="py-4 lg:py-8">
       <Container>
-        <div className="py-16 text-lg border-b border-color">
-          <p>Hey, I&apos;m</p>
+        <div className="py-8 text-lg border-b md:py-16 border-color">
+          <p className="mb-2">Hey, I&apos;m</p>
           <h1 className="text-2xl font-bold md:text-6xl">Muthukumar</h1>
-          <div className="flex flex-col mt-4 space-y-2 text-base md:text-lg">
+          <div className="flex flex-col mt-4 space-y-2 text-base light-font-color md:text-lg">
             <p>Welcome to my Personal website.</p>
             <p>
               I write <strong>code</strong>. I listen to <strong>music</strong>. Loves to read{' '}
@@ -171,7 +171,6 @@ export function CatchBoundary() {
   return <Four00 title="500" message={message} link="/blog" />
 }
 
-export function ErrorBoundary({ error }) {
-  console.log('error', error)
+export function ErrorBoundary() {
   return <Four00 title="500" message="Oopsies... Something went wrong." link="/" />
 }
