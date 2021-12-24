@@ -33,7 +33,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="border-t border-color">
-      <Container className="py-16">
+      <Container className="py-8 lg:py-16">
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="flex items-center">
             <p className="text-2xl font-bold font-color">Muthukumar</p>
