@@ -23,7 +23,7 @@ const socials = [
   },
   {
     Icon: IoLogoRss,
-    href: 'https://nullish.in/rss.xml',
+    href: '/rss.xml',
     isLast: true,
     alt: `Nullish.in rss feed link`,
     ariaLabel: 'Rss feed',
