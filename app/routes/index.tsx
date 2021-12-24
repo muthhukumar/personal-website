@@ -84,7 +84,7 @@ export default function Blog() {
       <Container>
         <div className="py-8 text-lg border-b md:py-16 border-color">
           <p className="mb-2">Hey, I&apos;m</p>
-          <h1 className="text-2xl font-bold md:text-6xl">Muthukumar</h1>
+          <h1 className="text-3xl font-bold md:text-6xl">Muthukumar</h1>
           <div className="flex flex-col mt-4 space-y-2 text-base light-font-color md:text-lg">
             <p>Welcome to my Personal website.</p>
             <p>
@@ -97,7 +97,7 @@ export default function Blog() {
               <Link to="/login" className="link-font-color">
                 easter eggs
               </Link>{' '}
-              I added in the website. If you find any of them, let me know on{' '}
+              in this website. If you find any of them, let me know on{' '}
               <a
                 href="https://rd.nullish.in/twitter"
                 target="_blank"
