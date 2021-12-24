@@ -5,7 +5,7 @@ import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: data && data.title ? `${data?.title} - Muthukumar` : 'Page Not Found | Muthukumar',
+    title: data && data.title ? `${data?.title} | Muthukumar` : 'Page Not Found | Muthukumar',
     description: data?.excerpt,
     'og:url': data?.url,
     'og:type': 'article',

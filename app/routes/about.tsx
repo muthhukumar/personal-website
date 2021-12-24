@@ -18,7 +18,7 @@ export default function About() {
           </p>
           <p>
             Currently I&apos;m in love with building website with Remix. And I also likes to try out
-            new technologies and build stuff with it for practice
+            new technologies and build stuff with it for practice.
           </p>
           <p>
             <a
