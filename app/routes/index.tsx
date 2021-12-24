@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { Link, useCatch, json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import type { MetaFunction } from 'remix'
+import { Link, useCatch } from 'remix'
 
-import { BlogPost, Four00, Container } from '~/components'
-import { getPosts, Post } from '~/utils/cms.server'
+import { LinkButton, Four00, Container } from '~/components'
 
 export const meta: MetaFunction = () => {
   return {
@@ -10,59 +9,59 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url)
-
-  const query = url.searchParams.get('q') ?? ''
-
-  const blogPosts = await getPosts(query)
-
-  if (blogPosts.length === 0) {
-    throw json({ message: 'No blogs found.' }, { status: 404 })
-  }
-
-  const filteredBlogPosts = !query
-    ? blogPosts
-    : blogPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase()))
-
-  return json(
-    { blogPosts: filteredBlogPosts },
-    {
-      headers: {
-        'Cache-Control': 'max-age=100, must-revalidate',
-      },
-    },
-  )
-}
-
 export default function Blog() {
-  const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-
   return (
-    <div className="p-8">
+    <div className="py-16">
       <Container>
-        <div className="py-8 text-lg">
+        <div className="text-lg">
           <p>Hey, I&apos;m</p>
-          <h1 className="mt-2 mb-4 text-6xl font-bold">Muthukumar</h1>
-          <p>
-            I write code. I listen to music. And I occasionally write on React, Javascript and other
-            stuff. Loves to read books.
-          </p>
+          <h1 className="text-2xl font-bold md:text-6xl">Muthukumar</h1>
+          <div className="flex flex-col mt-4 space-y-2 text-base md:text-lg">
+            <p>Welcome to my Personal website.</p>
+            <p>
+              I write <strong>code</strong>. I listen to <strong>music</strong>. Loves to read{' '}
+              <strong>books</strong>. And I occasionally write articles on React, Javascript and
+              other stuff.
+            </p>
+            <p>
+              Feel free to poke around. There are some{' '}
+              <Link to="/login" className="link-font-color">
+                easter eggs
+              </Link>{' '}
+              I added in the website. If you find any of them, let me know on{' '}
+              <a
+                href="https://rd.nullish.in/twitter"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="twitter"
+                className="link-font-color"
+              >
+                Twitter
+              </a>
+              .
+            </p>
+          </div>
         </div>
-        <h2 className="text-xl font-bold text-pink-500 uppercase md:py-4 md:text-xl">
-          Recently published
-        </h2>
-        <div className="w-full">
-          <div className="w-full">
-            {blogPosts.map((blogPost) => (
-              <BlogPost
-                publishedAt={blogPost.publishedAt}
-                key={blogPost.id}
-                slug={blogPost.slug}
-                title={blogPost.title}
-                excerpt={blogPost.excerpt}
-              />
-            ))}
+        <div className="mt-16">
+          <h2 className="text-xl font-bold md:text-center md:text-2xl">Website map</h2>
+          <div className="flex items-center justify-center mt-8">
+            <div className="flex flex-col justify-center w-full space-y-2 md:space-y-0 md:flex-row">
+              <LinkButton to="/blog" className="w-full md:rounded-r-none md:w-auto">
+                Read articles
+              </LinkButton>
+              <LinkButton
+                to="/about"
+                className="inline-block w-full md:rounded-l-none md:rounded-r-none md:w-auto"
+              >
+                More about me
+              </LinkButton>
+              <LinkButton
+                to="/changelog"
+                className="inline-block w-full md:rounded-l-none md:w-auto"
+              >
+                Website changelog
+              </LinkButton>
+            </div>
           </div>
         </div>
       </Container>
