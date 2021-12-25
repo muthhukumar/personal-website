@@ -25,7 +25,6 @@
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@remix-run/vercel": "^1.1.1",
-    "@tailwindcss/forms": "^0.4.0",
     "clsx": "^1.1.1",
     "graphql-request": "^3.7.0",
     "gray-matter": "^4.0.3",
@@ -44,6 +43,7 @@
     "xdm": "^3.3.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.4.0",
     "@remix-run/dev": "^1.1.1",
     "@tailwindcss/typography": "^0.5.0",
     "@types/lru-cache": "^5.1.1",
@@ -58,6 +58,7 @@
     "lint-staged": "^12.1.3",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
+    "postcss-import": "^14.0.2",
     "prettier": "^2.5.1",
     "tailwindcss": "^3.0.7",
     "typescript": "^4.5.4"

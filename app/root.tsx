@@ -184,7 +184,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="antialiased bg-color font-color">
+      <body className="mb-20 antialiased bg-color">
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
         <script
           async
