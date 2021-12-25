@@ -5,7 +5,7 @@ import { Container } from '~/components'
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Quotes',
+    title: 'About',
   }
 }
 
