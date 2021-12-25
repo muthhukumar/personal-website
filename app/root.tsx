@@ -17,7 +17,7 @@ import darkStylesUrl from '~/styles/dark.css'
 import { Navbar, Footer, Four00, Banner } from '~/components'
 import { getSession } from './utils/session.server'
 import { BannerType } from './components/banner'
-import * as gtag from '~/utils/etags'
+import * as gtag from '~/utils/gtags'
 
 export const meta: MetaFunction = () => {
   return {
@@ -55,27 +55,6 @@ export const links: LinksFunction = () => {
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: tailwindStylesUrl },
     { rel: 'stylesheet', href: darkStylesUrl, media: '(prefers-color-scheme: dark)' },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v7-latin-regular.eot',
-      type: 'font/eot',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v7-latin-regular.svg',
-      type: 'font/svg',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-v7-latin-regular.ttf',
-      type: 'font/ttf',
-      crossOrigin: 'anonymous',
-    },
     {
       rel: 'preload',
       as: 'font',
