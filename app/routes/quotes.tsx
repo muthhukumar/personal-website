@@ -1,8 +1,14 @@
-import { json, useLoaderData } from 'remix'
+import { json, MetaFunction, useLoaderData } from 'remix'
 import type { LoaderFunction } from 'remix'
 
 import { quotes, QuoteType } from '~/sources/quotes'
 import { Container, Quote } from '~/components'
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Quotes',
+  }
+}
 
 export const loader: LoaderFunction = () => {
   return json(quotes)

@@ -15,7 +15,7 @@ import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Blog | Muthukumar',
+    title: 'Blog',
   }
 }
 

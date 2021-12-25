@@ -1,4 +1,14 @@
+import { MetaFunction } from 'remix'
+
 import { Container } from '~/components'
+
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Quotes',
+  }
+}
+
 
 export default function About() {
   return (
