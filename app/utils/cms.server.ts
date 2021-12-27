@@ -1,5 +1,4 @@
-import { gql } from 'graphql-request'
-import { gqClient } from './graphql.server'
+import { gqRequest } from './graphql.server'
 
 export type Post = {
   title: string
@@ -20,7 +19,7 @@ export type Post = {
   userEmail: string
 }
 
-const PostsQuery = gql`
+const PostsQuery = `
   query MyQuery($search: String!) {
     posts(where: { _search: $search }) {
       id
@@ -32,7 +31,7 @@ const PostsQuery = gql`
   }
 `
 
-const PostQuery = gql`
+const PostQuery = `
   query GetPostBySlug($slug: String!) {
     post(where: { slug: $slug }) {
       title
@@ -50,7 +49,7 @@ const PostQuery = gql`
 
 export const getPosts = async (query?: string) => {
   try {
-    const posts = await gqClient.request(PostsQuery, { search: query ?? '' })
+    const posts = await gqRequest(PostsQuery, { search: query ?? '' })
 
     if (!posts) {
       return []
@@ -63,7 +62,8 @@ export const getPosts = async (query?: string) => {
 
 export const getPost = async (slug: Post['slug']) => {
   try {
-    const post = await gqClient.request(PostQuery, { slug })
+    const post = await gqRequest(PostQuery, { slug })
+
     if (!post) {
       return null
     }
