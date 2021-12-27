@@ -4,14 +4,17 @@ import { Markdown, GoBack, Four00, Date, Container } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
+  const postData = data as Awaited<ReturnType<typeof getPost>>
   return {
-    title: data && data.title ? `${data?.title} | Muthukumar` : 'Page Not Found | Muthukumar',
-    description: data?.excerpt,
+    title: postData?.seo.title ?? 'Page Not Found | Muthukumar',
+    description: postData?.seo.description ?? '',
+    keywords: postData?.seo.keywords ?? '',
+    image: postData?.seo.image.url ?? '',
     'og:url': data?.url,
     'og:type': 'article',
-    'og:title': data?.title,
-    'og:description': data?.excerpt,
-    'og:image': data?.ogImage,
+    'og:title': postData?.seo.title ?? 'Page Not Found | Muthukumar',
+    'og:description': postData?.seo.description ?? '',
+    'og:image': postData?.seo.image.url ?? '',
   }
 }
 
@@ -29,11 +32,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json(
     {
       url,
-      html: postData.content.html,
-      title: postData.title,
-      ogImage: postData.coverImage.url,
-      date: postData.publishedAt,
-      description: postData.excerpt,
+      ...postData,
     },
     {
       headers: {
@@ -44,22 +43,34 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 }
 
 export default function BlogSlug() {
-  const { html, title, date } = useLoaderData()
+  const postData = useLoaderData<Awaited<ReturnType<typeof getPost>>>()
+
+  if (!postData) {
+    throw new Error('Post data not found...!')
+  }
 
   return (
     <div>
       <div className="pt-4 pb-4 border-b border-color md:pb-10">
         <Container className="flex flex-col items-center justify-center text-center">
           <GoBack link="/blog" />
-          <h1 className="mt-4 mb-4 text-2xl font-bold md:mt-6 md:text-3xl">{title}</h1>
-          <Date date={date} className="text-sm light-font-color md:text-base" />
+          <h1 className="mt-4 mb-4 text-2xl font-bold md:mt-6 md:text-3xl">{postData.title}</h1>
+          <Date date={postData.publishedAt} className="text-sm light-font-color md:text-base" />
           <div className="flex items-center p-1 mt-4 md:mt-8">
             <div className="w-8 h-8 overflow-hidden rounded-full">
-              <img src="/images/profile.jpg" className="object-cover w-full h-full rounded-full" />
+              <img
+                src="/images/profile.jpg"
+                className="object-cover w-full h-full rounded-full"
+                alt="Muthukumar"
+              />
             </div>
             <div className="p-1 text-xs text-left">
               <h2>Muthukumar</h2>
-              <a href="https://rd.nullish.in/twitter" className="text-blue-600">
+              <a
+                href="https://rd.nullish.in/twitter"
+                className="text-blue-600"
+                aria-label="Muthukumar twitter link"
+              >
                 @am_muthukumar
               </a>
             </div>
@@ -67,7 +78,7 @@ export default function BlogSlug() {
         </Container>
       </div>
       <Markdown className="max-w-5xl">
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />
       </Markdown>
     </div>
   )
