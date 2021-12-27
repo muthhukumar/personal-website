@@ -94,7 +94,7 @@ export default function Footer() {
                 <a
                   aria-label={link.ariaLabel}
                   key={link.link}
-                  className="light-font-color"
+                  className="text-sm light-font-color"
                   href={link.link}
                   target="_blank"
                   rel="noreferrer"
@@ -108,14 +108,14 @@ export default function Footer() {
                 to={link.link}
                 aria-label={link.ariaLabel}
                 key={link.link}
-                className="light-font-color"
+                className="text-sm light-font-color"
               >
                 {link.name}
               </Link>
             )
           })}
         </nav>
-        <div className="flex flex-col items-center mt-12 md:items-start">
+        <div className="flex flex-col items-center mt-8 md:items-start">
           <Link to="/" className="flex items-center">
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
