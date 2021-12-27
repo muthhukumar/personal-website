@@ -1,6 +1,6 @@
 :root {
   --gray: #888;
-  --background-color: var(--black);
+  --background-color: var(--matt-black);
   --font-color: var(--white);
   --border-color: #333;
   --link-color: #3291ff;
@@ -10,5 +10,5 @@
 
   /* Inverted stuff */
   --background-color-inverted: var(--white);
-  --font-color-inverted: var(--black);
+  --font-color-inverted: var(--matt-black);
 }
