@@ -7,8 +7,11 @@ import {
   useCatch,
   useLoaderData,
   useLocation,
+  useTransition,
 } from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
+import NProgress from 'nprogress'
+import _ from 'lodash'
 
 import appleTouchFavIcon from '../public/favicon/dark/apple-touch-icon.png'
 import lightAppleTouchFavIcon from '../public/favicon/light/apple-touch-icon.png'
@@ -22,6 +25,7 @@ import smallLightFavIcon from '../public/favicon/light/favicon-16x16.png'
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
+import nprogressStylesUrl from '~/styles/nprogress.css'
 
 import { Navbar, Footer, Four00, Banner } from '~/components'
 import { getSession } from './utils/session.server'
@@ -55,6 +59,7 @@ export const meta: MetaFunction = () => {
       'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
     viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
     keywords: 'Learn Javascript, Learn Typescript and Learn CSS, Clean code',
+    robots: 'index, follow',
   }
 }
 
@@ -63,6 +68,7 @@ export const links: LinksFunction = () => {
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: tailwindStylesUrl },
     { rel: 'stylesheet', href: darkStylesUrl, media: '(prefers-color-scheme: dark)' },
+    { rel: 'stylesheet', href: nprogressStylesUrl },
     {
       rel: 'preload',
       as: 'font',
@@ -148,6 +154,17 @@ export default function App() {
   const { banner } = useLoaderData<{ banner: BannerType }>()
 
   const location = useLocation()
+
+  const transition = useTransition()
+
+  React.useEffect(() => {
+    const start = _.debounce(NProgress.start, 500)
+    if (transition.state === 'loading') {
+      start()
+    } else if (transition.state === 'idle') {
+      NProgress.done()
+    }
+  }, [transition.state])
 
   React.useEffect(() => {
     gtag.pageview(location.pathname)
