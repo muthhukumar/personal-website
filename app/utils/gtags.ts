@@ -1,4 +1,4 @@
-export const GA_TRACKING_ID = 'G-QNMM2GSDYJ'
+export const GA_TRACKING_ID = process.env.NODE_ENV === 'production' ? 'G-QNMM2GSDYJ' : ''
 
 declare global {
   interface Window {
