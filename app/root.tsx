@@ -10,6 +10,15 @@ import {
 } from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
+import appleTouchFavIcon from '../public/favicon/dark/apple-touch-icon.png'
+import lightAppleTouchFavIcon from '../public/favicon/light/apple-touch-icon.png'
+
+import bigDarkFavIcon from '../public/favicon/dark/favicon-32x32.png'
+import smallDarkFavIcon from '../public/favicon/dark/favicon-16x16.png'
+
+import bigLightFavIcon from '../public/favicon/light/favicon-32x32.png'
+import smallLightFavIcon from '../public/favicon/light/favicon-16x16.png'
+
 import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
@@ -32,7 +41,6 @@ export const meta: MetaFunction = () => {
     'og:locale': 'en',
     'og:site_name': 'Muthukumar',
     'og:type': 'website',
-    'theme-color': '#000',
     'twitter:card': 'summary_large_image',
     'twitter:creator': '@am_muthukumar',
     'twitter:site': '@am_muthukumar',
@@ -73,21 +81,21 @@ export const links: LinksFunction = () => {
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      href: '/favicon/dark/apple-touch-icon.png',
+      href: appleTouchFavIcon,
       media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      href: '/favicon/dark/favicon-32x32.png',
+      href: bigDarkFavIcon,
       media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      href: '/favicon/dark/favicon-16x16.png',
+      href: smallDarkFavIcon,
       media: '(prefers-color-scheme: dark)',
     },
     {
@@ -99,21 +107,21 @@ export const links: LinksFunction = () => {
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      href: '/favicon/light/apple-touch-icon.png',
+      href: lightAppleTouchFavIcon,
       media: '(prefers-color-scheme: light)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      href: '/favicon/light/favicon-32x32.png',
+      href: bigLightFavIcon,
       media: '(prefers-color-scheme: light)',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      href: '/favicon/light/favicon-16x16.png',
+      href: smallLightFavIcon,
       media: '(prefers-color-scheme: light)',
     },
     {
@@ -160,6 +168,8 @@ function Document({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
         <Meta />
         <Links />
       </head>
