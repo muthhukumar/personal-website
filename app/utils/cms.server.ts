@@ -2,21 +2,24 @@ import { gqRequest } from './graphql.server'
 
 export type Post = {
   title: string
-  excerpt: string
-  id: string
-  slug: string
-  author: string
-  coverImage: {
-    url: string
-  }
-  categories: string[]
-  publishedAt: string
   content: {
     html: string
   }
-  hits: number
-  isDraft: boolean
-  userEmail: string
+  coverImage: {
+    url: string
+  }
+  excerpt: string
+  publishedAt: string
+  lastUpdatedAt: string
+  seo: {
+    title: string
+    keywords: string
+    image: {
+      url: string
+    }
+    description: string
+  }
+  slug: string
 }
 
 const PostsQuery = `
@@ -26,25 +29,34 @@ const PostsQuery = `
       slug
       title
       publishedAt
+      lastUpdatedAt
       excerpt
     }
   }
 `
 
 const PostQuery = `
-  query GetPostBySlug($slug: String!) {
-    post(where: { slug: $slug }) {
+query GetPostBySlug($slug: String!) {
+  post(where: {slug: $slug}) {
+    title
+    content {
+      html
+    }
+    coverImage {
+      url
+    }
+    excerpt
+    publishedAt
+    seo {
       title
-      content {
-        html
-      }
-      coverImage {
+      keywords
+      image {
         url
       }
-      excerpt
-      publishedAt
+      description
     }
   }
+}
 `
 
 export const getPosts = async (query?: string) => {
