@@ -1,56 +1,67 @@
-import { gql } from 'graphql-request'
-import { gqClient } from './graphql.server'
+import { gqRequest } from './graphql.server'
 
 export type Post = {
   title: string
-  excerpt: string
-  id: string
-  slug: string
-  author: string
-  coverImage: {
-    url: string
-  }
-  categories: string[]
-  publishedAt: string
   content: {
     html: string
   }
-  hits: number
-  isDraft: boolean
-  userEmail: string
+  coverImage: {
+    url: string
+  }
+  excerpt: string
+  publishedAt: string
+  lastUpdatedAt: string
+  seo: {
+    title: string
+    keywords: string
+    image: {
+      url: string
+    }
+    description: string
+  }
+  slug: string
 }
 
-const PostsQuery = gql`
+const PostsQuery = `
   query MyQuery($search: String!) {
     posts(where: { _search: $search }) {
       id
       slug
       title
       publishedAt
+      lastUpdatedAt
       excerpt
     }
   }
 `
 
-const PostQuery = gql`
-  query GetPostBySlug($slug: String!) {
-    post(where: { slug: $slug }) {
+const PostQuery = `
+query GetPostBySlug($slug: String!) {
+  post(where: {slug: $slug}) {
+    title
+    content {
+      html
+    }
+    coverImage {
+      url
+    }
+    excerpt
+    publishedAt
+    seo {
       title
-      content {
-        html
-      }
-      coverImage {
+      keywords
+      image {
         url
       }
-      excerpt
-      publishedAt
+      description
     }
   }
+}
 `
 
 export const getPosts = async (query?: string) => {
   try {
-    const posts = await gqClient.request(PostsQuery, { search: query ?? '' })
+    const posts = await gqRequest(PostsQuery, { search: query ?? '' })
 
     if (!posts) {
       return []
@@ -63,7 +74,8 @@ export const getPosts = async (query?: string) => {
 
 export const getPost = async (slug: Post['slug']) => {
   try {
-    const post = await gqClient.request(PostQuery, { slug })
+    const post = await gqRequest(PostQuery, { slug })
+
     if (!post) {
       return null
     }
