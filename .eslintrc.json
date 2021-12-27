@@ -1,13 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "cypress"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:cypress/recommended"
   ],
   "env": {
+    "cypress/globals": true,
     "es6": true,
     "browser": true,
     "jest": true,
