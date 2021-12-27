@@ -2,13 +2,11 @@ import { MetaFunction } from 'remix'
 
 import { Container } from '~/components'
 
-
 export const meta: MetaFunction = () => {
   return {
     title: 'About',
   }
 }
-
 
 export default function About() {
   return (
@@ -19,6 +17,7 @@ export default function About() {
           width={200}
           height={200}
           className="mx-auto mb-8 rounded-full"
+          alt="Muthukumar"
         />
         <div className="flex flex-col max-w-3xl mx-auto space-y-4 text-base md:text-lg">
           <p>
