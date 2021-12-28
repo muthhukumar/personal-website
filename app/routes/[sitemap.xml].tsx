@@ -8,7 +8,7 @@ const getSiteMapText = async () => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.nullish.in/</loc>
-    <lastmod>2021-12-24</lastmod>
+    <lastmod>2021-12-28</lastmod>
   </url>
   <url>
     <loc>https://www.nullish.in/changelog</loc>
@@ -16,19 +16,15 @@ const getSiteMapText = async () => {
   </url>
   <url>
     <loc>https://www.nullish.in/quotes</loc>
-    <lastmod>2021-12-24</lastmod>
+    <lastmod>2021-12-28</lastmod>
   </url>
   <url>
     <loc>https://www.nullish.in/blog</loc>
-    <lastmod>2021-12-24</lastmod>
-  </url>
-  <url>
-    <loc>https://www.nullish.in/</loc>
-    <lastmod>2021-12-24</lastmod>
+    <lastmod>2021-12-28</lastmod>
   </url>
   <url>
     <loc>https://www.nullish.in/about</loc>
-    <lastmod>2021-12-24</lastmod>
+    <lastmod>2021-12-28</lastmod>
   </url>
   ${blogs.map(
     (blog) => `
