@@ -2,8 +2,8 @@ import {
   ActionFunction,
   Form,
   json,
+  LinksFunction,
   LoaderFunction,
-  MetaFunction,
   redirect,
   useLoaderData,
   useSubmit,
@@ -26,10 +26,13 @@ type LoaderData = {
   quote: Awaited<ReturnType<typeof getQuote>>
 }
 
-export const meta: MetaFunction = () => {
-  return {
-    title: 'Muthukumar',
-  }
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in',
+    },
+  ]
 }
 
 export const action: ActionFunction = async ({ request }) => {
