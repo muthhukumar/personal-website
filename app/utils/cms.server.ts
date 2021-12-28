@@ -1,6 +1,7 @@
 import { gqRequest } from './graphql.server'
 
 export type Post = {
+  id: string
   title: string
   content: {
     html: string

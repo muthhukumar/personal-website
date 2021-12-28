@@ -1,21 +1,35 @@
-import { json, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
+import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
 import { Markdown, GoBack, Four00, Date, Container } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
   const postData = data as Awaited<ReturnType<typeof getPost>>
+
+  const title = postData?.seo.title ?? 'Page Not Found | Muthukumar'
   return {
-    title: postData?.seo.title ?? 'Page Not Found | Muthukumar',
+    'apple-mobile-web-app-title': title,
+    title,
     description: postData?.seo.description ?? '',
     keywords: postData?.seo.keywords ?? '',
     image: postData?.seo.image.url ?? '',
+    pagename: title,
     'og:url': data?.url,
     'og:type': 'article',
-    'og:title': postData?.seo.title ?? 'Page Not Found | Muthukumar',
+    'og:title': title,
     'og:description': postData?.seo.description ?? '',
     'og:image': postData?.seo.image.url ?? '',
+    robots: 'index, follow',
   }
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in/blog',
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {

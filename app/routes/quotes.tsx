@@ -1,4 +1,4 @@
-import { json, MetaFunction, useLoaderData } from 'remix'
+import { json, LinksFunction, MetaFunction, useLoaderData } from 'remix'
 import type { LoaderFunction } from 'remix'
 
 import { quotes, QuoteType } from '~/sources/quotes'
@@ -6,8 +6,22 @@ import { Container, Quote } from '~/components'
 
 export const meta: MetaFunction = () => {
   return {
+    'apple-mobile-web-app-title': 'Quotes',
     title: 'Quotes',
+    description: `List of Muthukumar's favorite Quotes I found on Internet and on when reading books and watching Youtube videos`,
+    pagename: 'Quotes',
+    robots: 'index, follow',
+    image: '/images/og.jpg',
   }
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in/quotes',
+    },
+  ]
 }
 
 export const loader: LoaderFunction = () => {

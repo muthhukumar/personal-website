@@ -1,14 +1,41 @@
 ---
 meta:
   title: Changelog
-  description: In this page, I maintain the change log of the website to keep track of the progress and for others to see the progress of my site
+  description: The history of continuous stream of changes made to my personal website.
+  robots: 'index, follow'
+  pagename: 'Changelog'
+  image: '/images/og.jpg'
+  apple-mobile-web-app-title: Changelog,
+
 headers:
   Cache-Control: max-age=86400000, must-revalidate
 ---
 
 import { Date } from '~/components'
 
-### <Date date="2021-12-26" className="text-md md:text-xl" />
+### <Date date="2021-12-28" className="text-md md:text-xl" />
+
+#### Added
+
+- Added seo stuff(description, robots, pageame, image, apple-mobile-web-app-title) to the changelog page
+- Added seo stuff(description, robots, pageame, image, apple-mobile-web-app-title and canonical link) to the about page
+- Added seo stuff(description, robots, pageame, image, apple-mobile-web-app-title) to the blog page
+- Added seo stuff(canonical link) to the blog post page
+- Added seo stuff(description, robots, pageame, image, apple-mobile-web-app-title) to the quotes page
+- Added `X-Robots-Tag: no-index` header to the 'rss.xml`and`sitemap.xml` file
+
+#### Changed
+
+- Moved the canonical url from the root links to index route.
+
+#### Removed
+
+- Removed `rss.xml` link from the sitemap file
+- Removed the meta function from index route
+
+---
+
+### <Date date="2021-12-27" className="text-md md:text-xl" />
 
 #### Added
 
@@ -20,6 +47,8 @@ import { Date } from '~/components'
 - Now, Google analytics will not track in development mode
 - Updated blog page to use the seo stuff.
 - Updated the `sitemap.xml` file to include all the blog links
+- Changed the bg color to matt black
+- Updated some type stuff.
 
 ---
 
