@@ -7,6 +7,7 @@ import {
   MetaFunction,
   useLoaderData,
   useSearchParams,
+  LinksFunction,
 } from 'remix'
 import { IoIosSearch } from 'react-icons/io'
 
@@ -15,8 +16,24 @@ import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
   return {
+    'apple-mobile-web-app-title': 'Blog',
     title: 'Blog',
+    description:
+      'Tutorials for developers. Focus on Javascript, Typescript, React and other web development topics',
+    pagename: 'Blog',
+    image: '/images/og.jpg',
+    robots: 'index, follow',
+    // TODO: Og stuff are missing
   }
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in/blog',
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -74,7 +91,7 @@ function Layout({ children, query = '' }: { children: React.ReactNode; query?: s
       <div className="pb-6 border-b border-color">
         <Container>
           <Form method="get">
-            <h2 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h2>
+            <h1 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h1>
             <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
               <IoIosSearch className="ml-2 text-gray-600" size={20} />
               <input
