@@ -1,11 +1,26 @@
-import { MetaFunction } from 'remix'
+import { LinksFunction, MetaFunction } from 'remix'
 
 import { Container } from '~/components'
 
 export const meta: MetaFunction = () => {
   return {
+    'apple-mobile-web-app-title': 'About',
     title: 'About',
+    description:
+      'Muthukumar is a full stack developer, living in Tamil Nadu, India. He write code, listen to music and loves to read books. He occasionally write on React, Javascript and in other web development topics',
+    pagename: 'About',
+    robots: 'index, follow',
+    image: '/images/og.jpg',
   }
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in/about',
+    },
+  ]
 }
 
 export default function About() {

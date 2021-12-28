@@ -39,12 +39,12 @@ export const meta: MetaFunction = () => {
     image: '/images/og.jpg',
     'og:image': '/images/og.jpg',
     'og:locale': 'en',
-    'og:site_name': 'Muthukumar',
-    'og:type': 'website',
+    'og:site_name': 'Nullish.in',
     'twitter:card': 'summary_large_image',
     'twitter:creator': '@am_muthukumar',
     'twitter:site': '@am_muthukumar',
     'X-UA-Compatible': 'IE=edge,chrome=1',
+    'og:type': 'website',
     author: 'Muthukumar',
     HandheldFriendly: 'True',
     language: 'en',
@@ -54,7 +54,7 @@ export const meta: MetaFunction = () => {
     description:
       'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
     viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
-    keywords: 'Learn Javascript, Learn Typescript and Learn CSS, Clean code',
+    keywords: 'Nullish.in, Learn Javascript, Learn Typescript and Learn CSS, Clean code',
     robots: 'index, follow',
   }
 }
@@ -129,10 +129,6 @@ export const links: LinksFunction = () => {
       rel: 'manifest',
       href: '/favicon/light/site.webmanifest',
       media: '(prefers-color-scheme: light)',
-    },
-    {
-      rel: 'canonical',
-      href: 'https://www.nullish.in',
     },
   ]
 }
