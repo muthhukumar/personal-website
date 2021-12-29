@@ -12,7 +12,7 @@ const getSiteMapText = async () => {
   </url>
   <url>
     <loc>https://www.nullish.in/changelog</loc>
-    <lastmod>2021-12-28</lastmod>
+    <lastmod>2021-12-29</lastmod>
   </url>
   <url>
     <loc>https://www.nullish.in/quotes</loc>
