@@ -14,6 +14,8 @@ export default function handleRequest(
   responseHeaders.set('X-Content-Type-Options', 'nosniff')
   responseHeaders.set('X-Frame-Options', 'DENY')
   responseHeaders.set('Cross-Origin-Resource-Policy', 'same-origin')
+  responseHeaders.set('X-XSS-Protection', '1; mode=block')
+  responseHeaders.set('Strict-Transport-Security', 'max-age=31536000')
 
   return new Response('<!DOCTYPE html>' + markup, {
     status: responseStatusCode,
