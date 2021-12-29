@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /login
 
 Sitemap: https://nullish.in/sitemap.xml
