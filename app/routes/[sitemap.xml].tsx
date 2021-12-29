@@ -45,6 +45,7 @@ export const loader: LoaderFunction = async () => {
       'Content-Type': 'application/xml',
       'X-Robots-Tag': 'no-index',
       'Content-Length': String(Buffer.byteLength(siteMap)),
+      // 'Cross-Origin-Resource-Policy': 'same-origin'
     },
   })
 }
