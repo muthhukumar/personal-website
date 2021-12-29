@@ -54,7 +54,6 @@ export const meta: MetaFunction = () => {
     description:
       'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
     viewport: 'width=device-width, initial-scale=1',
-    keywords: 'Nullish.in, Learn Javascript, Learn Typescript and Learn CSS, Clean code',
     robots: 'index, follow',
   }
 }

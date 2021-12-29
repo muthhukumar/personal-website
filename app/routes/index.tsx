@@ -4,6 +4,7 @@ import {
   json,
   LinksFunction,
   LoaderFunction,
+  MetaFunction,
   redirect,
   useLoaderData,
   useSubmit,
@@ -24,6 +25,12 @@ export type Tasks = {
 type LoaderData = {
   tasks: Tasks
   quote: Awaited<ReturnType<typeof getQuote>>
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    keywords: 'Nullish.in, Learn Javascript, Learn Typescript and Learn CSS, Clean code',
+  }
 }
 
 export const links: LinksFunction = () => {
