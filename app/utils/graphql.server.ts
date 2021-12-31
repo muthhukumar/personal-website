@@ -8,7 +8,7 @@ const gqRequest = async (query: string, variables: Record<string, unknown>) => {
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${authorizationToken}`,
+      'graphcdn-token': `${authorizationToken}`,
     },
     body: JSON.stringify({ query, variables }),
   })
