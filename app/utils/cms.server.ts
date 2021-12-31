@@ -24,7 +24,7 @@ export type Post = {
 }
 
 const PostsQuery = `
-  query MyQuery($search: String!) {
+  query MyQuery($search: String! = "") {
     posts(where: { _search: $search }) {
       id
       slug
