@@ -37,7 +37,7 @@ const PostsQuery = `
 `
 
 const PostQuery = `
-query GetPostBySlug($slug: String!) {
+query GetPostBySlug($slug: String! = "") {
   post(where: {slug: $slug}) {
     title
     content {
