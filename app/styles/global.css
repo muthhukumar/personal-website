@@ -28,3 +28,18 @@
 .prose pre {
   background-color: var(--pre-color);
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  max-height: 100vh;
+}
+
+.text-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

@@ -1,13 +1,5 @@
 import * as React from 'react'
-import {
-  Scripts,
-  json,
-  LinksFunction,
-  LoaderFunction,
-  useCatch,
-  useLoaderData,
-  useLocation,
-} from 'remix'
+import { Scripts, LinksFunction, useCatch, useLocation } from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
 import appleTouchFavIcon from '../public/favicon/dark/apple-touch-icon.png'
@@ -23,9 +15,7 @@ import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
 
-import { Navbar, Footer, Four00, Banner } from '~/components'
-import { getSession } from './utils/session.server'
-import { BannerType } from './components/banner'
+import { Sidebar, Four00 } from '~/components'
 import * as gtag from '~/utils/gtags'
 
 export const meta: MetaFunction = () => {
@@ -132,17 +122,7 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'))
-
-  const banner = session.get('banner') ?? { title: '', link: '', show: false }
-
-  return json({ banner })
-}
-
 export default function App() {
-  const { banner } = useLoaderData<{ banner: BannerType }>()
-
   const location = useLocation()
 
   React.useEffect(() => {
@@ -151,7 +131,7 @@ export default function App() {
 
   return (
     <Document>
-      <Layout banner={banner}>
+      <Layout>
         <Outlet />
       </Layout>
     </Document>
@@ -195,13 +175,13 @@ function Document({ children }: { children: React.ReactNode }) {
   )
 }
 
-function Layout({ children, banner }: { banner?: BannerType; children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      {banner && banner.show && <Banner {...banner} />}
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+    <div className="flex w-full h-screen">
+      {/* <Navbar /> */}
+      <Sidebar />
+      <main className="w-full max-h-full overflow-y-auto">{children}</main>
+      {/* <Footer /> */}
     </div>
   )
 }
