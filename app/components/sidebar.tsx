@@ -1,0 +1,101 @@
+import type { IconType } from 'react-icons'
+
+import clsx from 'clsx'
+
+import { HiHome } from 'react-icons/hi'
+import { RiQuillPenFill } from 'react-icons/ri'
+import { BsFillBookmarksFill } from 'react-icons/bs'
+import { GrStackOverflow } from 'react-icons/gr'
+import { BsGithub } from 'react-icons/bs'
+import { SiTwitter } from 'react-icons/si'
+import { IoLogoRss } from 'react-icons/io'
+import { HiExternalLink } from 'react-icons/hi'
+import { Link, useLocation } from 'remix'
+
+const socials = [
+  {
+    Icon: BsGithub,
+    href: 'https://rd.nullish.in/github',
+    isLast: false,
+    alt: `Muthukumar's github profile link`,
+    ariaLabel: 'Github',
+  },
+  {
+    Icon: SiTwitter,
+    href: 'https://rd.nullish.in/twitter',
+    isLast: false,
+    alt: `Muthukumar's twitter profile link`,
+    ariaLabel: 'Twitter',
+  },
+  {
+    Icon: IoLogoRss,
+    href: '/rss.xml',
+    isLast: true,
+    alt: `Nullish.in rss feed link`,
+    ariaLabel: 'Rss feed',
+  },
+]
+
+function NavLink({
+  Icon,
+  href,
+  pathname,
+  external,
+  ...delegated
+}: {
+  external?: boolean
+  Icon: IconType
+  href: string
+  pathname: string
+}) {
+  const location = useLocation()
+
+  const currentPathname = location.pathname
+
+  const highlight = href === currentPathname
+
+  const Component = external
+    ? (props: { href: string; className: string }) => (
+        <a {...props} target="_blank" rel="noreferrer" />
+      )
+    : Link
+
+  return (
+    <Component
+      to={href}
+      href={href}
+      className={clsx('font-semibold flex items-center p-2 rounded-md', {
+        'bg-[color:var(--gray)]': highlight,
+        'hover:bg-[color:var(--gray)]': !highlight,
+      })}
+      {...delegated}
+    >
+      <Icon size={15} />
+      <p className="ml-3">{pathname}</p>
+      {external ? <HiExternalLink className="ml-auto" size={15} /> : null}
+    </Component>
+  )
+}
+
+export default function Sidebar() {
+  return (
+    <div className="flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] ">
+      <h2 className="font-bold">Muthukumar</h2>
+      <div className="flex flex-col gap-1">
+        <NavLink Icon={HiHome} href="/" pathname="Home" />
+        <NavLink Icon={RiQuillPenFill} href="/blog" pathname="Writings" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <h2 className="px-2 mb-4 text-gray-400">Me</h2>
+        <NavLink Icon={BsFillBookmarksFill} href="/bookmarks" pathname="Bookmarks" />
+        <NavLink Icon={GrStackOverflow} href="/stacks" pathname="Stack" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <h2 className="px-2 mb-4 text-gray-400">Online</h2>
+        {socials.map((props) => (
+          <NavLink pathname={props.ariaLabel} {...props} key={props.href} external />
+        ))}
+      </div>
+    </div>
+  )
+}

@@ -1,6 +1,6 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import { Markdown, GoBack, Four00, Date, Container } from '~/components'
+import { Markdown, Four00 } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
@@ -64,32 +64,9 @@ export default function BlogSlug() {
   }
 
   return (
-    <div>
-      <div className="pt-4 pb-4 border-b border-color md:pb-10">
-        <Container className="flex flex-col items-center justify-center text-center">
-          <GoBack link="/blog" />
-          <h1 className="mt-4 mb-4 text-2xl font-bold md:mt-6 md:text-3xl">{postData.title}</h1>
-          <Date date={postData.publishedAt} className="text-sm light-font-color md:text-base" />
-          <div className="flex items-center p-1 mt-4 md:mt-8">
-            <div className="w-8 h-8 overflow-hidden rounded-full">
-              <img
-                src="/images/profile.jpg"
-                className="object-cover w-full h-full rounded-full"
-                alt="Muthukumar"
-              />
-            </div>
-            <div className="p-1 text-xs text-left">
-              <h2>Muthukumar</h2>
-              <a
-                href="https://rd.nullish.in/twitter"
-                className="text-blue-600"
-                aria-label="Muthukumar twitter link"
-              >
-                @am_muthukumar
-              </a>
-            </div>
-          </div>
-        </Container>
+    <div className="min-h-screen">
+      <div className="sticky top-0 p-4 border-b navbar-backdrop-filter border-color">
+        <h1 className="font-bold">{postData.title}</h1>
       </div>
       <Markdown className="max-w-5xl">
         <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />

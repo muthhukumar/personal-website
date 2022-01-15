@@ -1,17 +1,15 @@
 import * as React from 'react'
 import {
-  Form,
   useCatch,
   json,
   LoaderFunction,
   MetaFunction,
   useLoaderData,
-  useSearchParams,
   LinksFunction,
+  Outlet,
 } from 'remix'
-import { IoIosSearch } from 'react-icons/io'
 
-import { BlogPost, Four00, Container } from '~/components'
+import { BlogPost, Four00 } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -63,33 +61,16 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-  const [searchParams] = useSearchParams()
+  // const [searchParams] = useSearchParams()
 
-  const query = searchParams.get('q')
+  // const query = searchParams.get('q')
   return (
-    <Layout query={query}>
-      <Container>
-        <div className="py-2 md:py-6">
-          {blogPosts.map((blogPost) => (
-            <BlogPost
-              publishedAt={blogPost.publishedAt}
-              key={blogPost.id}
-              slug={blogPost.slug}
-              title={blogPost.title}
-              excerpt={blogPost.excerpt}
-            />
-          ))}
+    <div className="flex">
+      <div className="overflow-y-auto max-h-screen max-w-[24rem] border-r border-color">
+        <div className="sticky top-0 p-6 py-4 bg-color">
+          <h2 className="font-bold">Writings</h2>
         </div>
-      </Container>
-    </Layout>
-  )
-}
-
-function Layout({ children, query = '' }: { children: React.ReactNode; query?: string | null }) {
-  return (
-    <>
-      <div className="pb-6 border-b border-color">
-        <Container>
+        {/* <Container>
           <Form method="get">
             <h1 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h1>
             <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
@@ -103,10 +84,32 @@ function Layout({ children, query = '' }: { children: React.ReactNode; query?: s
               />
             </div>
           </Form>
-        </Container>
+        </Container> */}
+        <div className="p-2 text-sm">
+          {blogPosts.map((blogPost) => (
+            <BlogPost
+              publishedAt={blogPost.publishedAt}
+              key={blogPost.id}
+              slug={blogPost.slug}
+              title={blogPost.title}
+              excerpt={blogPost.excerpt}
+            />
+          ))}
+          {blogPosts.map((blogPost) => (
+            <BlogPost
+              publishedAt={blogPost.publishedAt}
+              key={blogPost.id}
+              slug={blogPost.slug}
+              title={blogPost.title}
+              excerpt={blogPost.excerpt}
+            />
+          ))}
+        </div>
       </div>
-      {children}
-    </>
+      <div className="w-full max-h-screen overflow-y-auto">
+        <Outlet />
+      </div>
+    </div>
   )
 }
 
