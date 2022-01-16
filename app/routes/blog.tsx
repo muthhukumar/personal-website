@@ -34,12 +34,12 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, context }) => {
   const url = new URL(request.url)
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getPosts(query)
+  const blogPosts = await getPosts(query, context)
 
   if (blogPosts.length === 0) {
     throw json({ message: 'No blogs found.' }, { status: 404 })
@@ -86,15 +86,6 @@ export default function Blog() {
           </Form>
         </Container> */}
         <div className="p-2 text-sm">
-          {blogPosts.map((blogPost) => (
-            <BlogPost
-              publishedAt={blogPost.publishedAt}
-              key={blogPost.id}
-              slug={blogPost.slug}
-              title={blogPost.title}
-              excerpt={blogPost.excerpt}
-            />
-          ))}
           {blogPosts.map((blogPost) => (
             <BlogPost
               publishedAt={blogPost.publishedAt}

@@ -18,21 +18,21 @@ const socials = [
     href: 'https://rd.nullish.in/github',
     isLast: false,
     alt: `Muthukumar's github profile link`,
-    ariaLabel: 'Github',
+    'aria-label': 'Github',
   },
   {
     Icon: SiTwitter,
     href: 'https://rd.nullish.in/twitter',
     isLast: false,
     alt: `Muthukumar's twitter profile link`,
-    ariaLabel: 'Twitter',
+    'aria-label': 'Twitter',
   },
   {
     Icon: IoLogoRss,
     href: '/rss.xml',
     isLast: true,
     alt: `Nullish.in rss feed link`,
-    ariaLabel: 'Rss feed',
+    'aria-label': 'Rss feed',
   },
 ]
 
@@ -93,7 +93,7 @@ export default function Sidebar() {
       <div className="flex flex-col gap-1">
         <h2 className="px-2 mb-4 text-gray-400">Online</h2>
         {socials.map((props) => (
-          <NavLink pathname={props.ariaLabel} {...props} key={props.href} external />
+          <NavLink pathname={props['aria-label']} {...props} key={props.href} external />
         ))}
       </div>
     </div>

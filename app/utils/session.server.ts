@@ -1,14 +1,12 @@
 import { createCookieSessionStorage } from 'remix'
 
-import { getRequiredServerEnvVar } from './env.server'
-
 export const { commitSession, getSession, destroySession } = createCookieSessionStorage({
   cookie: {
     name: '_session',
     sameSite: 'lax',
     path: '/',
     httpOnly: true,
-    secrets: [getRequiredServerEnvVar('COOKIE_SECRET')],
+    secrets: ['something string'],
     secure: process.env.NODE_ENV === 'production',
   },
 })

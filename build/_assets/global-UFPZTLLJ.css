@@ -1,0 +1,45 @@
+:root {
+  /* Colors */
+  --black: black;
+  --matt-black: #171717;
+  --white: white;
+  --transparent-white: hsla(0, 0%, 100%, 0.8);
+  --transparent-black: rgba(0, 0, 0, 0.5);
+  --gray: #666;
+
+  --background-color: var(--white);
+  --font-color: var(--black);
+  --border-color: #eaeaea;
+  --link-color: #0070f3;
+  --light-font-color: var(--gray);
+  --transparent-background-color: var(--transparent-white);
+  --pre-color: #262626;
+
+  /* Inverted stuff */
+  --background-color-inverted: var(--matt-black);
+  --font-color-inverted: var(--white);
+}
+
+.navbar-backdrop-filter {
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+          backdrop-filter: saturate(180%) blur(5px);
+}
+
+.prose pre {
+  background-color: var(--pre-color);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  max-height: 100vh;
+}
+
+.text-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

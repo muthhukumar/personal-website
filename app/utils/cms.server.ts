@@ -60,9 +60,9 @@ query GetPostBySlug($slug: String! = "") {
 }
 `
 
-export const getPosts = async (query?: string) => {
+export const getPosts = async (query?: string, context?: Record<string, string>) => {
   try {
-    const posts = await gqRequest(PostsQuery, { search: query ?? '' })
+    const posts = await gqRequest(PostsQuery, { search: query ?? '' }, context)
 
     if (!posts) {
       return []
@@ -73,9 +73,9 @@ export const getPosts = async (query?: string) => {
   }
 }
 
-export const getPost = async (slug: Post['slug']) => {
+export const getPost = async (slug: Post['slug'], context?: Record<string, string>) => {
   try {
-    const post = await gqRequest(PostQuery, { slug })
+    const post = await gqRequest(PostQuery, { slug }, context)
 
     if (!post) {
       return null
