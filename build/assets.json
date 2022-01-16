@@ -1,5 +1,5 @@
 {
-  "version": "06931ce4",
+  "version": "6bf617c6",
   "entry": {
     "module": "/build/entry.client-MCUKZ7N7.js",
     "imports": [
@@ -62,7 +62,7 @@
     "routes/__changelog": {
       "id": "routes/__changelog",
       "parentId": "root",
-      "module": "/build/routes/__changelog-VAVWTJ7P.js",
+      "module": "/build/routes/__changelog-A6WJHM6C.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
@@ -172,5 +172,5 @@
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-06931CE4.js"
+  "url": "/build/manifest-6BF617C6.js"
 }
