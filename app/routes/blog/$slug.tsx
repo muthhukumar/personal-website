@@ -32,12 +32,12 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader: LoaderFunction = async ({ request, params, context }) => {
   const url = new URL(request.url)
 
   const slug = params.slug ?? ''
 
-  const postData = await getPost(slug)
+  const postData = await getPost(slug, context)
 
   if (!postData) {
     throw json({ message: `Oh no, the blog you looking for doesn't exists.` }, { status: 404 })

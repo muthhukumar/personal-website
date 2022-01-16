@@ -1,0 +1,14 @@
+:root {
+  --gray: rgb(61, 58, 58);
+  --background-color: var(--black);
+  --font-color: var(--white);
+  --border-color: #333;
+  --link-color: #3291ff;
+  --light-font-color: #888;
+
+  --transparent-background-color: var(--transparent-black);
+
+  /* Inverted stuff */
+  --background-color-inverted: var(--white);
+  --font-color-inverted: var(--matt-black);
+}
