@@ -1,5 +1,5 @@
 {
-  "version": "cd178caa",
+  "version": "bd9c68a6",
   "entry": {
     "module": "/build/entry.client-MCUKZ7N7.js",
     "imports": [
@@ -50,7 +50,7 @@
       "id": "routes/[sitemap.xml]",
       "parentId": "root",
       "path": "sitemap.xml",
-      "module": "/build/routes/[sitemap.xml]-RVX54IAQ.js",
+      "module": "/build/routes/[sitemap.xml]-ETNLB3YF.js",
       "imports": [
         "/build/_shared/chunk-Z3OU3JRA.js"
       ],
@@ -172,5 +172,5 @@
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-CD178CAA.js"
+  "url": "/build/manifest-BD9C68A6.js"
 }
