@@ -170,6 +170,11 @@ function Document({ children }: { children: React.ReactNode }) {
         <Scripts />
         <ScrollRestoration />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "7768bd915ff3469096a04570cbb3575a"}'
+        ></script>
       </body>
     </html>
   )

@@ -4,9 +4,14 @@ import clsx from 'clsx'
 
 import { HiHome } from 'react-icons/hi'
 import { RiQuillPenFill } from 'react-icons/ri'
-import { BsFillBookmarksFill } from 'react-icons/bs'
+import {
+  BsChatSquareQuoteFill,
+  BsGithub,
+  BsFillBookmarksFill,
+  BsFillFileImageFill,
+} from 'react-icons/bs'
 import { GrStackOverflow } from 'react-icons/gr'
-import { BsGithub } from 'react-icons/bs'
+import {} from 'react-icons/bs'
 import { SiTwitter } from 'react-icons/si'
 import { IoLogoRss } from 'react-icons/io'
 import { HiExternalLink } from 'react-icons/hi'
@@ -41,18 +46,22 @@ function NavLink({
   href,
   pathname,
   external,
+  exact = false,
   ...delegated
 }: {
   external?: boolean
   Icon: IconType
   href: string
   pathname: string
+  exact?: boolean
 }) {
   const location = useLocation()
 
   const currentPathname = location.pathname
 
-  const highlight = href === currentPathname
+  const highlight = exact
+    ? currentPathname === href
+    : currentPathname.includes(href) && href.length > 1
 
   const Component = external
     ? (props: { href: string; className: string }) => (
@@ -70,7 +79,7 @@ function NavLink({
       })}
       {...delegated}
     >
-      <Icon size={15} />
+      {Icon ? <Icon size={15} /> : null}
       <p className="ml-3">{pathname}</p>
       {external ? <HiExternalLink className="ml-auto" size={15} /> : null}
     </Component>
@@ -80,9 +89,9 @@ function NavLink({
 export default function Sidebar() {
   return (
     <div className="flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] ">
-      <h2 className="font-bold">Muthukumar</h2>
+      <h2 className="mx-2 font-bold">Muthukumar</h2>
       <div className="flex flex-col gap-1">
-        <NavLink Icon={HiHome} href="/" pathname="Home" />
+        <NavLink Icon={HiHome} href="/" pathname="Home" exact />
         <NavLink Icon={RiQuillPenFill} href="/blog" pathname="Writings" />
       </div>
       <div className="flex flex-col gap-1">
@@ -95,6 +104,12 @@ export default function Sidebar() {
         {socials.map((props) => (
           <NavLink pathname={props['aria-label']} {...props} key={props.href} external />
         ))}
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <h2 className="px-2 mb-4 text-gray-400">Others</h2>
+        <NavLink pathname="Favorite Quotes" href="/quotes" Icon={BsChatSquareQuoteFill} />
+        <NavLink pathname="Photos" href="/photos" Icon={BsFillFileImageFill} />
       </div>
     </div>
   )
