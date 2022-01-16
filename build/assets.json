@@ -1,5 +1,5 @@
 {
-  "version": "6bf617c6",
+  "version": "cd178caa",
   "entry": {
     "module": "/build/entry.client-MCUKZ7N7.js",
     "imports": [
@@ -95,7 +95,7 @@
       "id": "routes/blog",
       "parentId": "root",
       "path": "blog",
-      "module": "/build/routes/blog-TKYU7U5Z.js",
+      "module": "/build/routes/blog-5WN47T4X.js",
       "imports": [
         "/build/_shared/chunk-Z3OU3JRA.js",
         "/build/_shared/chunk-KGJ3KRSN.js"
@@ -172,5 +172,5 @@
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-6BF617C6.js"
+  "url": "/build/manifest-CD178CAA.js"
 }
