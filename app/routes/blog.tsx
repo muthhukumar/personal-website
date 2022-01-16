@@ -65,7 +65,7 @@ export default function Blog() {
 
   // const query = searchParams.get('q')
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <div className="overflow-y-auto max-h-screen max-w-[24rem] border-r border-color">
         <div className="sticky top-0 p-6 py-4 bg-color">
           <h2 className="font-bold">Writings</h2>
