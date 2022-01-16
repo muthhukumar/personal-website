@@ -78,27 +78,6 @@ export default function Blog() {
         <HomeSection title="Quote of the day">
           <Quote author={data.quote.quote.author}>{data.quote.quote.quote}</Quote>
         </HomeSection>
-        <HomeSection title="Website map" showBorder={false}>
-          <div className="flex items-center justify-center mt-8">
-            <div className="flex flex-col justify-center w-full space-y-2 md:space-y-0 md:flex-row">
-              <LinkButton to="/blog" className="w-full md:rounded-r-none md:w-auto">
-                Read articles
-              </LinkButton>
-              <LinkButton
-                to="/about"
-                className="inline-block w-full md:rounded-l-none md:rounded-r-none md:w-auto"
-              >
-                More about me
-              </LinkButton>
-              <LinkButton
-                to="/changelog"
-                className="inline-block w-full md:rounded-l-none md:w-auto"
-              >
-                Website changelog
-              </LinkButton>
-            </div>
-          </div>
-        </HomeSection>
       </Container>
     </div>
   )
