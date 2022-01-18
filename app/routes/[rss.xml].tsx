@@ -22,8 +22,8 @@ function escapeHtml(s: string) {
   return result5
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const blogs = await getPosts()
+export const loader: LoaderFunction = async ({ context, request }) => {
+  const blogs = await getPosts('', context)
 
   const host = request.headers.get('X-Forwarded-Host') ?? request.headers.get('host')
 
@@ -66,7 +66,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     headers: {
       'Cache-Control': `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 24}`,
       'Content-Type': 'application/xml',
-      'Content-Length': String(rssString).length,
       'X-Robots-Tag': 'no-index',
     },
   })

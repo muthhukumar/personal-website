@@ -44,7 +44,6 @@ export const loader: LoaderFunction = async () => {
     headers: {
       'Content-Type': 'application/xml',
       'X-Robots-Tag': 'no-index',
-      'Content-Length': String(siteMap).length,
     },
   })
 }
