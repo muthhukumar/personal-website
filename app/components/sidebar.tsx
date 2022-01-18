@@ -3,6 +3,7 @@ import type { IconType } from 'react-icons'
 import clsx from 'clsx'
 
 import { HiHome } from 'react-icons/hi'
+import { GiWhiteBook } from 'react-icons/gi'
 import { RiQuillPenFill } from 'react-icons/ri'
 import {
   BsChatSquareQuoteFill,
@@ -11,8 +12,8 @@ import {
   BsFillFileImageFill,
 } from 'react-icons/bs'
 import { GrStackOverflow } from 'react-icons/gr'
-import {} from 'react-icons/bs'
 import { SiTwitter } from 'react-icons/si'
+import { MdCollectionsBookmark } from 'react-icons/md'
 import { IoLogoRss } from 'react-icons/io'
 import { HiExternalLink } from 'react-icons/hi'
 import { Link, useLocation } from 'remix'
@@ -93,6 +94,8 @@ export default function Sidebar() {
       <div className="flex flex-col gap-1">
         <NavLink Icon={HiHome} href="/" pathname="Home" exact />
         <NavLink Icon={RiQuillPenFill} href="/blog" pathname="Writings" />
+        <NavLink Icon={GiWhiteBook} href="/good-reads" pathname="Good reads" />
+        <NavLink Icon={MdCollectionsBookmark} href="/notes" pathname="Notes" />
       </div>
       <div className="flex flex-col gap-1">
         <h2 className="px-2 mb-4 text-gray-400">Me</h2>

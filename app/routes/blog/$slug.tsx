@@ -6,7 +6,7 @@ import { getPost } from '~/utils/cms.server'
 export const meta: MetaFunction = ({ data }) => {
   const postData = data as Awaited<ReturnType<typeof getPost>>
 
-  const title = postData?.seo.title ?? 'Page Not Found | Muthukumar'
+  const title = postData?.seo.title ?? 'Page Not Found'
   return {
     'apple-mobile-web-app-title': title,
     title,
