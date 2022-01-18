@@ -62,6 +62,30 @@ export type Note = {
   }
 }
 
+export type Photo = {
+  'id': string
+  'title': string
+  'image': {
+    'id': string
+    'url': string
+  }
+}
+
+const PhotosQuery = `
+query MyQuery {
+  photos {
+    id
+    title
+    image {
+      ... on Asset {
+        id
+        url
+      }
+    }
+  }
+}
+`
+
 const PostsQuery = `
   query MyQuery($search: String! = "") {
     posts(where: { _search: $search }) {
@@ -239,5 +263,18 @@ export const getNote = async (slug: Note['slug'], context?: Record<string, strin
     return note.note as Note
   } catch {
     return null
+  }
+}
+
+export const getPhotos = async (context?: Record<string, string>) => {
+  try {
+    const photos = await gqRequest(PhotosQuery, {}, context)
+
+    if (!photos) {
+      return []
+    }
+    return photos.photos as Array<Photo>
+  } catch {
+    return []
   }
 }

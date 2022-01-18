@@ -22,21 +22,18 @@ const socials = [
   {
     Icon: BsGithub,
     href: 'https://rd.nullish.in/github',
-    isLast: false,
     alt: `Muthukumar's github profile link`,
     'aria-label': 'Github',
   },
   {
     Icon: SiTwitter,
     href: 'https://rd.nullish.in/twitter',
-    isLast: false,
     alt: `Muthukumar's twitter profile link`,
     'aria-label': 'Twitter',
   },
   {
     Icon: IoLogoRss,
     href: '/rss.xml',
-    isLast: true,
     alt: `Nullish.in rss feed link`,
     'aria-label': 'Rss feed',
   },
@@ -89,7 +86,7 @@ function NavLink({
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] ">
+    <div className="flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] overflow-y-auto">
       <h2 className="mx-2 font-bold">Muthukumar</h2>
       <div className="flex flex-col gap-1">
         <NavLink Icon={HiHome} href="/" pathname="Home" exact />
