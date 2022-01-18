@@ -30,7 +30,7 @@ const getSiteMapText = async () => {
     (blog) => `
   <url>
     <loc>https://www.nullish.in/blog/${blog.slug}</loc>
-    <lastmod>${blog.lastUpdatedAt}</lastmod>
+    <lastmod>${blog.updatedAt}</lastmod>
   </url>
   `,
   )}

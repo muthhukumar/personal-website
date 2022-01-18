@@ -1,7 +1,7 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Link, useCatch } from 'remix'
 
-import { Quote, Four00, Container, HomeSection, LinkButton } from '~/components'
+import { Quote, Four00, Container, HomeSection } from '~/components'
 import { getQuote } from '~/utils/index.server'
 import { commitSession, getSession } from '~/utils/session.server'
 

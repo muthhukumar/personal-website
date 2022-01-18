@@ -1,24 +1,26 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
 import { Markdown, Four00 } from '~/components'
-import { getPost } from '~/utils/cms.server'
+import { getBook } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
-  const postData = data as Awaited<ReturnType<typeof getPost>>
+  const bookData = data as Awaited<ReturnType<typeof getBook>>
 
-  const title = postData?.seo.title ?? 'Page Not Found'
+  const title = bookData?.name
+    ? `${bookData?.name}: Summary, Notes, and Lessons - Muthukumar`
+    : 'Page Not Found'
   return {
     'apple-mobile-web-app-title': title,
     title,
-    description: postData?.seo.description ?? '',
-    keywords: postData?.seo.keywords ?? '',
-    image: postData?.seo.image.url ?? '',
+    description: bookData?.seo.description ?? '',
+    keywords: bookData?.seo.keywords ?? '',
+    image: bookData?.seo.image.url ?? '',
     pagename: title,
     'og:url': data?.url,
     'og:type': 'article',
     'og:title': title,
-    'og:description': postData?.seo.description ?? '',
-    'og:image': postData?.seo.image.url ?? '',
+    'og:description': bookData?.seo.description ?? '',
+    'og:image': bookData?.seo.image.url ?? '',
     robots: 'index, follow',
   }
 }
@@ -27,7 +29,7 @@ export const links: LinksFunction = () => {
   return [
     {
       rel: 'canonical',
-      href: 'https://www.nullish.in/blog',
+      href: 'https://www.nullish.in/good-reads',
     },
   ]
 }
@@ -37,16 +39,16 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
 
   const slug = params.slug ?? ''
 
-  const postData = await getPost(slug, context)
+  const bookData = await getBook(slug, context)
 
-  if (!postData) {
-    throw json({ message: `Oh no, the blog you looking for doesn't exists.` }, { status: 404 })
+  if (!bookData) {
+    throw json({ message: `Oh no, the book you looking for doesn't exists.` }, { status: 404 })
   }
 
   return json(
     {
       url,
-      ...postData,
+      ...bookData,
     },
     {
       headers: {
@@ -56,20 +58,20 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
   )
 }
 
-export default function BlogSlug() {
-  const postData = useLoaderData<Awaited<ReturnType<typeof getPost>>>()
+export default function BookSlug() {
+  const bookData = useLoaderData<Awaited<ReturnType<typeof getBook>>>()
 
-  if (!postData) {
-    throw new Error('Post data not found...!')
+  if (!bookData) {
+    throw new Error('Book data not found...!')
   }
 
   return (
     <div className="min-h-screen">
       <div className="sticky top-0 p-4 border-b navbar-backdrop-filter border-color">
-        <h1 className="font-bold">{postData.title}</h1>
+        <h1 className="font-bold">{bookData.name}</h1>
       </div>
       <Markdown className="max-w-5xl">
-        <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />
+        <div dangerouslySetInnerHTML={{ __html: bookData.content.html }} />
       </Markdown>
     </div>
   )
@@ -81,12 +83,12 @@ export function CatchBoundary() {
   const message = caught.status === 404 ? caught.data.message : 'Oopsies.. Something went wrong.'
 
   if (caught.status === 404) {
-    return <Four00 title="404" message={message} link="/blog" />
+    return <Four00 title="404" message={message} link="/good-reads" />
   }
 
-  return <Four00 title="500" message={message} link="/blog" />
+  return <Four00 title="500" message={message} link="/good-reads" />
 }
 
 export function ErrorBoundary() {
-  return <Four00 title="500" message="Oopsies... Something went wrong." link="/blog" />
+  return <Four00 title="500" message="Oopsies... Something went wrong." link="/good-reads" />
 }
