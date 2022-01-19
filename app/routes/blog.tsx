@@ -1,15 +1,7 @@
 import * as React from 'react'
-import {
-  useCatch,
-  json,
-  LoaderFunction,
-  MetaFunction,
-  useLoaderData,
-  LinksFunction,
-  Outlet,
-} from 'remix'
+import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, LinksFunction } from 'remix'
 
-import { BlogPost, Four00 } from '~/components'
+import { BlogPost, Four00, ListPage } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -61,46 +53,19 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
 export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-  // const [searchParams] = useSearchParams()
 
-  // const query = searchParams.get('q')
   return (
-    <div className="flex h-screen">
-      <div className="overflow-y-auto max-h-screen max-w-[24rem] border-r border-color">
-        <div className="sticky top-0 p-6 py-4 bg-color">
-          <h2 className="font-bold">Writings</h2>
-        </div>
-        {/* <Container>
-          <Form method="get">
-            <h1 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h1>
-            <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
-              <IoIosSearch className="ml-2 text-gray-600" size={20} />
-              <input
-                name="q"
-                type="text"
-                className="w-full p-1 ml-2 text-sm border-white bg-color dark:border-black"
-                placeholder="Search posts..."
-                defaultValue={query ?? ''}
-              />
-            </div>
-          </Form>
-        </Container> */}
-        <div className="p-2 text-sm">
-          {blogPosts.map((blogPost) => (
-            <BlogPost
-              publishedAt={blogPost.publishedAt}
-              key={blogPost.id}
-              slug={blogPost.slug}
-              title={blogPost.title}
-              excerpt={blogPost.excerpt}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="w-full max-h-screen overflow-y-auto">
-        <Outlet />
-      </div>
-    </div>
+    <ListPage title="Writings" href="/blog">
+      {blogPosts.map((blogPost) => (
+        <BlogPost
+          publishedAt={blogPost.publishedAt}
+          key={blogPost.id}
+          slug={blogPost.slug}
+          title={blogPost.title}
+          excerpt={blogPost.excerpt}
+        />
+      ))}
+    </ListPage>
   )
 }
 

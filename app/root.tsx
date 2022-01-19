@@ -184,8 +184,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex w-full h-screen">
       {/* <Navbar /> */}
-      <Sidebar />
-      <main className="w-full max-h-full overflow-y-auto">{children}</main>
+      <Sidebar className="hidden lg:flex" />
+      <main className="w-full max-h-full overflow-y-auto flex-2">{children}</main>
       {/* <Footer /> */}
     </div>
   )

@@ -16,6 +16,7 @@ import { SiTwitter } from 'react-icons/si'
 import { MdCollectionsBookmark } from 'react-icons/md'
 import { IoLogoRss } from 'react-icons/io'
 import { HiExternalLink } from 'react-icons/hi'
+import { CgClose } from 'react-icons/cg'
 import { Link, useLocation } from 'remix'
 
 const socials = [
@@ -84,10 +85,26 @@ function NavLink({
   )
 }
 
-export default function Sidebar() {
+export default function Sidebar({
+  handleClose,
+  className,
+}: {
+  handleClose?: () => void
+  className?: string
+}) {
   return (
-    <div className="flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] overflow-y-auto">
-      <h2 className="mx-2 font-bold">Muthukumar</h2>
+    <div
+      className={clsx(
+        'flex flex-col gap-6 p-4 text-sm border-r border-color h-screen min-w-[18rem] overflow-y-auto',
+        className,
+      )}
+    >
+      <div className="flex items-center gap-2 px-2">
+        <button onClick={handleClose} className="lg:hidden">
+          <CgClose size={15} />
+        </button>
+        <h2 className="mx-2 font-bold">Muthukumar</h2>
+      </div>
       <div className="flex flex-col gap-1">
         <NavLink Icon={HiHome} href="/" pathname="Home" exact />
         <NavLink Icon={RiQuillPenFill} href="/blog" pathname="Writings" />

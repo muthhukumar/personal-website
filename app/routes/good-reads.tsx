@@ -1,13 +1,5 @@
-import {
-  json,
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-  Outlet,
-  useCatch,
-  useLoaderData,
-} from 'remix'
-import { Book, Four00 } from '~/components'
+import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
+import { Book, Four00, ListPage } from '~/components'
 import { Book as BookType, getBooks } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -60,27 +52,17 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 export default function GoodReads() {
   const { books } = useLoaderData<{ books: Array<BookType> }>()
   return (
-    <div className="flex h-screen">
-      <div className="overflow-y-auto max-h-screen min-w-[24rem] max-w-[24rem] border-r border-color">
-        <div className="sticky top-0 p-6 py-4 bg-color">
-          <h2 className="font-bold">Good reads</h2>
-        </div>
-        <div className="p-2 text-sm">
-          {books.map((currentBook) => (
-            <Book
-              publishedAt={currentBook.publishedAt}
-              key={currentBook.id}
-              slug={currentBook.slug}
-              name={currentBook.name}
-              author={currentBook.author}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="w-full max-h-screen overflow-y-auto">
-        <Outlet />
-      </div>
-    </div>
+    <ListPage title="Good reads" href="/good-reads">
+      {books.map((currentBook) => (
+        <Book
+          publishedAt={currentBook.publishedAt}
+          key={currentBook.id}
+          slug={currentBook.slug}
+          name={currentBook.name}
+          author={currentBook.author}
+        />
+      ))}
+    </ListPage>
   )
 }
 
