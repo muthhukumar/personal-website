@@ -1,6 +1,6 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import { Markdown, Four00 } from '~/components'
+import { Markdown, Four00, MainPage } from '~/components'
 import { getPost } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
@@ -64,14 +64,11 @@ export default function BlogSlug() {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="sticky top-0 p-4 border-b navbar-backdrop-filter border-color">
-        <h1 className="font-bold">{postData.title}</h1>
-      </div>
+    <MainPage goBack="/blog" title={postData.title}>
       <Markdown className="max-w-5xl">
         <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />
       </Markdown>
-    </div>
+    </MainPage>
   )
 }
 

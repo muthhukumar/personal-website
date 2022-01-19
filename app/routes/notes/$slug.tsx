@@ -1,6 +1,6 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import { Markdown, Four00 } from '~/components'
+import { Markdown, Four00, MainPage } from '~/components'
 import { getNote } from '~/utils/cms.server'
 
 export const meta: MetaFunction = ({ data }) => {
@@ -66,14 +66,11 @@ export default function NoteSlug() {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="sticky top-0 p-4 border-b navbar-backdrop-filter border-color">
-        <h1 className="font-bold">{note.title}</h1>
-      </div>
+    <MainPage goBack="/blog" title={note.title}>
       <Markdown className="max-w-5xl">
         <div dangerouslySetInnerHTML={{ __html: note.content.html }} />
       </Markdown>
-    </div>
+    </MainPage>
   )
 }
 

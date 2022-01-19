@@ -1,14 +1,6 @@
-import {
-  useCatch,
-  json,
-  LoaderFunction,
-  MetaFunction,
-  useLoaderData,
-  LinksFunction,
-  Outlet,
-} from 'remix'
+import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, LinksFunction } from 'remix'
 
-import {  Four00, Note } from '~/components'
+import { Four00, ListPage, Note } from '~/components'
 import { getNotes, Note as NoteType } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -64,42 +56,17 @@ export default function Blog() {
 
   // const query = searchParams.get('q')
   return (
-    <div className="flex h-screen">
-      <div className="overflow-y-auto max-h-screen min-w-[24rem] max-w-[24rem] border-r border-color">
-        <div className="sticky top-0 p-6 py-4 bg-color">
-          <h2 className="font-bold">Notes</h2>
-        </div>
-        {/* <Container>
-          <Form method="get">
-            <h1 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h1>
-            <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
-              <IoIosSearch className="ml-2 text-gray-600" size={20} />
-              <input
-                name="q"
-                type="text"
-                className="w-full p-1 ml-2 text-sm border-white bg-color dark:border-black"
-                placeholder="Search posts..."
-                defaultValue={query ?? ''}
-              />
-            </div>
-          </Form>
-        </Container> */}
-        <div className="p-2 text-sm">
-          {notes.map((note) => (
-            <Note
-              publishedAt={note.publishedAt}
-              key={note.id}
-              slug={note.slug}
-              title={note.title}
-              excerpt={note.excerpt}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="w-full max-h-screen overflow-y-auto">
-        <Outlet />
-      </div>
-    </div>
+    <ListPage title="Notes" href="/notes">
+      {notes.map((note) => (
+        <Note
+          publishedAt={note.publishedAt}
+          key={note.id}
+          slug={note.slug}
+          title={note.title}
+          excerpt={note.excerpt}
+        />
+      ))}
+    </ListPage>
   )
 }
 
