@@ -29,7 +29,7 @@ export default function Photos() {
   const photos = useLoaderData<Awaited<ReturnType<typeof getPhotos>>>()
   return (
     <div className="p-8">
-      <div className="columns-3">
+      <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4">
         {photos.map((photo) => (
           <img
             alt={photo.title}

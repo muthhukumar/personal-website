@@ -45,7 +45,7 @@ export default function Blog() {
   const data = useLoaderData<LoaderData>()
   return (
     <div className="py-4 lg:py-8">
-      <Container>
+      <Container className="max-w-3xl">
         <div className="py-8 text-lg border-b md:py-16 border-color">
           <p className="mb-2">Hey, I&apos;m</p>
           <h1 className="text-3xl font-bold md:text-6xl">Muthukumar</h1>
