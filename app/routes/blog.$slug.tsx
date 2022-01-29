@@ -78,7 +78,7 @@ export default function BlogSlug() {
       <h2 className="w-4/5 mx-auto my-10 text-4xl font-bold text-center md:text-6xl">
         {postData.title}
       </h2>
-      <p className="w-full px-4 mx-auto mb-4 text-base text-center text-black md:text-lg lg:w-2/3">
+      <p className="w-full px-4 mx-auto mb-4 text-base text-center font-color md:text-lg lg:w-2/3">
         {postData.excerpt}
       </p>
       <div className="flex items-center mx-auto my-8 fit-content">
