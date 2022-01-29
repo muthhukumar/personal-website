@@ -49,6 +49,7 @@ export default function Navbar() {
     >
       <Dialog
         isOpen={showModal}
+        aria-label="Navbar modal"
         className="fixed top-0 z-50 block w-screen h-screen bg-white md:hidden dark:black"
       >
         <div className="flex flex-col px-8 py-4 gap-y-4">

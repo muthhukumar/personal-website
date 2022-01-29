@@ -25,7 +25,7 @@ export const links: LinksFunction = () => {
 
 export default function About() {
   return (
-    <div className="py-16">
+    <div>
       <Container>
         <img
           src="/images/profile.jpg"

@@ -8,10 +8,5 @@ export default function Container({
   children: React.ReactNode
   className?: string | undefined
 }) {
-  const hasPy = className?.includes('py')
-  return (
-    <div className={clsx('px-8 container max-w-5xl mx-auto', { 'py-2': !hasPy }, className)}>
-      {children}
-    </div>
-  )
+  return <div className={clsx('px-8 container max-w-5xl mx-auto', className)}>{children}</div>
 }

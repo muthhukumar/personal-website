@@ -44,7 +44,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Blog() {
   const data = useLoaderData<LoaderData>()
   return (
-    <div className="py-4 lg:py-8">
+    <div>
       <Container className="max-w-3xl">
         <div className="py-8 text-lg border-b md:py-16 border-color">
           <p className="mb-2">Hey, I&apos;m</p>

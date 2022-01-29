@@ -184,7 +184,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="isolate">
       <Navbar />
-      <main className="w-full my-20">{children}</main>
+      <main className="w-full my-20 md:my-28">{children}</main>
       <Footer />
     </div>
   )
