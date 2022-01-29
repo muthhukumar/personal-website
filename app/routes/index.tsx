@@ -1,7 +1,7 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Link, useCatch } from 'remix'
 
-import { Quote, Four00, Container, HomeSection, LinkButton } from '~/components'
+import { Quote, Four00, Container, HomeSection } from '~/components'
 import { getQuote } from '~/utils/index.server'
 import { commitSession, getSession } from '~/utils/session.server'
 
@@ -45,7 +45,7 @@ export default function Blog() {
   const data = useLoaderData<LoaderData>()
   return (
     <div className="py-4 lg:py-8">
-      <Container>
+      <Container className="max-w-3xl">
         <div className="py-8 text-lg border-b md:py-16 border-color">
           <p className="mb-2">Hey, I&apos;m</p>
           <h1 className="text-3xl font-bold md:text-6xl">Muthukumar</h1>
@@ -77,27 +77,6 @@ export default function Blog() {
         </div>
         <HomeSection title="Quote of the day">
           <Quote author={data.quote.quote.author}>{data.quote.quote.quote}</Quote>
-        </HomeSection>
-        <HomeSection title="Website map" showBorder={false}>
-          <div className="flex items-center justify-center mt-8">
-            <div className="flex flex-col justify-center w-full space-y-2 md:space-y-0 md:flex-row">
-              <LinkButton to="/blog" className="w-full md:rounded-r-none md:w-auto">
-                Read articles
-              </LinkButton>
-              <LinkButton
-                to="/about"
-                className="inline-block w-full md:rounded-l-none md:rounded-r-none md:w-auto"
-              >
-                More about me
-              </LinkButton>
-              <LinkButton
-                to="/changelog"
-                className="inline-block w-full md:rounded-l-none md:w-auto"
-              >
-                Website changelog
-              </LinkButton>
-            </div>
-          </div>
         </HomeSection>
       </Container>
     </div>
