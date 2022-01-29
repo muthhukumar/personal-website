@@ -37,7 +37,7 @@ const links: Array<{ to: string; pathname: string }> = [
 export default function Navbar() {
   const scrolled = useScrolled(10)
   const pathname = useLocation().pathname
-  const [showModal, setShowModal] = React.useState(true)
+  const [showModal, setShowModal] = React.useState(false)
 
   const toggleModal = () => setShowModal((state) => !state)
 
@@ -51,8 +51,8 @@ export default function Navbar() {
         isOpen={showModal}
         className="fixed top-0 z-50 block w-screen h-screen bg-white md:hidden dark:black"
       >
-        <div className="flex flex-col p-8 gap-y-4">
-          <button className="p-4 -ml-4 rounded-sm" onClick={toggleModal}>
+        <div className="flex flex-col px-8 py-4 gap-y-4">
+          <button className="p-4 -mt-2 -ml-4 rounded-sm" onClick={toggleModal}>
             <RiCloseFill size={20} />
           </button>
           {links.map((link) => (
@@ -68,11 +68,11 @@ export default function Navbar() {
         </div>
       </Dialog>
       <nav className="flex md:mx-auto">
-        <div className="flex items-center">
+        <div className="flex items-center md:hidden">
           <button className="p-4 -ml-4 rounded-sm" onClick={toggleModal}>
             <HiOutlineMenuAlt4 className="md:hidden" size={20} />
           </button>
-          <h2 className="font-bold">{links.find((link) => link.to === pathname)?.pathname}</h2>
+          <h2 className="font-semibold">{links.find((link) => link.to === pathname)?.pathname}</h2>
         </div>
 
         <div className="items-center hidden md:flex gap-x-8">
