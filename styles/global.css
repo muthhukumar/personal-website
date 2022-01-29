@@ -16,7 +16,7 @@
   --pre-color: #262626;
 
   /* Inverted stuff */
-  --background-color-inverted: var(--matt-black);
+  --background-color-inverted: var(--black);
   --font-color-inverted: var(--white);
 }
 
