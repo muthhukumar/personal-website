@@ -73,7 +73,7 @@ export default function BlogSlug() {
   }
 
   return (
-    <div className="pb-20 mt-28">
+    <div className="mt-28">
       <Date date={postData.publishedAt} className="text-center light-font-color" />
       <h2 className="w-4/5 mx-auto my-10 text-4xl font-bold text-center md:text-6xl">
         {postData.title}
@@ -98,7 +98,7 @@ export default function BlogSlug() {
         <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />
       </Markdown>
       <ContinueReading />
-      <div className="grid max-w-screen-xl grid-cols-1 mx-5 mb-20 lg:mx-24 2xl:mx-auto md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
+      <div className="grid max-w-screen-xl grid-cols-1 mx-5 lg:mx-24 2xl:mx-auto md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
         {postData.posts.map((blogPost) => (
           <BlogPost key={blogPost.id} {...blogPost} />
         ))}

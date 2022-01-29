@@ -53,11 +53,11 @@ const links: Array<LinkType> = [
     link: '/about',
     ariaLabel: 'About page',
   },
-  {
-    name: 'Quotes',
-    link: '/quotes',
-    ariaLabel: 'List of all the quotes',
-  },
+  // {
+  //   name: 'Quotes',
+  //   link: '/quotes',
+  //   ariaLabel: 'List of all the quotes',
+  // },
   {
     name: 'RSS',
     link: '/rss.xml',
@@ -70,11 +70,11 @@ const links: Array<LinkType> = [
     ariaLabel: 'Sitemap of the website',
     openInNewTab: true,
   },
-  {
-    name: 'Changelog',
-    link: '/changelog',
-    ariaLabel: 'Changelog of the website',
-  },
+  // {
+  //   name: 'Changelog',
+  //   link: '/changelog',
+  //   ariaLabel: 'Changelog of the website',
+  // },
   {
     name: 'Source code',
     link: 'https://github.com/muthhukumar/personal-website',
