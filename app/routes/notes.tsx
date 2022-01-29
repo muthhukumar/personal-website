@@ -1,6 +1,6 @@
 import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, LinksFunction } from 'remix'
 
-import { Four00, ListPage, Note } from '~/components'
+import { Four00, Note } from '~/components'
 import { getNotes, Note as NoteType } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -56,7 +56,7 @@ export default function Blog() {
 
   // const query = searchParams.get('q')
   return (
-    <ListPage title="Notes" href="/notes">
+    <div title="Notes">
       {notes.map((note) => (
         <Note
           publishedAt={note.publishedAt}
@@ -66,7 +66,7 @@ export default function Blog() {
           excerpt={note.excerpt}
         />
       ))}
-    </ListPage>
+    </div>
   )
 }
 
