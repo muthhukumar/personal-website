@@ -24,10 +24,6 @@
   backdrop-filter: saturate(180%) blur(5px);
 }
 
-.prose pre {
-  background-color: var(--pre-color);
-}
-
 html {
   height: 100%;
 }
