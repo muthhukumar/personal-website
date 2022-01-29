@@ -43,9 +43,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`px-8 flex items-center bg-color fixed z-40 w-full ${
-        scrolled ? 'drop-shadow-md' : ''
-      }  top-0 left-0 right-0 h-16 z-30 transition-all ease duration-150 flex`}
+      className={`px-8 flex items-center fixed z-40 w-full transition-transform border-b navbar-backdrop-filter border-color transparent-all
+       ${
+         scrolled ? 'drop-shadow-md' : ''
+       }  top-0 left-0 right-0 h-16 z-30 transition-all ease duration-150 flex`}
     >
       <Dialog
         isOpen={showModal}
