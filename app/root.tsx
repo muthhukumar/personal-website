@@ -1,13 +1,5 @@
 import * as React from 'react'
-import {
-  Scripts,
-  json,
-  LinksFunction,
-  LoaderFunction,
-  useCatch,
-  useLoaderData,
-  useLocation,
-} from 'remix'
+import { Scripts, LinksFunction, useCatch, useLocation } from 'remix'
 import { Links, LiveReload, Meta, Outlet, ScrollRestoration, MetaFunction } from 'remix'
 
 import appleTouchFavIcon from '../public/favicon/dark/apple-touch-icon.png'
@@ -23,9 +15,7 @@ import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
 
-import { Navbar, Footer, Four00, Banner } from '~/components'
-import { getSession } from './utils/session.server'
-import { BannerType } from './components/banner'
+import { Footer, Four00, Navbar } from '~/components'
 import * as gtag from '~/utils/gtags'
 
 export const meta: MetaFunction = () => {
@@ -54,7 +44,6 @@ export const meta: MetaFunction = () => {
     description:
       'Tutorials and notes on React, Javascript, CSS and more. Also Personal book reviews and personal thoughts on stuff and more!.',
     viewport: 'width=device-width, initial-scale=1',
-    keywords: 'Nullish.in, Learn Javascript, Learn Typescript and Learn CSS, Clean code',
     robots: 'index, follow',
   }
 }
@@ -67,14 +56,14 @@ export const links: LinksFunction = () => {
     {
       rel: 'preload',
       as: 'font',
-      href: '/fonts/inter-v7-latin-regular.woff',
+      href: '/fonts/inter.woff',
       type: 'font/woff',
       crossOrigin: 'anonymous',
     },
     {
       rel: 'preload',
       as: 'font',
-      href: '/fonts/inter-v7-latin-regular.woff2',
+      href: '/fonts/inter.woff2',
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
@@ -133,17 +122,7 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'))
-
-  const banner = session.get('banner') ?? { title: '', link: '', show: false }
-
-  return json({ banner })
-}
-
 export default function App() {
-  const { banner } = useLoaderData<{ banner: BannerType }>()
-
   const location = useLocation()
 
   React.useEffect(() => {
@@ -152,7 +131,7 @@ export default function App() {
 
   return (
     <Document>
-      <Layout banner={banner}>
+      <Layout>
         <Outlet />
       </Layout>
     </Document>
@@ -170,7 +149,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="antialiased bg-color">
+      <body className="antialiased isolate">
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
         <script
           async
@@ -191,17 +170,21 @@ function Document({ children }: { children: React.ReactNode }) {
         <Scripts />
         <ScrollRestoration />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "7768bd915ff3469096a04570cbb3575a"}'
+        ></script>
       </body>
     </html>
   )
 }
 
-function Layout({ children, banner }: { banner?: BannerType; children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      {banner && banner.show && <Banner {...banner} />}
+    <div className="isolate">
       <Navbar />
-      <main>{children}</main>
+      <main className="w-full my-20">{children}</main>
       <Footer />
     </div>
   )

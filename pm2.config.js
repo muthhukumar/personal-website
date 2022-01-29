@@ -10,12 +10,11 @@ module.exports = {
     //   },
     // },
     {
-      name: 'Vercel',
-      script: 'vercel dev',
+      name: 'Server',
+      script: 'cross-env NODE_ENV=development run-p dev:*',
       ignore_watch: ['.'],
       env: {
         FORCE_COLOR: '1',
-        NODE_ENV: process.env.NODE_ENV ?? 'development',
       },
     },
     {

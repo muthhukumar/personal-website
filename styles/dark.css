@@ -1,6 +1,6 @@
 :root {
-  --gray: #888;
-  --background-color: var(--matt-black);
+  --gray: rgb(61, 58, 58);
+  --background-color: var(--black);
   --font-color: var(--white);
   --border-color: #333;
   --link-color: #3291ff;

@@ -1,8 +1,6 @@
 import * as React from 'react'
 import clsx from 'clsx'
 
-import { Container } from '.'
-
 export default function Markdown({
   children,
   className,
@@ -11,10 +9,8 @@ export default function Markdown({
   className?: string | undefined
 }) {
   return (
-    <Container className={clsx('max-w-3xl', className)}>
-      <article className="py-2 prose md:py-6 md:prose-lg max-w-none prose-blue dark:prose-invert">
-        {children}
-      </article>
-    </Container>
+    <article className={clsx('w-11/12 m-auto prose sm:w-3/4 prose-md sm:prose-lg', className)}>
+      {children}
+    </article>
   )
 }

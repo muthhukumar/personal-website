@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "pm2-dev ./pm2.config.js",
     "watch:css": "postcss styles --base styles --dir app/styles -w",
-    "build:css": "postcss styles --base styles --dir app/styles --env production",
-    "build:remix": "remix build",
-    "build:css:prod": "npm run build:css -- --env production",
+    "build:css": "postcss styles --base styles --dir app/styles",
+    "build:remix": "cross-env NODE_ENV=production remix build",
+    "build:css:prod": "cross-env NODE_ENV=production npm run build:css",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "setup": "npm install && npm run build && npm run validate",
     "prepare": "husky install",
@@ -17,12 +17,15 @@
     "build": "npm run build:css:prod && npm run build:remix",
     "prebuild": "npm run clean && echo All clean",
     "clean": "npx rimraf public/build ./node_modules/.cache ./app/styles/**.css ./api/build* .cache",
-    "postinstall": "remix setup node"
+    "postinstall": "remix setup cloudflare-pages",
+    "dev:remix": "remix watch",
+    "dev:wrangler": "wrangler pages dev ./public --watch ./build -b GRAPHQL_ENDPOINT=${GRAPHQL_ENDPOINT} GRAPHQL_ACCESS_TOKEN=${GRAPHQL_ACCESS_TOKEN} USE_GRAPH_CDN=${USE_GRAPH_CDN}",
+    "start": "npm run dev:wrangler"
   },
   "dependencies": {
+    "@reach/dialog": "^0.16.2",
+    "@remix-run/cloudflare-pages": "^1.1.1",
     "@remix-run/react": "^1.1.1",
-    "@remix-run/serve": "^1.1.1",
-    "@remix-run/vercel": "^1.1.1",
     "clsx": "^1.1.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -31,6 +34,7 @@
     "remix": "^1.1.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^3.2.0",
     "@remix-run/dev": "^1.1.1",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.0",
@@ -39,17 +43,21 @@
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "autoprefixer": "^10.4.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "0.13.14",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.27.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.3",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.0.2",
     "prettier": "^2.5.1",
     "tailwindcss": "^3.0.7",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "wrangler": "beta"
   },
   "engines": {
     "node": ">=14"
