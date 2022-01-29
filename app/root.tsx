@@ -15,7 +15,7 @@ import globalStylesUrl from '~/styles/global.css'
 import tailwindStylesUrl from '~/styles/tailwind.css'
 import darkStylesUrl from '~/styles/dark.css'
 
-import { Four00, Navbar } from '~/components'
+import { Footer, Four00, Navbar } from '~/components'
 import * as gtag from '~/utils/gtags'
 
 export const meta: MetaFunction = () => {
@@ -184,9 +184,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="isolate">
       <Navbar />
-      {/* <Sidebar className="hidden lg:flex" /> */}
-      <main className="w-full mt-20">{children}</main>
-      {/* <Footer /> */}
+      <main className="w-full my-20">{children}</main>
+      <Footer />
     </div>
   )
 }

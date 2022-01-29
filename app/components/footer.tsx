@@ -119,7 +119,7 @@ export default function Footer() {
           <Link to="/" className="flex items-center">
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
-          <div className="flex flex-col items-center justify-center w-full mt-6 md:justify-between md:flex-row">
+          <div className="flex flex-col items-center justify-center w-full mt-4 md:justify-between md:flex-row">
             <h2 className="mb-4 text-sm md:mb-0 light-font-color">
               Copyright &copy; 2021 Muthukumar. All rights reserved.
             </h2>
