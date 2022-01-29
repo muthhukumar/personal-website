@@ -7,7 +7,7 @@ const Date: React.FC<{ date: string | number | Date; className?: string | undefi
   const date = props.date
   return date ? (
     <p {...props} className={props.className}>
-      {moment(date).format('MMMM Do YYYY')}
+      {moment(date).format('MMM DD, YYYY')}
     </p>
   ) : null
 }
