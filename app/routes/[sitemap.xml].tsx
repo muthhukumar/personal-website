@@ -12,7 +12,7 @@ const getSiteMapText = async () => {
   </url>
   <url>
     <loc>https://www.nullish.in/changelog</loc>
-    <lastmod>2021-12-28</lastmod>
+    <lastmod>2021-12-29</lastmod>
   </url>
   <url>
     <loc>https://www.nullish.in/quotes</loc>
@@ -30,7 +30,7 @@ const getSiteMapText = async () => {
     (blog) => `
   <url>
     <loc>https://www.nullish.in/blog/${blog.slug}</loc>
-    <lastmod>${blog.lastUpdatedAt}</lastmod>
+    <lastmod>${blog.updatedAt}</lastmod>
   </url>
   `,
   )}
@@ -44,8 +44,6 @@ export const loader: LoaderFunction = async () => {
     headers: {
       'Content-Type': 'application/xml',
       'X-Robots-Tag': 'no-index',
-      'Content-Length': String(Buffer.byteLength(siteMap)),
-      // 'Cross-Origin-Resource-Policy': 'same-origin'
     },
   })
 }

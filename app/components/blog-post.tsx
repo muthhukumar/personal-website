@@ -1,28 +1,32 @@
-import { BiRightArrowAlt } from 'react-icons/bi'
 import { Link } from 'remix'
 
 import { Date } from '.'
 import { Post } from '~/utils/cms.server'
+import clsx from 'clsx'
 
-export default function BlogPost({
-  title,
-  publishedAt,
-  excerpt,
-  slug,
-}: Pick<Post, 'title' | 'publishedAt' | 'excerpt' | 'slug'>) {
+interface Props extends Pick<Post, 'title' | 'publishedAt' | 'excerpt' | 'slug' | 'seo'> {
+  className?: string
+}
+
+export default function BlogPost({ title, publishedAt, excerpt, slug, className, seo }: Props) {
   return (
-    <div className="w-full pb-6 mb-4 border-b border-color md:pb-10 md:mb-8">
-      <Date className="my-2 text-sm light-font-color md:text-base" date={publishedAt} />
-      <h2 className="my-4 text-xl font-bold md:text-2xl">{title}</h2>
-      <p className="mb-4 text-sm md:text-base">{excerpt}</p>
-      <Link
-        to={`/blog/${slug}`}
-        className="flex items-center text-sm link-font-color"
-        prefetch="render"
+    <Link to={`/blog/${slug}`} prefetch="render" className={clsx(className, 'flex flex-1')}>
+      <div
+        className={clsx(
+          'overflow-hidden transition-all duration-200 bg-white border-2 border-gray-100 shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1 ease',
+        )}
       >
-        Continue Reading
-        <BiRightArrowAlt className="ml-1" />
-      </Link>
-    </div>
+        <img
+          src={seo?.image?.url}
+          className="object-cover object-center w-full duration-700 ease-in-out scale-100 grayscale-0 blur-0 min-h-[325px]"
+        />
+        <div className="my-auto"></div>
+        <div className="flex flex-col p-6 pt-8 mt-auto border-t gap-y-2 border-color">
+          <h2 className="text-lg font-bold">{title}</h2>
+          <p className="italic truncate text-[color:var(--gray)]/[0.3]">{excerpt}</p>
+          <Date className="text-sm light-font-color" date={publishedAt} />
+        </div>
+      </div>
+    </Link>
   )
 }

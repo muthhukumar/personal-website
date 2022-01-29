@@ -1,17 +1,6 @@
-import * as React from 'react'
-import {
-  Form,
-  useCatch,
-  json,
-  LoaderFunction,
-  MetaFunction,
-  useLoaderData,
-  useSearchParams,
-  LinksFunction,
-} from 'remix'
-import { IoIosSearch } from 'react-icons/io'
+import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, LinksFunction } from 'remix'
 
-import { BlogPost, Four00, Container } from '~/components'
+import { BigPost, BlogPost, Four00 } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -36,12 +25,12 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, context }) => {
   const url = new URL(request.url)
 
   const query = url.searchParams.get('q') ?? ''
 
-  const blogPosts = await getPosts(query)
+  const blogPosts = await getPosts(query, context)
 
   if (blogPosts.length === 0) {
     throw json({ message: 'No blogs found.' }, { status: 404 })
@@ -63,50 +52,23 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
-  const [searchParams] = useSearchParams()
 
-  const query = searchParams.get('q')
+  const bigPost = blogPosts[0]
+
   return (
-    <Layout query={query}>
-      <Container>
-        <div className="py-2 md:py-6">
-          {blogPosts.map((blogPost) => (
-            <BlogPost
-              publishedAt={blogPost.publishedAt}
-              key={blogPost.id}
-              slug={blogPost.slug}
-              title={blogPost.title}
-              excerpt={blogPost.excerpt}
-            />
+    // <ListPage title="Writings" href="/blog">
+    <div className="container w-full max-w-screen-xl pb-20 mx-auto lg:w-5/6 md:mb-28">
+      <BigPost {...bigPost} imageLink={bigPost.seo.image.url} />
+      <div className="max-w-screen-xl mx-5 mb-20 lg:mx-24 2xl:mx-auto">
+        <h2 className="mb-10 text-4xl font-bold md:text-5xl">More stories</h2>
+        <div className="grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
+          {blogPosts.slice(1, blogPosts.length).map((blogPost) => (
+            <BlogPost key={blogPost.id} {...blogPost} />
           ))}
         </div>
-      </Container>
-    </Layout>
-  )
-}
-
-function Layout({ children, query = '' }: { children: React.ReactNode; query?: string | null }) {
-  return (
-    <>
-      <div className="pb-6 border-b border-color">
-        <Container>
-          <Form method="get">
-            <h1 className="py-4 text-xl font-bold md:py-10 md:text-2xl">Blog</h1>
-            <div className="flex items-center max-w-sm p-1 border rounded-md border-color">
-              <IoIosSearch className="ml-2 text-gray-600" size={20} />
-              <input
-                name="q"
-                type="text"
-                className="w-full p-1 ml-2 text-sm border-white bg-color dark:border-black"
-                placeholder="Search posts..."
-                defaultValue={query ?? ''}
-              />
-            </div>
-          </Form>
-        </Container>
       </div>
-      {children}
-    </>
+    </div>
+    // </ListPage>
   )
 }
 
