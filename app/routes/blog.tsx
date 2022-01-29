@@ -57,9 +57,9 @@ export default function Blog() {
 
   return (
     // <ListPage title="Writings" href="/blog">
-    <div className="container w-full max-w-screen-xl pb-20 mx-auto lg:w-5/6 md:mb-28">
+    <div className="container w-full max-w-screen-xl mx-auto lg:w-5/6">
       <BigPost {...bigPost} imageLink={bigPost.seo.image.url} />
-      <div className="max-w-screen-xl mx-5 mb-20 lg:mx-24 2xl:mx-auto">
+      <div className="max-w-screen-xl mx-5 lg:mx-24 2xl:mx-auto">
         <h2 className="mb-10 text-4xl font-bold md:text-5xl">More stories</h2>
         <div className="grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
           {blogPosts.slice(1, blogPosts.length).map((blogPost) => (
