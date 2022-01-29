@@ -10,7 +10,7 @@ export type Post = {
     url: string
   }
   excerpt: string
-  publishedAt: string
+  publishedDate: string
   updatedAt: string
   seo: {
     title: string
@@ -38,7 +38,7 @@ export type Book = {
     }
     description: string
   }
-  publishedAt: string
+  publishedDate: string
   updatedAt: string
   id: string
 }
@@ -55,7 +55,7 @@ export type Note = {
     }
     description: string
   }
-  publishedAt: string
+  publishedDate: string
   excerpt: string
   content: {
     html: string
@@ -88,11 +88,11 @@ query MyQuery {
 
 const PostsQuery = `
 query MyQuery($search: String! = "") {
-  posts(where: {_search: $search}, orderBy: publishedAt_DESC) {
+  posts(where: {_search: $search}, orderBy: publishedDate_DESC) {
     id
     slug
     title
-    publishedAt
+    publishedDate
     updatedAt
     excerpt
     seo {
@@ -115,7 +115,7 @@ query GetPostBySlug($slug: String! = "") {
       url
     }
     excerpt
-    publishedAt
+    publishedDate
     seo {
       title
       keywords
@@ -135,7 +135,7 @@ query MyQuery($search: String! = "") {
     name
     slug
     author
-    publishedAt
+    publishedDate
   }
 }
 `
@@ -167,7 +167,7 @@ query MyQuery($search: String! = "")  {
     slug
     id
     excerpt
-    publishedAt
+    publishedDate
   }
 }
 `

@@ -74,7 +74,7 @@ export default function BlogSlug() {
 
   return (
     <div className="mt-28">
-      <Date date={postData.publishedAt} className="text-center light-font-color" />
+      <Date date={postData.publishedDate} className="text-center light-font-color" />
       <h2 className="w-4/5 mx-auto my-10 text-4xl font-bold text-center md:text-6xl">
         {postData.title}
       </h2>
