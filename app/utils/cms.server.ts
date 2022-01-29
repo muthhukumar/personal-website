@@ -87,16 +87,21 @@ query MyQuery {
 `
 
 const PostsQuery = `
-  query MyQuery($search: String! = "") {
-    posts(where: { _search: $search }) {
-      id
-      slug
-      title
-      publishedAt
-      updatedAt
-      excerpt
+query MyQuery($search: String! = "") {
+  posts(where: {_search: $search}, orderBy: publishedAt_DESC) {
+    id
+    slug
+    title
+    publishedAt
+    updatedAt
+    excerpt
+    seo {
+      image {
+        url
+      }
     }
   }
+}
 `
 
 const PostQuery = `
@@ -196,7 +201,8 @@ export const getPosts = async (query?: string, context?: Record<string, string>)
       return []
     }
     return posts.posts as Array<Post>
-  } catch {
+  } catch (err){
+    console.log('here', err)
     return []
   }
 }

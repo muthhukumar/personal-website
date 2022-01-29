@@ -42,3 +42,7 @@ body {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
+.fit-content {
+  width: fit-content;
+}

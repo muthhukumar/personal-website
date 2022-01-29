@@ -1,7 +1,11 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
-import { Markdown, Four00, MainPage } from '~/components'
-import { getPost } from '~/utils/cms.server'
+import { Markdown, Four00, Date, ContinueReading, BlogPost } from '~/components'
+import { getPost, getPosts, Post } from '~/utils/cms.server'
+
+interface LoaderType extends Post {
+  posts: Array<Post>
+}
 
 export const meta: MetaFunction = ({ data }) => {
   const postData = data as Awaited<ReturnType<typeof getPost>>
@@ -39,6 +43,10 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
 
   const postData = await getPost(slug, context)
 
+  const posts = await getPosts('', context)
+
+  const selectedPosts = posts.slice(posts.length - 3, posts.length)
+
   if (!postData) {
     throw json({ message: `Oh no, the blog you looking for doesn't exists.` }, { status: 404 })
   }
@@ -47,6 +55,7 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
     {
       url,
       ...postData,
+      posts: selectedPosts,
     },
     {
       headers: {
@@ -57,18 +66,44 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
 }
 
 export default function BlogSlug() {
-  const postData = useLoaderData<Awaited<ReturnType<typeof getPost>>>()
+  const postData = useLoaderData<LoaderType>()
 
   if (!postData) {
     throw new Error('Post data not found...!')
   }
 
   return (
-    <MainPage goBack="/blog" title={postData.title}>
-      <Markdown className="max-w-5xl">
+    <div className="pb-20 mt-28">
+      <Date date={postData.publishedAt} className="text-center light-font-color" />
+      <h2 className="w-4/5 mx-auto my-10 text-4xl font-bold text-center md:text-6xl">
+        {postData.title}
+      </h2>
+      <p className="w-full px-4 mx-auto mb-4 text-base text-center text-black md:text-lg lg:w-2/3">
+        {postData.excerpt}
+      </p>
+      <div className="flex items-center mx-auto my-8 fit-content">
+        <div className="inline-block w-8 h-8 mr-4 overflow-hidden align-middle rounded-full md:w-12 md:h-12">
+          <img src="/images/profile.jpg" className="w-full h-full" />
+        </div>
+        <p className="mr-2 light-font-color">By</p>
+        <p className="font-semibold">Muthukumar</p>
+      </div>
+      <div className="w-full max-w-screen-lg m-auto mb-10 overflow-hidden h-80 md:h-[37.5rem] lg:2/3 md:w-5/6 md:mb-20 md:rounded-2xl">
+        <img
+          src={postData.seo.image.url}
+          className="object-cover object-center w-full h-full transition-all duration-500 hover:scale-110 ease"
+        />
+      </div>
+      <Markdown>
         <div dangerouslySetInnerHTML={{ __html: postData.content.html }} />
       </Markdown>
-    </MainPage>
+      <ContinueReading />
+      <div className="grid max-w-screen-xl grid-cols-1 mx-5 mb-20 lg:mx-24 2xl:mx-auto md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
+        {postData.posts.map((blogPost) => (
+          <BlogPost key={blogPost.id} {...blogPost} />
+        ))}
+      </div>
+    </div>
   )
 }
 

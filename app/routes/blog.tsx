@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { useCatch, json, LoaderFunction, MetaFunction, useLoaderData, LinksFunction } from 'remix'
 
-import { BlogPost, Four00, ListPage } from '~/components'
+import { BigPost, BlogPost, Four00 } from '~/components'
 import { getPosts, Post } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -54,18 +53,22 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 export default function Blog() {
   const { blogPosts } = useLoaderData<{ blogPosts: Array<Post> }>()
 
+  const bigPost = blogPosts[0]
+
   return (
-    <ListPage title="Writings" href="/blog">
-      {blogPosts.map((blogPost) => (
-        <BlogPost
-          publishedAt={blogPost.publishedAt}
-          key={blogPost.id}
-          slug={blogPost.slug}
-          title={blogPost.title}
-          excerpt={blogPost.excerpt}
-        />
-      ))}
-    </ListPage>
+    // <ListPage title="Writings" href="/blog">
+    <div className="container w-full max-w-screen-xl pb-20 mx-auto lg:w-5/6 md:mb-28">
+      <BigPost {...bigPost} imageLink={bigPost.seo.image.url} />
+      <div className="max-w-screen-xl mx-5 mb-20 lg:mx-24 2xl:mx-auto">
+        <h2 className="mb-10 text-4xl font-bold md:text-5xl">More stories</h2>
+        <div className="grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8">
+          {blogPosts.slice(1, blogPosts.length).map((blogPost) => (
+            <BlogPost key={blogPost.id} {...blogPost} />
+          ))}
+        </div>
+      </div>
+    </div>
+    // </ListPage>
   )
 }
 
