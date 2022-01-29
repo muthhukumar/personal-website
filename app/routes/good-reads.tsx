@@ -1,5 +1,5 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
-import { Book, Four00, ListPage } from '~/components'
+import { Book, Four00 } from '~/components'
 import { Book as BookType, getBooks } from '~/utils/cms.server'
 
 export const meta: MetaFunction = () => {
@@ -52,7 +52,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 export default function GoodReads() {
   const { books } = useLoaderData<{ books: Array<BookType> }>()
   return (
-    <ListPage title="Good reads" href="/good-reads">
+    <div title="Good reads">
       {books.map((currentBook) => (
         <Book
           publishedAt={currentBook.publishedAt}
@@ -62,7 +62,7 @@ export default function GoodReads() {
           author={currentBook.author}
         />
       ))}
-    </ListPage>
+    </div>
   )
 }
 
