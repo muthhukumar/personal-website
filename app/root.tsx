@@ -149,7 +149,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="antialiased">
+      <body className="antialiased isolate">
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
         <script
           async
@@ -182,7 +182,7 @@ function Document({ children }: { children: React.ReactNode }) {
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <div className="isolate">
       <Navbar />
       {/* <Sidebar className="hidden lg:flex" /> */}
       <main className="w-full mt-20">{children}</main>
