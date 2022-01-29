@@ -11,6 +11,7 @@ export default function Changelog() {
           <p className="text-base font-bold md:text-lg">
             All notable changes to this project will be documented in this file.
           </p>
+
         </Container>
       </div>
       <Markdown className="sm:max-w-5xl">
