@@ -6,10 +6,10 @@ import clsx from 'clsx'
 
 export default function BlogPost({
   title,
-  publishedAt,
+  publishedDate,
   excerpt,
   slug,
-}: Pick<Note, 'title' | 'publishedAt' | 'excerpt' | 'slug'>) {
+}: Pick<Note, 'title' | 'publishedDate' | 'excerpt' | 'slug'>) {
   const location = useLocation()
   return (
     <Link
@@ -24,7 +24,7 @@ export default function BlogPost({
     >
       <h2 className="font-semibold">{title}</h2>
       <p className="text-truncate text-[color:var(--gray)]/[0.3]">{excerpt}</p>
-      <Date className="light-font-color" date={publishedAt} />
+      <Date className="light-font-color" date={publishedDate} />
     </Link>
   )
 }

@@ -4,11 +4,11 @@ import { Date } from '.'
 import { Post } from '~/utils/cms.server'
 import clsx from 'clsx'
 
-interface Props extends Pick<Post, 'title' | 'publishedAt' | 'excerpt' | 'slug' | 'seo'> {
+interface Props extends Pick<Post, 'title' | 'publishedDate' | 'excerpt' | 'slug' | 'seo'> {
   className?: string
 }
 
-export default function BlogPost({ title, publishedAt, excerpt, slug, className, seo }: Props) {
+export default function BlogPost({ title, publishedDate, excerpt, slug, className, seo }: Props) {
   return (
     <Link to={`/blog/${slug}`} prefetch="render" className={clsx(className, 'flex flex-1')}>
       <div
@@ -24,7 +24,7 @@ export default function BlogPost({ title, publishedAt, excerpt, slug, className,
         <div className="flex flex-col p-6 pt-8 mt-auto border-t gap-y-2 border-color">
           <h2 className="text-lg font-bold">{title}</h2>
           <p className="italic truncate text-[color:var(--gray)]/[0.3]">{excerpt}</p>
-          <Date className="text-sm light-font-color" date={publishedAt} />
+          <Date className="text-sm light-font-color" date={publishedDate} />
         </div>
       </div>
     </Link>
