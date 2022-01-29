@@ -55,7 +55,7 @@ export default function GoodReads() {
     <div title="Good reads">
       {books.map((currentBook) => (
         <Book
-          publishedAt={currentBook.publishedAt}
+          publishedDate={currentBook.publishedDate}
           key={currentBook.id}
           slug={currentBook.slug}
           name={currentBook.name}

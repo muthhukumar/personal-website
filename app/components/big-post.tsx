@@ -4,13 +4,13 @@ import Date from './date'
 export default function BigPost({
   imageLink,
   title,
-  publishedAt,
+  publishedDate,
   excerpt,
   slug,
 }: {
   imageLink: string
   title: string
-  publishedAt: string
+  publishedDate: string
   excerpt: string
   slug: string
 }) {
@@ -33,7 +33,7 @@ export default function BigPost({
             </div>
             <p className="font-semibold">Muthukumar</p>
             <div className="w-[1px] h-[32px] mx-4 bg-black dark:bg-white"></div>
-            <Date date={publishedAt} className="light-font-color" />
+            <Date date={publishedDate} className="light-font-color" />
           </div>
         </div>
       </div>
