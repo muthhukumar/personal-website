@@ -85,7 +85,7 @@ const links: Array<LinkType> = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-color">
+    <footer className="bg-white border-t border-color dark:bg-black ">
       <Container className="py-8 lg:py-16">
         <nav className="grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 md:gap-y-2">
           {links.map((link) => {
