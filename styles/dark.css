@@ -6,9 +6,9 @@
   --link-color: #3291ff;
   --light-font-color: #888;
 
-  --transparent-background-color: var(--transparent-black);
+  --transparent-background-color: var(--black);
 
   /* Inverted stuff */
   --background-color-inverted: var(--white);
-  --font-color-inverted: var(--matt-black);
+  --font-color-inverted: var(--black);
 }

@@ -13,7 +13,7 @@ export default function BlogPost({ title, publishedAt, excerpt, slug, className,
     <Link to={`/blog/${slug}`} prefetch="render" className={clsx(className, 'flex flex-1')}>
       <div
         className={clsx(
-          'overflow-hidden transition-all duration-200 bg-white border-2 border-gray-100 shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1 ease',
+          'overflow-hidden transition-all duration-200 bg-color border-2 dark:border-color shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1 ease',
         )}
       >
         <img

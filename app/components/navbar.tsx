@@ -61,6 +61,7 @@ export default function Navbar() {
               onClick={toggleModal}
               to={link.to}
               key={link.to}
+              prefetch="intent"
               className={clsx('py-4 border-b border-gray-200 font-semibold text-sm')}
             >
               {link.pathname}
@@ -81,6 +82,7 @@ export default function Navbar() {
             <Link
               to={link.to}
               key={link.to}
+              prefetch="intent"
               className={clsx('font-semibold', {
                 'border-b-2 border-black dark:border-white': pathname === link.to,
               })}

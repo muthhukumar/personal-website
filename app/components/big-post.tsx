@@ -28,12 +28,11 @@ export default function BigPost({
           <p className="w-full mb-4 text-base md:text-lg lg:w-2/3">{excerpt}</p>
 
           <div className="flex items-center my-8 fit-content">
-            <div className="inline-block w-4 h-4 mr-4 overflow-hidden align-middle rounded-full md:w-12 md:h-12">
+            <div className="inline-block w-6 h-6 mr-4 overflow-hidden align-middle rounded-full md:w-10 md:h-10">
               <img src="/images/profile.jpg" className="w-full h-full" />
             </div>
             <p className="font-semibold">Muthukumar</p>
-            <div className="w-[1px] h-[32px] mx-2 bg-black dark:bg-white"></div>
-            {/* <p className="mr-2 light-font-color">By</p> */}
+            <div className="w-[1px] h-[32px] mx-4 bg-black dark:bg-white"></div>
             <Date date={publishedAt} className="light-font-color" />
           </div>
         </div>

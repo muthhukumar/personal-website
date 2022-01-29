@@ -9,7 +9,7 @@ export default function Markdown({
   className?: string | undefined
 }) {
   return (
-    <article className={clsx('w-11/12 m-auto prose sm:w-3/4 prose-md sm:prose-lg', className)}>
+    <article className={clsx('w-11/12 m-auto prose sm:w-3/4 prose-md sm:prose-lg dark:prose-invert', className)}>
       {children}
     </article>
   )
