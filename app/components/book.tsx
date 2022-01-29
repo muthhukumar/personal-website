@@ -6,10 +6,10 @@ import clsx from 'clsx'
 
 export default function Book({
   name,
-  publishedAt,
+  publishedDate,
   author,
   slug,
-}: Pick<Book, 'author' | 'name' | 'publishedAt' | 'slug'>) {
+}: Pick<Book, 'author' | 'name' | 'publishedDate' | 'slug'>) {
   const location = useLocation()
   return (
     <Link
@@ -25,7 +25,7 @@ export default function Book({
       <h2 className="font-semibold">
         {name} by {author}
       </h2>
-      <Date className="light-font-color" date={publishedAt} />
+      <Date className="light-font-color" date={publishedDate} />
     </Link>
   )
 }

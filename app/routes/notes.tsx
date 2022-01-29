@@ -59,7 +59,7 @@ export default function Blog() {
     <div title="Notes">
       {notes.map((note) => (
         <Note
-          publishedAt={note.publishedAt}
+          publishedDate={note.publishedDate}
           key={note.id}
           slug={note.slug}
           title={note.title}
