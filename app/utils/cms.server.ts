@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { gqRequest } from './graphql.server'
 
 export type Post = {
@@ -108,6 +110,7 @@ const PostQuery = `
 query GetPostBySlug($slug: String! = "") {
   post(where: {slug: $slug}) {
     title
+    id
     content {
       html
     }
@@ -201,10 +204,22 @@ export const getPosts = async (query?: string, context?: Record<string, string>)
       return []
     }
     return posts.posts as Array<Post>
-  } catch (err){
-    console.log('here', err)
+  } catch {
     return []
   }
+}
+
+export const getRandomPosts = async (context: Record<string, string>, currentPost: Post) => {
+  const posts = await getPosts('', context)
+
+  const filteredPosts = posts.filter((post) => {
+    const isNotEqual = post.id !== currentPost.id
+    return isNotEqual
+  })
+
+  const shuffledPosts = _.shuffle(filteredPosts)
+
+  return shuffledPosts.slice(0, 3)
 }
 
 export const getPost = async (slug: Post['slug'], context?: Record<string, string>) => {

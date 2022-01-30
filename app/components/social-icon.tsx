@@ -16,7 +16,7 @@ function SocialIcon({
     <li
       className={clsx({
         'mr-0': isLast,
-        'mr-4 pr-4 border-r border-color': !isLast,
+        'pr-6 border-r border-color': !isLast,
       })}
     >
       <a href={href} target="_blank" rel="noreferrer" aria-label={ariaLabel} title={ariaLabel}>
