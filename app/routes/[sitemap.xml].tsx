@@ -1,8 +1,8 @@
 import { LoaderFunction } from 'remix'
 import { getPosts } from '~/utils/cms.server'
 
-const getSiteMapText = async () => {
-  const blogs = (await getPosts()) ?? []
+const getSiteMapText = async (context: Record<string, string>) => {
+  const blogs = await getPosts('', context)
   return `
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -26,20 +26,27 @@ const getSiteMapText = async () => {
     <loc>https://www.nullish.in/about</loc>
     <lastmod>2021-12-28</lastmod>
   </url>
-  ${blogs.map(
-    (blog) => `
+  ${blogs
+    .map((blog) => {
+      const updatedAt = new Date(blog.updatedAt)
+      const updatedAtDate = `${updatedAt.getFullYear()}-${
+        updatedAt.getMonth() + 1
+      }-${updatedAt.getDate()}`
+
+      return `
   <url>
     <loc>https://www.nullish.in/blog/${blog.slug}</loc>
-    <lastmod>${blog.updatedAt}</lastmod>
+    <lastmod>${updatedAtDate}</lastmod>
   </url>
-  `,
-  )}
+  `.trim()
+    })
+    .join('\n')}
 </urlset>
 `.trim()
 }
 
-export const loader: LoaderFunction = async () => {
-  const siteMap = await getSiteMapText()
+export const loader: LoaderFunction = async ({ context }) => {
+  const siteMap = await getSiteMapText(context)
   return new Response(siteMap, {
     headers: {
       'Content-Type': 'application/xml',
