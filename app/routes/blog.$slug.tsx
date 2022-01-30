@@ -1,7 +1,7 @@
 import { json, LinksFunction, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 
 import { Markdown, Four00, Date, ContinueReading, BlogPost } from '~/components'
-import { getPost, getPosts, Post } from '~/utils/cms.server'
+import { getPost, getRandomPosts, Post } from '~/utils/cms.server'
 
 interface LoaderType extends Post {
   posts: Array<Post>
@@ -43,19 +43,17 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
 
   const postData = await getPost(slug, context)
 
-  const posts = await getPosts('', context)
-
-  const selectedPosts = posts.slice(posts.length - 3, posts.length)
-
   if (!postData) {
     throw json({ message: `Oh no, the blog you looking for doesn't exists.` }, { status: 404 })
   }
+
+  const posts = await getRandomPosts(context, postData)
 
   return json(
     {
       url,
       ...postData,
-      posts: selectedPosts,
+      posts,
     },
     {
       headers: {
