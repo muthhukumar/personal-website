@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { LoaderFunction } from 'remix'
 import { getPosts } from '~/utils/cms.server'
 
@@ -28,10 +29,8 @@ const getSiteMapText = async (context: Record<string, string>) => {
   </url>
   ${blogs
     .map((blog) => {
-      const updatedAt = new Date(blog.updatedAt)
-      const updatedAtDate = `${updatedAt.getFullYear()}-${
-        updatedAt.getMonth() + 1
-      }-${updatedAt.getDate()}`
+
+      const updatedAtDate = moment(blog.publishedDate).format('YYYY-MM-DD')
 
       return `
   <url>
