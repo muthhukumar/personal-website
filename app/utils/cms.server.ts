@@ -209,7 +209,11 @@ export const getPosts = async (query?: string, context?: Record<string, string>)
   }
 }
 
-export const getRandomPosts = async (context: Record<string, string>, currentPost: Post) => {
+export const getRandomPosts = async (
+  context: Record<string, string>,
+  currentPost: Post,
+  limit = 3,
+) => {
   const posts = await getPosts('', context)
 
   const filteredPosts = posts.filter((post) => {
@@ -219,7 +223,7 @@ export const getRandomPosts = async (context: Record<string, string>, currentPos
 
   const shuffledPosts = _.shuffle(filteredPosts)
 
-  return shuffledPosts.slice(0, 3)
+  return shuffledPosts.slice(0, limit)
 }
 
 export const getPost = async (slug: Post['slug'], context?: Record<string, string>) => {
