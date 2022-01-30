@@ -28,17 +28,15 @@ export const loader: LoaderFunction = async ({ context }) => {
 export default function Photos() {
   const photos = useLoaderData<Awaited<ReturnType<typeof getPhotos>>>()
   return (
-    <div>
-      <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4">
-        {photos.map((photo) => (
-          <img
-            alt={photo.title}
-            src={photo.image.url}
-            key={photo.image.url}
-            className="block w-full mb-4"
-          />
-        ))}
-      </div>
+    <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4">
+      {photos.map((photo) => (
+        <img
+          alt={photo.title}
+          src={photo.image.url}
+          key={photo.image.url}
+          className="block w-full mb-4"
+        />
+      ))}
     </div>
   )
 }
