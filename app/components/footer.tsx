@@ -94,7 +94,7 @@ export default function Footer() {
                 <a
                   aria-label={link.ariaLabel}
                   key={link.link}
-                  className="text-sm light-font-color"
+                  className="light-font-color"
                   href={link.link}
                   target="_blank"
                   rel="noreferrer"
@@ -108,7 +108,7 @@ export default function Footer() {
                 to={link.link}
                 aria-label={link.ariaLabel}
                 key={link.link}
-                className="text-sm light-font-color"
+                className="light-font-color"
               >
                 {link.name}
               </Link>
@@ -120,7 +120,7 @@ export default function Footer() {
             <p className="text-2xl font-bold font-color">Muthukumar</p>
           </Link>
           <div className="flex flex-col items-center justify-center w-full mt-4 md:items-baseline md:justify-between md:flex-row">
-            <h2 className="mb-6 text-sm md:mb-0 light-font-color">
+            <h2 className="mb-6 md:mb-0 light-font-color">
               Copyright &copy; 2021 Muthukumar. All rights reserved.
             </h2>
             <ul className="flex items-center gap-x-6">
