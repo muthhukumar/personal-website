@@ -67,7 +67,7 @@ export default function Navbar() {
               to={link.to}
               key={link.to}
               prefetch="intent"
-              className={clsx('py-4 border-b border-gray-200 font-semibold text-sm')}
+              className={clsx('py-4 border-b border-gray-200 font-semibold')}
             >
               {link.pathname}
             </Link>
