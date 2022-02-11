@@ -30,7 +30,7 @@ const getSiteMapText = async (context: Record<string, string>) => {
   ${blogs
     .map((blog) => {
 
-      const updatedAtDate = moment(blog.publishedDate).format('YYYY-MM-DD')
+      const updatedAtDate = moment(blog.lastUpdatedAt).format('YYYY-MM-DD')
 
       return `
   <url>
