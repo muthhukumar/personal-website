@@ -94,7 +94,6 @@ export default function Footer() {
                 <a
                   aria-label={link.ariaLabel}
                   key={link.link}
-                  className="light-font-color"
                   href={link.link}
                   target="_blank"
                   rel="noreferrer"
@@ -108,7 +107,6 @@ export default function Footer() {
                 to={link.link}
                 aria-label={link.ariaLabel}
                 key={link.link}
-                className="light-font-color"
               >
                 {link.name}
               </Link>
