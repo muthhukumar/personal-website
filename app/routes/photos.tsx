@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
+import { LinksFunction, json, LoaderFunction, MetaFunction, useCatch, useLoaderData } from 'remix'
 import { Four00 } from '~/components'
 import { getPhotos } from '~/utils/cms.server'
 
@@ -13,6 +13,15 @@ export const meta: MetaFunction = () => {
     robots: 'index, follow',
     // TODO: Og stuff are missing
   }
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in/photos',
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async ({ context }) => {

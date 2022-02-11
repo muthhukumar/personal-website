@@ -12,10 +12,6 @@ const getSiteMapText = async (context: Record<string, string>) => {
     <lastmod>2021-12-28</lastmod>
   </url>
   <url>
-    <loc>https://www.nullish.in/changelog</loc>
-    <lastmod>2021-12-29</lastmod>
-  </url>
-  <url>
     <loc>https://www.nullish.in/quotes</loc>
     <lastmod>2021-12-28</lastmod>
   </url>
@@ -29,7 +25,6 @@ const getSiteMapText = async (context: Record<string, string>) => {
   </url>
   ${blogs
     .map((blog) => {
-
       const updatedAtDate = moment(blog.lastUpdatedAt).format('YYYY-MM-DD')
 
       return `
