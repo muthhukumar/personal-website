@@ -1,8 +1,17 @@
-import { json, LoaderFunction, useCatch } from 'remix'
+import { LinksFunction, json, LoaderFunction, useCatch } from 'remix'
 import { Container, Four00 } from '~/components'
 
 export const loader: LoaderFunction = async () => {
   throw json({ message: `Page, you are looking for doesn't exists` }, { status: 404 })
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'canonical',
+      href: 'https://www.nullish.in',
+    },
+  ]
 }
 
 export default function Splat() {
