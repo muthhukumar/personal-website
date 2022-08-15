@@ -73,7 +73,7 @@ export default function About() {
             </a>{' '}
             are my favorites authors in the category of Books.
           </p>
-          <p>At present, I&apos;m unemployed and figuring out what to do with my life.</p>
+          <p>At present, I&apos;m working at NeoGrowth and figuring out what to do with my life.</p>
         </div>
       </Container>
     </div>
