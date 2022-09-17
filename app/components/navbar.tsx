@@ -16,17 +16,9 @@ const links: Array<{ to: string; pathname: string }> = [
     to: '/blog',
     pathname: 'Blog',
   },
-  // {
-  //   to: '/good-reads',
-  //   pathname: 'Good reads',
-  // },
-  // {
-  //   to: '/notes',
-  //   pathname: 'Notes',
-  // },
   {
-    to: '/photos',
-    pathname: 'Photos',
+    to: '/projects',
+    pathname: 'Projects',
   },
   {
     to: '/about',
@@ -44,7 +36,6 @@ export default function Navbar() {
   return (
     <header
       className={clsx(
-        // `px-8 flex items-center fixed z-40 w-full transition-transform border-b bg-white dark:bg-black navbar-backdrop-filter border-color transparent-all`,
         `px-8 flex items-center fixed z-40 w-full transition-transform border-b bg-white dark:bg-black border-color transparent-all`,
         {
           'drop-shadow-md': scrolled,
