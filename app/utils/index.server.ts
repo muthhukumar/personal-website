@@ -28,3 +28,58 @@ const getQuote = async (request: Request) => {
 }
 
 export { getRandomIntBetweenRange, getQuote }
+
+export const getProjects = async () => {
+  const urls = [
+    {
+      name: 'Personal website',
+      url: 'https://nullish.in',
+    },
+    {
+      name: 'Sole and Ankle',
+      url: 'https://sole-and-ankle.pages.dev',
+    },
+    {
+      name: 'Old Dev-tools',
+      url: 'https://dev-tools-new.pages.dev',
+    },
+    {
+      name: 'Todo list app v.1',
+      url: 'https://next.todos.nullish.in/',
+    },
+    {
+      name: 'Letter typing practice',
+      url: 'https://letter-typing-practice-muthukumar.vercel.app/',
+    },
+    {
+      name: 'Create translation string app',
+      url: 'https://create-translation-strings-app.vercel.app/',
+    },
+    {
+      name: 'Dev tools v.2',
+      url: 'https://dev-utilities.vercel.app/',
+    },
+    {
+      name: 'Dev tools v.3',
+      url: 'https://dev-tools.in',
+    },
+    {
+      name: 'Clipi app',
+      url: 'https://clipi.nullish.in',
+    },
+  ]
+
+  const result = urls.map((item) => {
+    return fetch(`${item.url}`, { method: 'HEAD' })
+      .then((r) => {
+        if (!r.ok) return item
+        return item
+      })
+      .catch(() => Promise.reject(item))
+  })
+
+  return (await Promise.allSettled(result)).map((value) => ({
+    isActive: value.status === 'fulfilled',
+    value: value.status === 'fulfilled' ? value.value : value.reason,
+  }))
+}
