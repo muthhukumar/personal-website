@@ -67,6 +67,10 @@ export const getProjects = async () => {
       name: 'Clipi app',
       url: 'https://clipi.nullish.in',
     },
+    {
+      name: 'Minimal Youtube',
+      url: 'https://minimal-yt.nullish.in',
+    },
   ]
 
   const result = urls.map((item) => {
